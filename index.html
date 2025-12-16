@@ -194,6 +194,24 @@
       .aurora, .grid, .grain, .title{ animation: none !important; }
       .glitch span{ display:none; }
     }
+
+    .subtitle {
+      position: relative;
+      font-size: clamp(24px, 4vw, 60px);
+      font-weight: 700;
+      text-align: center;
+      color: #f6f7ff;
+      margin-top: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+      animation: glowEffect 1.5s infinite alternate;
+    }
+    
+    @keyframes glowEffect {
+      0% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6); }
+      100% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.4); }
+    }
   </style>
 </head>
 <body>
@@ -210,13 +228,9 @@
         <span>BELLA RAAAGA</span>
       </span>
     </h1>
-    <h2 class="title" id="title">
-      CBN26 IS COMING
-      <span class="glitch" aria-hidden="true">
-        <span>CBN26 IS COMING</span>
-        <span>CBN26 IS COMING</span>
-      </span>
-    </h2>
+
+    <h2 class="subtitle">CBN26 IS COMING</h2>
+    
   </main>
 
   <div class="hint">Muovi il mouse · Click per “boost”</div>

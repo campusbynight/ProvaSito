@@ -1,0 +1,118 @@
+
+:root {
+  --cbn-blue: #103682;
+  --cbn-orange: #ef7f1b;
+  --cbn-grey: #ededed;
+  --font-title: 'Craketest Medium', sans-serif;
+  --font-body: 'Clash Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.home-container {
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: var(--font-body);
+  color: #333;
+  border-radius: 28px;
+  background: #fff;
+}
+
+.home-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.home-header h1 {
+  font-size: 2.5rem;
+  color: var(--cbn-orange);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  font-family: var(--font-title);
+}
+
+.home-header h2,
+.countdown .title {
+  color: var(--cbn-orange);
+}
+
+.home-header p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.widget-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.widget {
+  background: var(--cbn-orange);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.widget-white {
+  background: var(--cbn-grey);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.425);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.widget:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.widget h2 {
+  font-size: 1.5rem;
+  color: #ededed;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  font-family: var(--font-title);
+}
+
+.widget p {
+  color: #ededed;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.immagine,
+.immagineHome {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.bckHOME {
+  width: 100%;
+  max-height: 400px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  border-radius: 16px;
+  align-items: center;
+}
+
+@font-face {
+  font-family: 'Craketest Medium';
+  src: url('../files/CBN25/crake-font-family/craketest-medium.otf') format('opentype');
+}
+
+.countdown {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin: 20px 0;
+}
+
+.countdown .time {
+  font-size: 20px;
+  color: var(--cbn-orange);
+}

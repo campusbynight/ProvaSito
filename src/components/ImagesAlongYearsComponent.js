@@ -73,7 +73,7 @@ const ImagesAlongYearsComponent = () => {
         <div className="widget">
           <h2>Storia</h2>
           <p>
-          L’Associazione ONLUS The Crew, in collaborazione con la lista e associazione studentesca Student Office, organizza il "Campus By Night", arrivato alla sua XXIII edizione, quale significativo evento culturale con cadenza annuale rivolto agli studenti dell’Alma Mater Studiorum-Università di Bologna e alla città intera. <br/>
+          L’Associazione The Crew ODV, in collaborazione con la lista e associazione studentesca Student Office, organizza il "Campus By Night", arrivato alla sua XXIII edizione, quale significativo evento culturale con cadenza annuale rivolto agli studenti dell’Alma Mater Studiorum-Università di Bologna e alla città intera. <br/>
           Il "Campus by Night" nasce dal desiderio di poter incontrare tutta la comunità Accademica, diventando una grande occasione di incontro, confronto e dibattito, tramite mostre, spettacoli, conferenze e tornei sportivi.<br/>
           Il "Campus by Night" partendo dall'ascolto delle sfide contemporanee che il mondo pone, ogni anno propone un tema centrale, rappresentato dal titolo, con cui invita l'università e la città a confrontarsi. <br/>
           Nelle ultime edizioni sono stati scelti i seguenti titoli:<br/>

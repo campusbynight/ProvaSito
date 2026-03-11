@@ -32,5 +32,65 @@
     -->
     <h1>Benvenuto nella Home</h1>
     <p>La logica di redirect per i vecchi QR è attiva.</p>
+
+    <!-- Content from HomeData.json will be loaded here -->
+    <div id="home-content"></div>
+
+    <script type="module">
+        async function loadHomeData() {
+            try {
+                const response = await fetch('./src/data/HomeData.json');
+                const data = await response.json();
+                
+                const container = document.getElementById('home-content');
+                
+                // Title & Subtitle
+                container.innerHTML += `<h2>${data.title}</h2>`;
+                container.innerHTML += `<h3>${data.subtitle}</h3>`;
+                container.innerHTML += `<p><strong>Date:</strong> ${data.date}</p>`;
+                
+                // Sections
+                container.innerHTML += `
+                    <div class="section">
+                        <h4>${data.widgetTitle}</h4>
+                        <p>${data.widgetText}</p>
+                    </div>
+                `;
+
+                container.innerHTML += `
+                    <div class="section">
+                        <h4>${data.doveQuandoTitle}</h4>
+                        <p>${data.doveQunadoText}</p>
+                    </div>
+                `;
+
+                container.innerHTML += `
+                    <div class="section">
+                        <h4>${data.chiSiamoTitle}</h4>
+                        <p>${data.chiSiamoText}</p>
+                    </div>
+                `;
+
+                container.innerHTML += `
+                    <div class="section">
+                        <h4>${data.cosaCiMuoveTitle}</h4>
+                        <p>${data.cosaCiMuoveText}</p>
+                    </div>
+                `;
+
+                container.innerHTML += `
+                    <div class="section">
+                        <h4>${data.percheAiutarciTitle}</h4>
+                        <p>${data.percheAiutarciText}</p>
+                    </div>
+                `;
+
+            } catch (error) {
+                console.error('Error loading home data:', error);
+            }
+        }
+
+        loadHomeData();
+    </script>
 </body>
 </html>

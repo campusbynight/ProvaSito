@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sito CBN - Home</title>
+    <script>
+        // Gestione redirect dai vecchi QR code
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectId = urlParams.get('redirect');
+
+        if (redirectId) {
+            const routes = {
+                '1': '/images/',
+                '2': '/food/',
+                '3': '/info/',
+                '4': '/lottery/'
+            };
+
+            const targetUrl = routes[redirectId];
+            if (targetUrl) {
+                // Sostituisce la storia del browser e reindirizza senza loop
+                window.location.replace(targetUrl);
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- 
+      INCOLLA QUI IL CODICE DELLA HOME SCRAPATA
+      Nota: I collegamenti verso le altre pagine dovranno puntare a "/info/", "/food/", ecc.
+    -->
+    <h1>Benvenuto nella Home</h1>
+    <p>La logica di redirect per i vecchi QR è attiva.</p>
+</body>
+</html>

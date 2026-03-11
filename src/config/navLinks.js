@@ -32,21 +32,21 @@ export const navLinks = [
     path: '/info',
     icon: <FiCalendar size={24} />,
     component: <Info />,
-    enabled: false
+    enabled: true
   },
   {
     label: 'Food',
     path: '/food',
     icon: <IoFastFoodOutline size={24} />,
     component: <Food />,
-    enabled: false
+    enabled: true
   },
   {
     label: 'Lotteria',
     path: '/lottery',
     icon: <TbListNumbers size={24} />,
     component: <Lottery />,
-    enabled: false
+    enabled: true
   },
   {
     label: 'Immagini',

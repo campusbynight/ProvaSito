@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import BottomBar from './components/BottomBar/BottomBar';
 import Footer from './components/Footer/Footer';
 import { navLinks } from './config/navLinks';
@@ -9,6 +9,7 @@ import logoAnimato from './files/animazione_logo_CBN26.webm';
 
 function App() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
   const handleVideoUpdate = (e) => {
@@ -23,7 +24,36 @@ function App() {
   useEffect(() => {
     // Torna in cima alla pagina ad ogni cambio di rotta
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-  }, [location.pathname]);
+
+    // Gestione del redirect tramite parametro nell'URL principale (?redirect=1)
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectId = urlParams.get('redirect');
+
+    if (redirectId) {
+      // Puliamo l'URL dal parametro per evitare loop di redirect
+      const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + window.location.hash;
+      window.history.replaceState({path: newUrl}, '', newUrl);
+
+      // Usiamo React Router per navigare (senza il #)
+      switch (redirectId) {
+        case '1':
+          navigate('/images', { replace: true });
+          break;
+        case '2':
+          navigate('/food', { replace: true });
+          break;
+        case '3':
+          navigate('/info', { replace: true });
+          break;
+        case '4':
+          navigate('/lottery', { replace: true });
+          break;
+        default:
+          navigate('/', { replace: true });
+          break;
+      }
+    }
+  }, [location.pathname, navigate]);
 
   return (
     <div>

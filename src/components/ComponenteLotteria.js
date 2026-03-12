@@ -18,9 +18,9 @@ const Lotteria = () => {
       <div className='widget'>
         
         <p>
-        Per confermare la propria vincita telefonare al +39 388 1630145 oppure al numero +39 347 6575383.
+        Per confermare la propria vincita telefonare al +39 3478886602 (Arianna) oppure al numero +39 3382833134 (Anthony).
         <br></br>
-        I premi devono essere ritirati presso Via San Donato 175/4 - interno 7, Bologna (40127) tassativamente entro il 13 luglio 2025.
+        I premi devono essere ritirati presso Via Valverde 14, Bologna (40136) tassativamente entro il 31luglio 2026.
         </p>
       </div>
 

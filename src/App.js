@@ -14,6 +14,24 @@ function App() {
   const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const redirectId = urlParams.get('redirect');
+
+  if(redirectId) {
+    const routes = {
+      '1': '/#/lottery',
+      '2': '/#/food',
+      '3': '/#/info',
+      '4': '/#/images',
+      '5': '/#/sport'
+    };
+
+    const targetUrl = routes[redirectId];
+    if(targetUrl){
+      window.location.replace(targetUrl);
+    }
+  }
+
   useEffect(() => {
     // Aggiorna l'indice attivo in base al percorso
     switch (location.pathname) {
@@ -25,12 +43,12 @@ function App() {
         break;
       case '/food':
         setActiveIndex(2);
-        break;
-      case '/lottery':
-        setActiveIndex(3);
+        break;*/
+      /*case '/lottery':
+        setActiveIndex(1);
         break;*/
       case '/images':
-        setActiveIndex(/*4*/1);
+        setActiveIndex(1);
         break;
       default:
         setActiveIndex(0);
@@ -46,22 +64,17 @@ function App() {
         navigate('/');
         break;
       case 1:
-        /*navigate('/info');*/ navigate('/images'); //TODO: quando sarà da modificare il numero di pagine bisogna guardare qui
+        navigate('/images');
         break;
-      case 2:
+      /*case 2:
         navigate('/food');
         break;
       case 3:
         navigate('/lottery');
-        break;
-      case 4:
-        navigate('/images');
-        break;
+        break;*/
       default:
         navigate('/');
     }
-    // (opzionale) scroll animato quando si clicca il pulsante
-    // window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   };
 
   return (

@@ -39,6 +39,7 @@ const Lotteria = () => {
             <div key={premio.premio}>
               <h2>{premio.premio}° premio</h2>
               <p>{premio.descrizione}</p>
+              {premio.commento && <p style={{ fontSize: '0.9em', color: '#666', fontStyle: 'italic', marginTop: '-10px' }}>{premio.commento}</p>}
               <p><strong>Numero vincente:</strong> {premio.numero}</p>
             </div>
           ))

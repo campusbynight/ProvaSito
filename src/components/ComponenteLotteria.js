@@ -18,9 +18,9 @@ const Lotteria = () => {
       <div className='widget'>
         
         <p>
-        Per confermare la propria vincita telefonare al +39 3478886602 (Arianna) oppure al numero +39 3382833134 (Anthony).
+        Per confermare la propria vincita contattare al +39 3478886602 (Arianna) oppure al numero +39 3382833134 (Anthony).
         <br></br>
-        I premi devono essere ritirati presso Via Valverde 14, Bologna (40136) tassativamente entro il 31luglio 2026.
+        I premi devono essere ritirati presso Via Valverde 14, Bologna (40136) tassativamente entro il 31 luglio 2026.
         </p>
       </div>
 

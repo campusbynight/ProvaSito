@@ -1,1 +1,1154 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96"/><link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg"/><link rel="shortcut icon" href="/favicon/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png"/><link rel="manifest" href="/favicon/site.webmanifest"/><meta property="og:image" content="https://www.campusbynight.it/favicon/cbnlogo.png"><meta property="og:description" content="Campus By Night Official Site 2026"><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="Campus By Night" content="Campus By Night Official Site 2026"/><title>Campus By Night</title><script defer="defer" src="/static/js/main.1248240b.js"></script><link href="/static/css/main.ed1ba9a4.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+  <link rel="icon" type="image/png" href="assets/images/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="assets/images/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="assets/images/favicon/site.webmanifest" />
+	<title>campusbynight</title>
+    <meta name="description" content="Campus by Night - la festa universitaria">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="campusbynight">
+    <meta property="og:description" content="Campus by Night - la festa universitaria">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="campusbynight">
+    <meta name="twitter:description" content="Campus by Night - la festa universitaria">
+	<meta name="robots" content="max-image-preview:large">
+    
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const redirectId = urlParams.get('redirect');
+
+      if (redirectId) {
+        const routes = {
+          '1': 'lotteria.html',
+          '2': 'menu.html',
+          '3': 'index.html',
+          '4': 'foto.html',
+          '5': 'index.html'
+        };
+
+        const targetUrl = routes[redirectId];
+        if (targetUrl) {
+          window.location.replace(targetUrl);
+        }
+      }
+    </script>
+    <script>
+      const PROGRAMMA_COUNTDOWN_TARGET = new Date(2026, 4, 7, 0, 0, 0);
+      let programmaCountdownInterval = null;
+
+      function adjustProgrammaTitles() {
+        const titleWrappers = document.querySelectorAll('.programma-event-title-wrap');
+
+        titleWrappers.forEach(titleWrapper => {
+          const row = titleWrapper.closest('.programma-col-sx, .programma-col-dx');
+          if (!row) return;
+
+          titleWrapper.style.transform = 'translateX(0)';
+
+          const rowRect = row.getBoundingClientRect();
+          const titleRect = titleWrapper.getBoundingClientRect();
+          const overflowRight = titleRect.right - rowRect.right;
+
+          if (overflowRight > 0) {
+            titleWrapper.style.transform = `translateX(-${Math.ceil(overflowRight)}px)`;
+          }
+        });
+      }
+
+      function clearProgrammaCountdown() {
+        if (programmaCountdownInterval) {
+          window.clearInterval(programmaCountdownInterval);
+          programmaCountdownInterval = null;
+        }
+      }
+
+      function formatUnit(value) {
+        return String(value).padStart(2, '0');
+      }
+
+      function renderCountdown(node, parts) {
+        node.innerHTML =
+          `<span class="lotteria-countdown-digit">${formatUnit(parts.days)}</span> <span class="lotteria-countdown-sep">:</span> ` +
+          `<span class="lotteria-countdown-digit">${formatUnit(parts.hours)}</span> <span class="lotteria-countdown-sep">:</span> ` +
+          `<span class="lotteria-countdown-digit">${formatUnit(parts.minutes)}</span> <span class="lotteria-countdown-sep">:</span> ` +
+          `<span class="lotteria-countdown-digit">${formatUnit(parts.seconds)}</span>`;
+      }
+
+      function computeCountdown(targetDate) {
+        const now = new Date();
+        const diff = targetDate.getTime() - now.getTime();
+
+        if (diff <= 0) {
+          return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+        }
+
+        const totalSeconds = Math.floor(diff / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor((totalSeconds % 86400) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        return { days, hours, minutes, seconds };
+      }
+
+      function renderProgrammaCountdown(programmaGriglia) {
+        clearProgrammaCountdown();
+
+        const counterWrap = document.createElement('div');
+        counterWrap.className = 'programma-countdown-wrap';
+        counterWrap.innerHTML = `
+          <p class="programma-countdown-subtitle">si riparte tra</p>
+          <p class="lotteria-countdown programma-countdown" aria-live="polite">
+            <span class="lotteria-countdown-digit">00</span>
+            <span class="lotteria-countdown-sep">:</span>
+            <span class="lotteria-countdown-digit">00</span>
+            <span class="lotteria-countdown-sep">:</span>
+            <span class="lotteria-countdown-digit">00</span>
+            <span class="lotteria-countdown-sep">:</span>
+            <span class="lotteria-countdown-digit">00</span>
+          </p>
+          <div class="programma-countdown-meta" aria-label="Informazioni evento">
+            <p class="programma-countdown-meta-item"><span>luogo</span> Piazza Scaravilli</p>
+            <p class="programma-countdown-meta-item"><span>data</span> 7-8-9 maggio</p>
+          </div>
+        `;
+
+        programmaGriglia.appendChild(counterWrap);
+
+        const countdownNode = counterWrap.querySelector('.programma-countdown');
+        if (!countdownNode) return;
+
+        const tick = () => {
+          renderCountdown(countdownNode, computeCountdown(PROGRAMMA_COUNTDOWN_TARGET));
+        };
+
+        tick();
+        programmaCountdownInterval = window.setInterval(tick, 1000);
+      }
+
+      // Carica e popola il programma dal JSON
+      async function loadProgramma() {
+          try {
+              const response = await fetch('assets/programma.json');
+              const data = await response.json();
+              populateProgramma(data.eventi);
+          } catch (error) {
+              console.error('Errore nel caricamento del programma:', error);
+              populateProgramma([]);
+          }
+      }
+
+          // Carica e popola le liste menu da assets/menu.json.
+          // Formato atteso: [{ titolo: string, lista: string[] }, ...]
+          async function loadMenu() {
+            const menuSection = document.querySelector('#menu.sezione-menu');
+            const menuSlots = [
+              document.querySelector('.menu-piatto-a'),
+              document.querySelector('.menu-piatto-b')
+            ];
+
+            if (!menuSlots[0] || !menuSlots[1]) return;
+
+            try {
+              const response = await fetch('assets/menu.json', { cache: 'no-store' });
+              if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+              }
+
+              const data = await response.json();
+              if (!Array.isArray(data)) {
+                throw new Error('menu.json deve essere un array');
+              }
+
+              if (data.length === 0) {
+                if (menuSection) {
+                  menuSection.hidden = true;
+                }
+                return;
+              }
+
+              if (menuSection) {
+                menuSection.hidden = false;
+              }
+
+              const normalized = data
+                .filter((item) => item && typeof item === 'object')
+                .map((item) => ({
+                  titolo: typeof item.titolo === 'string' ? item.titolo.trim() : '',
+                  lista: Array.isArray(item.lista)
+                    ? item.lista.filter((entry) => typeof entry === 'string').map((entry) => entry.trim())
+                    : []
+                }))
+                .filter((item) => item.titolo || item.lista.length);
+
+              menuSlots.forEach((slot, index) => {
+                const listData = normalized[index];
+                if (!listData) {
+                  slot.hidden = true;
+                  return;
+                }
+
+                const nodes = [];
+
+                if (listData.titolo) {
+                  const title = document.createElement('li');
+                  title.className = 'menu-lista-title';
+                  title.textContent = listData.titolo;
+                  nodes.push(title);
+                }
+
+                listData.lista.forEach((entry) => {
+                  const li = document.createElement('li');
+                  li.className = 'framer-text';
+                  li.textContent = entry;
+                  nodes.push(li);
+                });
+
+                if (nodes.length) {
+                  slot.hidden = false;
+                  slot.replaceChildren(...nodes);
+                }
+              });
+
+              if (normalized.length > menuSlots.length) {
+                console.warn(`menu.json contiene ${normalized.length} liste: questa sezione ne mostra al massimo ${menuSlots.length}.`);
+              }
+            } catch (error) {
+              // Fallback: in caso di errore resta visibile il contenuto statico HTML.
+              console.error('Errore nel caricamento del menu:', error);
+            }
+          }
+
+          // Carica sponsor da assets/sponsor.json e popola la griglia in home.
+          // Formato atteso: [{ nome?: string, image: string, link?: string }, ...]
+          async function loadSponsors() {
+            const sponsorSection = document.querySelector('.sezione-sponsor');
+            const sponsorGrid = document.querySelector('[data-sponsor-grid]');
+
+            if (!sponsorSection || !sponsorGrid) return;
+
+            try {
+              const response = await fetch('assets/sponsor.json', { cache: 'no-store' });
+              if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+              }
+
+              const data = await response.json();
+              if (!Array.isArray(data)) {
+                throw new Error('sponsor.json deve essere un array');
+              }
+
+              const normalized = data
+                .filter((item) => item && typeof item === 'object')
+                .map((item) => ({
+                  nome: typeof item.nome === 'string' ? item.nome.trim() : '',
+                  image: typeof item.image === 'string' ? item.image.trim() : '',
+                  link: typeof item.link === 'string' ? item.link.trim() : ''
+                }))
+                .filter((item) => item.image);
+
+              if (!normalized.length) {
+                sponsorGrid.replaceChildren();
+                const sponsorTitolo = document.querySelector('.sponsor-titolo');
+                if (sponsorTitolo) sponsorTitolo.hidden = true;
+                sponsorGrid.hidden = true;
+                sponsorSection.classList.add('no-sponsors');
+                return;
+              }
+
+              sponsorSection.classList.remove('no-sponsors');
+              const sponsorTitolo = document.querySelector('.sponsor-titolo');
+              if (sponsorTitolo) sponsorTitolo.hidden = false;
+              sponsorGrid.hidden = false;
+
+              const nodes = normalized.map((item) => {
+                const wrapper = item.link ? document.createElement('a') : document.createElement('div');
+
+                wrapper.className = 'sponsor-grid-item';
+                if (item.link && wrapper instanceof HTMLAnchorElement) {
+                  wrapper.href = item.link;
+                  wrapper.target = '_blank';
+                  wrapper.rel = 'noopener noreferrer';
+                  wrapper.setAttribute('aria-label', item.nome || 'Apri sito sponsor');
+                }
+
+                const img = document.createElement('img');
+                img.src = item.image;
+                img.alt = item.nome || 'Logo sponsor';
+                img.loading = 'lazy';
+                img.decoding = 'async';
+
+                // Adatta il box alle proporzioni reali del logo caricato.
+                img.addEventListener('load', () => {
+                  if (!img.naturalWidth || !img.naturalHeight) return;
+                  wrapper.style.setProperty('--sponsor-aspect', `${img.naturalWidth} / ${img.naturalHeight}`);
+                }, { once: true });
+
+                wrapper.appendChild(img);
+                return wrapper;
+              });
+
+              sponsorGrid.replaceChildren(...nodes);
+            } catch (error) {
+              console.error('Errore nel caricamento sponsor:', error);
+              sponsorGrid.replaceChildren();
+              const sponsorTitolo = document.querySelector('.sponsor-titolo');
+              if (sponsorTitolo) sponsorTitolo.hidden = true;
+              sponsorGrid.hidden = true;
+              sponsorSection.classList.add('no-sponsors');
+            }
+          }
+      
+          // Carica eventi (mostre e incontri) e aggiorna la card in home
+          async function loadEventiImages() {
+            const preview = document.querySelector('.naviga-card-eventi .naviga-card-preview');
+            if (!preview) return;
+            const eventiCard = preview.closest('.naviga-card-eventi');
+
+            try {
+              const [mostreRes, incontriRes] = await Promise.all([
+                fetch('assets/mostre.json').catch(() => ({ ok: false })),
+                fetch('assets/incontri.json').catch(() => ({ ok: false }))
+              ]);
+
+              const mostreData = mostreRes.ok ? await mostreRes.json() : [];
+              const incontriData = incontriRes.ok ? await incontriRes.json() : [];
+
+              const normalizeImagePath = (rawPath) => {
+                const path = String(rawPath || '').trim();
+                if (!path) return '';
+                if (/^(https?:)?\/\//.test(path) || path.startsWith('data:') || path.startsWith('/')) {
+                  return path;
+                }
+                if (path.startsWith('./') || path.startsWith('../')) {
+                  return path;
+                }
+                return `./${path}`;
+              };
+
+              const mostreImages = Array.isArray(mostreData)
+                ? mostreData.map((m) => normalizeImagePath(m?.image)).filter(Boolean)
+                : [];
+              const incontriImages = Array.isArray(incontriData)
+                ? incontriData.map((i) => normalizeImagePath(i?.image)).filter(Boolean)
+                : [];
+              const allImages = [...mostreImages, ...incontriImages];
+
+              if (allImages.length === 0) {
+                if (eventiCard) {
+                  eventiCard.remove();
+                  window.dispatchEvent(new Event('resize'));
+                }
+                return;
+              }
+
+              const INTERVAL = 4000;
+              const SLIDE_MS = 420;
+              let idx = 0;
+              let animating = false;
+
+              const imgA = document.createElement('img');
+              imgA.className = 'foto-preview-img';
+              imgA.alt = '';
+              imgA.dataset.layer = 'front';
+
+              const imgB = document.createElement('img');
+              imgB.className = 'foto-preview-img';
+              imgB.alt = '';
+              imgB.dataset.layer = 'back';
+
+              imgA.src = allImages[0];
+
+              const prevBtn = document.createElement('button');
+              prevBtn.type = 'button';
+              prevBtn.className = 'foto-nav prev';
+              prevBtn.setAttribute('aria-label', 'Immagine evento precedente');
+
+              const nextBtn = document.createElement('button');
+              nextBtn.type = 'button';
+              nextBtn.className = 'foto-nav next';
+              nextBtn.setAttribute('aria-label', 'Immagine evento successiva');
+
+              preview.replaceChildren(imgA, imgB, prevBtn, nextBtn);
+
+              function slideTo(newIdx, direction) {
+                if (animating || allImages.length < 2) return;
+                animating = true;
+
+                const front = preview.querySelector(".foto-preview-img[data-layer='front']");
+                const back = preview.querySelector(".foto-preview-img[data-layer='back']");
+                if (!front || !back) {
+                  animating = false;
+                  return;
+                }
+
+                back.src = allImages[newIdx];
+                back.style.zIndex = '2';
+                front.style.zIndex = '1';
+
+                const inFrom = direction === 'next' ? '100%' : '-100%';
+                const outTo = direction === 'next' ? '-100%' : '100%';
+
+                back.style.transition = 'none';
+                back.style.transform = `translateX(${inFrom})`;
+                back.offsetHeight;
+
+                const ease = `transform ${SLIDE_MS}ms cubic-bezier(0.4,0,0.2,1)`;
+                back.style.transition = ease;
+                front.style.transition = ease;
+                back.style.transform = 'translateX(0)';
+                front.style.transform = `translateX(${outTo})`;
+
+                back.addEventListener('transitionend', () => {
+                  front.style.transition = 'none';
+                  front.style.transform = 'translateX(0)';
+                  front.dataset.layer = 'back';
+                  back.dataset.layer = 'front';
+                  back.style.zIndex = '1';
+                  front.style.zIndex = '0';
+                  idx = newIdx;
+                  animating = false;
+                }, { once: true });
+              }
+
+              function goNext() {
+                slideTo((idx + 1) % allImages.length, 'next');
+              }
+
+              function goPrev() {
+                slideTo((idx - 1 + allImages.length) % allImages.length, 'prev');
+              }
+
+              let timer = window.setInterval(goNext, INTERVAL);
+
+              const stopCardLink = (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+              };
+
+              prevBtn.addEventListener('click', (event) => {
+                stopCardLink(event);
+                goPrev();
+              });
+
+              nextBtn.addEventListener('click', (event) => {
+                stopCardLink(event);
+                goNext();
+              });
+
+              preview.addEventListener('mouseenter', () => {
+                window.clearInterval(timer);
+              });
+
+              preview.addEventListener('mouseleave', () => {
+                window.clearInterval(timer);
+                timer = window.setInterval(goNext, INTERVAL);
+              });
+
+            } catch (error) {
+              console.error('Errore nel caricamento eventi:', error);
+            }
+          }
+      
+      function populateProgramma(eventi) {
+          const programmaGriglia = document.querySelector('.programma-griglia');
+          if (!programmaGriglia) return;
+
+          const eventiInput = Array.isArray(eventi) ? eventi : [];
+
+          const parseDateFromGiorno = (giorno) => {
+            if (!giorno || typeof giorno !== 'string') return null;
+            const parts = giorno.split('-');
+            if (parts.length !== 3) return null;
+
+            const [day, month, year] = parts;
+            const parsed = new Date(Number(year), Number(month) - 1, Number(day));
+            return Number.isNaN(parsed.getTime()) ? null : parsed;
+          };
+
+          const isToday = (giorno) => {
+            const parsedDate = parseDateFromGiorno(giorno);
+            if (!parsedDate) return false;
+
+            const today = new Date();
+            return parsedDate.getFullYear() === today.getFullYear()
+              && parsedDate.getMonth() === today.getMonth()
+              && parsedDate.getDate() === today.getDate();
+          };
+          
+          // Svuota il contenuto precedente
+          programmaGriglia.innerHTML = '';
+          clearProgrammaCountdown();
+          
+          // Ordina gli eventi per data e ora
+            const eventiOrdinati = [...eventiInput].sort((a, b) => {
+              const dateA = parseDateFromGiorno(a.giorno);
+              const dateB = parseDateFromGiorno(b.giorno);
+              const timeA = dateA ? dateA.getTime() : 0;
+              const timeB = dateB ? dateB.getTime() : 0;
+              if (timeA !== timeB) return timeA - timeB;
+              return (a.ora || '').localeCompare(b.ora || '');
+            });
+          
+            // Filtra: mostra solo eventi della data odierna
+            const eventiOggi = eventiOrdinati.filter(evento => isToday(evento.giorno));
+
+            if (!eventiOggi.length) {
+              renderProgrammaCountdown(programmaGriglia);
+              return;
+            }
+
+            // Raggruppa gli eventi per giorno
+          const eventsByDay = {};
+            eventiOggi.forEach(evento => {
+              if (!eventsByDay[evento.giorno]) {
+                  eventsByDay[evento.giorno] = [];
+              }
+              eventsByDay[evento.giorno].push(evento);
+          });
+          
+          // Crea i contenitori per gli eventi con data
+          let isLeftColumn = true;
+          Object.entries(eventsByDay).forEach(([giorno, dayEvents]) => {
+              // Crea il titolo fisso al posto della data
+              const titleDiv = document.createElement('div');
+              titleDiv.className = 'programma-colonne';
+              titleDiv.innerHTML = `<p class="framer-text" dir="auto"
+                style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgUmVndWxhcg==;--framer-font-family:"Ltt Recoleta Compressed Regular","Ltt Recoleta Compressed Regular Placeholder",sans-serif;--framer-font-size:120px;--framer-text-alignment:left;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))'
+                >oggi</p>`;
+              programmaGriglia.appendChild(titleDiv);
+              
+              dayEvents.forEach((evento, index) => {
+                  if (isLeftColumn) {
+                      // Colonna sinistra
+                      const colSx = document.createElement('div');
+                      colSx.className = 'programma-col-sx';
+                      colSx.innerHTML = `
+                          <div class="programma-txt-a">
+                              <p class="framer-text" dir="auto"
+                                style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTGlnaHQ=;--framer-font-family:"Ltt Recoleta Compressed Light","Ltt Recoleta Compressed Light Placeholder",sans-serif;--framer-font-size:46px;--framer-font-weight:300;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))'>
+                                ore ${evento.ora}</p>
+                          </div>
+                          <div class="programma-txt-c programma-event-title-wrap">
+                              <p class="framer-text" dir="auto"
+                                style='--font-selector:Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTWVkaXVt;--framer-font-family:"Ltt Recoleta Compressed Medium","Ltt Recoleta Compressed Medium Placeholder",sans-serif;--framer-font-size:96px;--framer-font-weight:500;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))'>
+                                ${evento.titolo}</p>
+                          </div>
+                      `;
+                      programmaGriglia.appendChild(colSx);
+                  } else {
+                      // Colonna destra
+                      const colDx = document.createElement('div');
+                      colDx.className = 'programma-col-dx';
+                      colDx.innerHTML = `
+                          <div class="programma-txt-d">
+                              <p class="framer-text" dir="auto"
+                                style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTGlnaHQ=;--framer-font-family:"Ltt Recoleta Compressed Light","Ltt Recoleta Compressed Light Placeholder",sans-serif;--framer-font-size:46px;--framer-font-weight:300;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))'>
+                                ore ${evento.ora}</p>
+                          </div>
+                          <div class="programma-txt-f programma-event-title-wrap">
+                              <p class="framer-text" dir="auto"
+                                style='--font-selector:Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTWVkaXVt;--framer-font-family:"Ltt Recoleta Compressed Medium","Ltt Recoleta Compressed Medium Placeholder",sans-serif;--framer-font-size:96px;--framer-font-weight:500;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))'>
+                                ${evento.titolo}</p>
+                          </div>
+                      `;
+                      programmaGriglia.appendChild(colDx);
+                  }
+                  isLeftColumn = !isLeftColumn;
+                  
+                  // Aggiungi descrizione
+                  const sepDiv = document.createElement('div');
+                  sepDiv.className = isLeftColumn ? 'programma-sep-b' : 'programma-sep-a';
+                  sepDiv.innerHTML = `<p class="framer-text" dir="auto"
+                    style='--font-selector: Q1VTVE9NVjI7QXJ0aWN1bGF0IENGIE5vcm1hbA==;--framer-font-family:"Articulat CF Normal","Articulat CF Normal Placeholder",sans-serif;--framer-font-size:18px;--framer-text-alignment:right;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))'>
+                    ${evento.descrizione}</p>`;
+                  programmaGriglia.appendChild(sepDiv);
+              });
+          });
+
+                requestAnimationFrame(adjustProgrammaTitles);
+      }
+      
+      document.addEventListener("DOMContentLoaded", function() {
+          loadProgramma();
+          loadMenu();
+          loadSponsors();
+          loadEventiImages();
+
+                if (document.fonts?.ready) {
+                  document.fonts.ready.then(adjustProgrammaTitles);
+                }
+
+                window.addEventListener('resize', adjustProgrammaTitles);
+                    window.addEventListener('beforeunload', clearProgrammaCountdown);
+      });
+    </script>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="main" class="pagina">
+  <!-- =============================== -->
+  <!-- Navbar montata dinamicamente da components/navbar.html -->
+  <div class="navbar-wrapper hidden-1wu7hlw" data-navbar-placeholder="true"></div>
+  <!-- =============================== -->
+  <div class="hero" id="hero-section">
+    <div class="hero-sfondo">
+      <img
+          alt="" decoding="auto" height="2310" sizes=""
+          src="./assets/images/home/hero.avif"
+          srcset=""
+          style="position:absolute;inset:0px;border-radius:inherit;display:block;width:100%;height:100%;border-radius:inherit;object-position:center center;object-fit:contain"
+          width="4000" />
+    </div>
+    <div class="hero-titolo" style="transform:translateX(-50%)">
+      <p class="framer-text" dir="auto"
+        style='--font-selector: Q1VTVE9NVjI7Q2FtcHVzIEJ5IE5pZ2h0IFJlZ3VsYXI=;--framer-font-family:"Campus By Night Regular",sans-serif;--framer-font-size:126px;--framer-font-weight:900;--framer-text-alignment:center;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))'
+        >CAMPUS BY NIGHT</p>
+    </div>
+  </div>
+  <!-- PROGRAMMA  -->
+  <div class="sezione-programma" id="programma">
+    <div class="programma-griglia">
+      <!-- Gli eventi verranno caricati dinamicamente dal file programma.json -->
+    </div>
+  </div>
+  <!-- NAVIGA  -->
+  <div class="sezione-naviga">
+    <div class="naviga-carousel-shell hidden-n6m9oa hidden-1wu7hlw">
+      <div class="naviga-lista" data-naviga-track>
+        <a class="naviga-card link-pointer" href="lotteria.html">
+          <div class="naviga-card-preview" aria-hidden="true" data-img-base="lotteria">
+            <img src="./assets/images/home/lotteria.png" alt="" loading="lazy" decoding="async">
+          </div>
+          <p class="framer-text naviga-card-line" dir="auto"
+            style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgUmVndWxhcg==;--framer-font-family:"Ltt Recoleta Compressed Regular","Ltt Recoleta Compressed Regular Placeholder",sans-serif;--framer-font-size:55px;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))'
+            >lotteria</p>
+          <div class="naviga-card-cta">
+            <p class="framer-text naviga-card-cta-text" dir="auto"
+              style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTGlnaHQ=;--framer-font-family:"Ltt Recoleta Compressed Light","Ltt Recoleta Compressed Light Placeholder",sans-serif;--framer-font-size:22px;--framer-font-weight:300;--framer-text-color:var(--token-d453de31-a28f-4b58-b5d3-fb3a6b7682a5,rgb(33,39,78))'
+            >visita qui</p>
+          </div>
+        </a>
+        <div class="naviga-card naviga-card-eventi">
+          <div class="naviga-card-preview" aria-hidden="true" data-img-base="eventi"></div>
+          <p class="framer-text naviga-card-line" dir="auto"
+            style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgUmVndWxhcg==;--framer-font-family:"Ltt Recoleta Compressed Regular","Ltt Recoleta Compressed Regular Placeholder",sans-serif;--framer-font-size:55px;--framer-text-color:var(--token-819f6190-c503-4369-af27-3643c2ed1690,rgb(118,20,24))'
+            >eventi</p>
+          <div class="naviga-card-cta">
+            <p class="framer-text naviga-card-cta-text" dir="auto"
+              style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTGlnaHQ=;--framer-font-family:"Ltt Recoleta Compressed Light","Ltt Recoleta Compressed Light Placeholder",sans-serif;--framer-font-size:22px;--framer-font-weight:300;--framer-text-color:var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2,rgb(255,250,227))'
+            >visita qui</p>
+          </div>
+          <div class="naviga-eventi-actions" aria-label="Link eventi">
+            <a class="naviga-eventi-btn framer-text" href="mostre.html" dir="auto"
+              style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTGlnaHQ=;--framer-font-family:"Ltt Recoleta Compressed Light","Ltt Recoleta Compressed Light Placeholder",sans-serif;--framer-font-size:22px;--framer-font-weight:300;--framer-text-color:var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2,rgb(255,250,227))'>mostre</a>
+            <a class="naviga-eventi-btn framer-text" href="incontri.html" dir="auto"
+              style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTGlnaHQ=;--framer-font-family:"Ltt Recoleta Compressed Light","Ltt Recoleta Compressed Light Placeholder",sans-serif;--framer-font-size:22px;--framer-font-weight:300;--framer-text-color:var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2,rgb(255,250,227))'>incontri</a>
+          </div>
+        </div>
+        <a class="naviga-card link-pointer" href="https://www.ideaginger.it/progetti/campus-by-night-2026.html">
+          <div class="naviga-card-preview" aria-hidden="true" data-img-base="fund-raising">
+            <img src="./assets/images/home/fundRaising.png" alt="" loading="lazy" decoding="async">
+          </div>
+          <p class="framer-text naviga-card-line" dir="auto"
+            style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgUmVndWxhcg==;--framer-font-family:"Ltt Recoleta Compressed Regular","Ltt Recoleta Compressed Regular Placeholder",sans-serif;--framer-font-size:55px;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))'
+            >fund raising</p>
+          <div class="naviga-card-cta">
+            <p class="framer-text naviga-card-cta-text" dir="auto"
+              style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTGlnaHQ=;--framer-font-family:"Ltt Recoleta Compressed Light","Ltt Recoleta Compressed Light Placeholder",sans-serif;--framer-font-size:22px;--framer-font-weight:300;--framer-text-color:var(--token-d453de31-a28f-4b58-b5d3-fb3a6b7682a5,rgb(33,39,78))'
+            >visita qui</p>
+          </div>
+        </a>
+        <a class="naviga-card link-pointer" href="chiSiamo.html">
+          <div class="naviga-card-preview" aria-hidden="true" data-img-base="chi-siamo">
+            <img src="./assets/images/home/chiSiamo.jpg" alt="" loading="lazy" decoding="async">
+          </div>
+          <p class="framer-text naviga-card-line" dir="auto"
+            style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgUmVndWxhcg==;--framer-font-family:"Ltt Recoleta Compressed Regular","Ltt Recoleta Compressed Regular Placeholder",sans-serif;--framer-font-size:55px;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))'
+            >chi siamo</p>
+          <div class="naviga-card-cta">
+            <p class="framer-text naviga-card-cta-text" dir="auto"
+              style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTGlnaHQ=;--framer-font-family:"Ltt Recoleta Compressed Light","Ltt Recoleta Compressed Light Placeholder",sans-serif;--framer-font-size:22px;--framer-font-weight:300;--framer-text-color:var(--token-d453de31-a28f-4b58-b5d3-fb3a6b7682a5,rgb(33,39,78))'
+            >visita qui</p>
+          </div>
+        </a>
+      </div>
+      <button class="naviga-carousel-prev" type="button" aria-label="Scorri a sinistra" hidden>&lsaquo;</button>
+      <button class="naviga-carousel-next" type="button" aria-label="Scorri a destra" hidden>&rsaquo;</button>
+      <div class="naviga-carousel-dots" aria-label="Pagine naviga" hidden></div>
+    </div>
+  </div>
+  <!-- MENU  -->
+  <a class="sezione-menu link-pointer" href="menu.html"
+    id="menu">
+    <!-- Contenitore contenuti menu: titolo + blocco piatti.
+         Per spostare/impilare gli elementi intervieni su .menu-body in CSS. -->
+    <div class="menu-body" id="menu-phone">
+      <!-- Intestazione sezione menu:
+           modifica testo e gerarchia visiva in .menu-intestazione/.menu-titolo/.menu-completo -->
+      <div class="menu-intestazione">
+        <h1 class="menu-titolo framer-text" dir="auto">cosa mangiare oggi</h1>
+        <!-- <p class="menu-completo framer-text" dir="auto">menu' completo</p> -->
+      </div>
+      <!-- Area card menu (sfondo + due liste piatti).
+           Dimensioni/posizione del box: .menu-piatti e .menu-piatti-sfondo -->
+      <div class="menu-piatti">
+        <div aria-hidden="true" class="menu-piatti-sfondo hidden-1wu7hlw" radius="23"
+          style="image-rendering:pixelated;flex-shrink:0">
+          <div class="svgContainer" style="width:100%;height:100%;aspect-ratio:inherit"><svg height="100%"
+              preserveAspectRatio="none" style="width:100%;height:100%" width="100%">
+              <use href="#svg-1385455016_419"></use>
+            </svg></div>
+        </div>
+        <!-- Prima colonna lista: posizione con .menu-piatto-a, stile testo con .menu-lista -->
+        <ul class="menu-piatto-a menu-lista framer-text" dir="auto"></ul>
+        <!-- Seconda colonna lista: posizione con .menu-piatto-b -->
+        <ul class="menu-piatto-b menu-lista framer-text" dir="auto"></ul>
+      </div>
+    </div>
+    <!-- Immagine decorativa lato destro (desktop):
+         posizione/dimensioni in .menu-immagine, nascosta in mobile. -->
+    <div class="menu-immagine hidden-1wu7hlw"
+      style="will-change:transform;opacity:1;transform:translateX(-50%)">
+      <img
+          alt="" decoding="auto" height="2092" loading="lazy" sizes=""
+          src="./assets/images/home/piada.avif"
+          srcset=""
+          style="position:absolute;inset:0px;border-radius:inherit;display:block;width:100%;height:100%;border-radius:inherit;object-position:center center;object-fit:fill"
+          width="2052" />
+    </div>
+  </a>
+  <!-- /mappa -->
+  <div class="sezione-mappa">
+    <div class="mappa-body">
+      <div class="mappa-titolo">
+        <h1 class="framer-text framer-styles-preset-qqmdfr" dir="auto">mappa</h1>
+      </div>
+      <div class="mappa-immagine hidden-1wu7hlw">
+        <img
+            alt="" decoding="auto" height="1480" loading="lazy" sizes=""
+            src="./assets/images/home/mappa.avif"
+            srcset=""
+            style="position:absolute;inset:0px;border-radius:inherit;display:block;width:100%;height:100%;border-radius:inherit;object-position:center center;object-fit:cover"
+            width="1754" />
+      </div>
+    </div>
+  </div>
+  <!-- FOTO -->
+  <div class="sezione-foto">
+    <div class="foto-body">
+      <div class="foto-col-info">
+        <h1 class="framer-text framer-styles-preset-qqmdfr" dir="auto"
+          style="--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))">bacheca</h1>
+      </div>
+      <div class="foto-grid hidden-1wu7hlw">
+        <a class="foto-card link-pointer" href="foto-anni-scorsi.html">
+          <div class="foto-card-preview" aria-hidden="true" data-img-base="old"></div>
+          <p class="framer-text foto-card-line">guarda</p>
+          <p class="framer-text foto-card-line">gli anni scorsi</p>
+          <div class="foto-card-cta">
+            <p class="framer-text foto-card-cta-text">visita qui</p>
+          </div>
+        </a>
+        <a class="foto-card link-pointer" href="foto-nuove.html">
+          <div class="foto-card-preview" aria-hidden="true" data-img-base="new"></div>
+          <p class="framer-text foto-card-line">cerca la tua foto</p>
+          <p class="framer-text foto-card-line">di quest'anno</p>
+          <div class="foto-card-cta">
+            <p class="framer-text foto-card-cta-text">visita qui</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="sezione-sponsor">
+    <div class="sponsor-titolo">
+      <h1 class="framer-text framer-styles-preset-qqmdfr" dir="auto"
+        style="--framer-text-color:var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2,rgb(255,250,227))">i nostri sponsor
+      </h1>
+    </div>
+    <div class="sponsor-grid" data-sponsor-grid aria-label="Elenco sponsor"></div>
+    <div class="sponsor-lista">
+      <h1 class="framer-text framer-styles-preset-qqmdfr" dir="auto"
+        style="--framer-text-color:var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2,rgb(255,250,227))">contatti</h1>
+      <div class="footer-logo-container" aria-label="Social Campus by Night">
+        <a href="https://www.facebook.com/CampusByNight" target="_blank" rel="noopener noreferrer" aria-label="Facebook Campus by Night">
+          <svg class="footer-logo" viewBox="0 0 24 24" role="img" aria-hidden="true">
+            <path d="M13.5 21V12.8h2.7l.4-3.2h-3.1V7.6c0-.9.2-1.5 1.5-1.5h1.7V3.3c-.8-.1-1.7-.2-2.5-.2-2.5 0-4.2 1.5-4.2 4.3v2.2H7.2v3.2h2.7V21h3.6z" fill="currentColor"></path>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/_campusbynight_" target="_blank" rel="noopener noreferrer" aria-label="Instagram Campus by Night">
+          <svg class="footer-logo" viewBox="0 0 24 24" role="img" aria-hidden="true">
+            <path d="M7.5 3h9A4.5 4.5 0 0 1 21 7.5v9a4.5 4.5 0 0 1-4.5 4.5h-9A4.5 4.5 0 0 1 3 16.5v-9A4.5 4.5 0 0 1 7.5 3zm0 1.8A2.7 2.7 0 0 0 4.8 7.5v9a2.7 2.7 0 0 0 2.7 2.7h9a2.7 2.7 0 0 0 2.7-2.7v-9a2.7 2.7 0 0 0-2.7-2.7h-9zm9.3 1.4a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2zM12 7.4A4.6 4.6 0 1 1 7.4 12 4.6 4.6 0 0 1 12 7.4zm0 1.8A2.8 2.8 0 1 0 14.8 12 2.8 2.8 0 0 0 12 9.2z" fill="currentColor"></path>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/c/CampusByNight" target="_blank" rel="noopener noreferrer" aria-label="YouTube Campus by Night">
+          <svg class="footer-logo" viewBox="0 0 24 24" role="img" aria-hidden="true">
+            <path d="M21.5 8.4a3.2 3.2 0 0 0-2.2-2.2C17.2 5.6 12 5.6 12 5.6s-5.2 0-7.3.6a3.2 3.2 0 0 0-2.2 2.2A33.7 33.7 0 0 0 2 12a33.7 33.7 0 0 0 .5 3.6 3.2 3.2 0 0 0 2.2 2.2c2.1.6 7.3.6 7.3.6s5.2 0 7.3-.6a3.2 3.2 0 0 0 2.2-2.2A33.7 33.7 0 0 0 22 12a33.7 33.7 0 0 0-.5-3.6zM10.3 15V9l5.1 3-5.1 3z" fill="currentColor"></path>
+          </svg>
+        </a>
+        <a href="mailto:commerciale.campusbynight@gmail.com" aria-label="Email Campus by Night">
+          <svg class="footer-logo" viewBox="0 0 24 24" role="img" aria-hidden="true">
+            <path d="M3.5 5h17a1.5 1.5 0 0 1 1.5 1.5v11a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 17.5v-11A1.5 1.5 0 0 1 3.5 5zm0 1.8v.2l8.5 5.8 8.5-5.8v-.2h-17zm17 2.4-8.1 5.5a.8.8 0 0 1-.9 0L3.5 9.2v8h17v-8z" fill="currentColor"></path>
+          </svg>
+        </a>
+      </div>
+      <p style="font-size: 12px; color: rgba(255, 250, 227, 0.7); margin-top: 20px; text-align: center;">© 2026 Campus By Night. Tutti i diritti riservati.</p>
+    </div>
+  <!-- Libreria SVG nascosta: qui definiamo forme/icone riusabili con <use href="#id"> -->
+  <div id="svg-templates" style="position: absolute; overflow: hidden; bottom: 0; left: 0; width: 0; height: 0; z-index: 0; contain: strict" aria-hidden="true">
+<!-- Linea orizzontale usata nel divider della navbar (versione larga desktop) -->
+<svg viewBox="0 0 1787.306 1" overflow="visible" id="svg1175538082_370"><path d="M 0 0 L 1787.306 0" fill="transparent" stroke-width="0.5" stroke="var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3, rgb(236, 99, 26)) /* {&quot;name&quot;:&quot;arancione&quot;} */" stroke-linejoin="round" opacity="0.63"></path></svg>
+<!-- Linea orizzontale usata nel separatore inferiore della navbar -->
+<svg viewBox="0 0 3334 1" overflow="visible" id="svg-1272790531_347"><path d="M 0 0 L 3334 0" fill="transparent" stroke-width="0.5" stroke="var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3, rgb(236, 99, 26)) /* {&quot;name&quot;:&quot;arancione&quot;} */" stroke-linejoin="round"></path></svg>
+<!-- Varianti di linee/archetti per elementi grafici secondari -->
+<svg viewBox="0 0 411.56 1" overflow="visible" id="svg-1566436403_254"><path d="M 0 0 L 411.56 0" fill="transparent" stroke-width="0.5" stroke="rgb(251, 125, 20)" stroke-linejoin="round"></path></svg>
+<svg viewBox="0 0 429.5 1" overflow="visible" id="svg831131077_252"><path d="M 0 0 L 429.5 0" fill="transparent" stroke-width="0.5" stroke="rgb(251, 125, 20)" stroke-linejoin="round"></path></svg>
+<!-- Rettangolo arrotondato pieno (sfondo/shape decorativa di sezione) -->
+<svg viewBox="0 0 678 555" overflow="visible" id="svg-1385455016_419"><path d="M 0 23 C 0 10.297 10.297 0 23 0 L 655 0 C 667.703 0 678 10.297 678 23 L 678 532 C 678 544.703 667.703 555 655 555 L 23 555 C 10.297 555 0 544.703 0 532 Z" fill="var(--token-819f6190-c503-4369-af27-3643c2ed1690, rgb(118, 20, 24)) /* {&quot;name&quot;:&quot;rosso&quot;} */"></path></svg>
+<!-- Sprite compatto con icone principali navbar (home, menu, raccolta fondi) -->
+<svg display="block" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="1695347308"><path d="M 8.781 0.22 C 8.64 0.079 8.449 0 8.25 0 C 8.051 0 7.86 0.079 7.719 0.22 L 0 7.94 L 0 17.251 L 6 17.251 L 6 11.251 L 10.5 11.251 L 10.5 17.251 L 16.5 17.251 L 16.5 7.94 Z" fill-opacity="var(--1m6trwb, 0)" fill="var(--21h8s6, rgb(0, 0, 0))" height="17.250589992311827px" id="bclRjHh9i" transform="translate(3.75 2.999)" width="16.5px"></path><path d="M 0 0 L 21 0" fill="transparent" height="1px" id="x_1UoMXYg" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(1.5 20.25)" width="21px"></path><path d="M 4.5 6 L 4.5 0 L 0 0 L 0 6" fill="transparent" height="6px" id="B_eAApVIi" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(9.75 14.25)" width="4.5px"></path><path d="M 0 0 L 0 9.31" fill="transparent" height="9.310312500000009px" id="lD22mnHXI" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(3.75 10.94)" width="1px"></path><path d="M 0 9.31 L 0 0" fill="transparent" height="9.310312500000009px" id="LO3qsaZ8o" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(20.25 10.94)" width="1px"></path><path d="M 0 9.44 L 9.219 0.22 C 9.36 0.079 9.551 0 9.75 0 C 9.949 0 10.14 0.079 10.281 0.22 L 19.5 9.44" fill="transparent" height="9.440277492311829px" id="TVmdv_yE5" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(2.25 2.999)" width="19.5px"></path></svg><svg display="block" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="3088927185"><path d="M 1.875 0 L 5.625 1.5 L 9.375 0 L 13.125 1.5 L 15 0.818 L 15 2.25 C 15 3.907 13.657 5.25 12 5.25 L 3 5.25 C 1.343 5.25 0 3.907 0 2.25 L 0 0.682 Z" fill-opacity="var(--1m6trwb, 0)" fill="var(--21h8s6, rgb(0, 0, 0))" height="5.25px" id="GdFbaMFzJ" transform="translate(4.5 15)" width="15px"></path><path d="M 0.757 6 C 0.529 6.002 0.312 5.9 0.168 5.723 C 0.024 5.545 -0.032 5.312 0.018 5.089 C 0.627 2.208 4.081 0 8.251 0 C 12.421 0 15.874 2.208 16.484 5.089 C 16.533 5.312 16.478 5.545 16.334 5.723 C 16.19 5.9 15.973 6.002 15.744 6 Z" fill-opacity="var(--1m6trwb, 0)" fill="var(--21h8s6, rgb(0, 0, 0))" height="6.000034975089832px" id="DGoNpSpdY" transform="translate(3.749 3)" width="16.50135818304515px"></path><path d="M 0.757 6 C 0.529 6.002 0.312 5.9 0.168 5.723 C 0.024 5.545 -0.032 5.312 0.018 5.089 C 0.627 2.208 4.081 0 8.251 0 C 12.421 0 15.874 2.208 16.484 5.089 C 16.533 5.312 16.478 5.545 16.334 5.723 C 16.19 5.9 15.973 6.002 15.744 6 Z" fill="transparent" height="6.000034975089832px" id="nyJBYxKQA" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(3.749 3)" width="16.50135818304515px"></path><path d="M 0 1.5 L 4.125 0 L 7.875 1.5 L 11.625 0 L 15.375 1.5 L 19.5 0" fill="transparent" height="1.5px" id="Vp8n_javK" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(2.25 15)" width="19.5px"></path><path d="M 0 0 L 19.5 0" fill="transparent" height="1px" id="ehPiVA63y" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(2.25 12)" width="19.5px"></path><path d="M 15 0.137 L 15 1.568 C 15 3.225 13.657 4.568 12 4.568 L 3 4.568 C 1.343 4.568 0 3.225 0 1.568 L 0 0" fill="transparent" height="4.5684374999999875px" id="UcrRTDuYc" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(4.5 15.682)" width="15px"></path></svg><svg display="block" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="2164235900"><path d="M 3.75 5.25 L 0.75 5.25 C 0.336 5.25 0 4.914 0 4.5 L 0 0.75 C 0 0.336 0.336 0 0.75 0 L 3.75 0 Z" fill-opacity="var(--1m6trwb, 0)" fill="var(--21h8s6, rgb(0, 0, 0))" height="5.25px" id="D2yugkWnF" transform="translate(0.75 14.25)" width="3.75px"></path><path d="M 6.372 2.252 C 5.983 2.252 5.599 2.339 5.247 2.506 L 5.247 2.506 C 5.195 1.35 4.392 0.365 3.27 0.081 C 2.148 -0.204 0.973 0.28 0.376 1.271 C -0.221 2.263 -0.098 3.528 0.678 4.386 C 1.455 5.244 2.701 5.493 3.747 4.998 L 3.747 4.998 C 3.813 6.43 5.016 7.545 6.449 7.501 C 7.882 7.458 9.015 6.272 8.994 4.839 C 8.973 3.405 7.806 2.254 6.372 2.252 Z" fill-opacity="var(--1m6trwb, 0)" fill="var(--21h8s6, rgb(0, 0, 0))" height="7.502271320941112px" id="VBorbR88x" transform="translate(12.753 2.998)" width="8.994555937469457px"></path><path d="M 0 2.625 C 0 1.175 1.175 0 2.625 0 C 4.075 0 5.25 1.175 5.25 2.625 C 5.25 4.075 4.075 5.25 2.625 5.25 C 1.175 5.25 0 4.075 0 2.625 Z" fill="transparent" height="5.25px" id="c6_3LPIw4" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(16.5 5.25)" width="5.25px"></path><path d="M 3.75 5.25 L 0.75 5.25 C 0.336 5.25 0 4.914 0 4.5 L 0 0.75 C 0 0.336 0.336 0 0.75 0 L 3.75 0" fill="transparent" height="5.25px" id="kfyPKfUx8" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(0.75 14.25)" width="3.75px"></path><path d="M 6 3.75 L 9 3.75 L 15.281 2.305 C 15.749 2.177 16.25 2.274 16.637 2.568 C 17.023 2.863 17.249 3.32 17.25 3.805 L 17.25 3.805 C 17.25 4.395 16.917 4.934 16.389 5.198 L 12.75 6.75 L 6.75 8.25 L 0 8.25 L 0 3 L 2.344 0.656 C 2.767 0.235 3.34 -0.001 3.938 0 L 8.625 0 C 9.661 0 10.5 0.839 10.5 1.875 L 10.5 1.875 C 10.5 2.911 9.661 3.75 8.625 3.75 Z" fill="transparent" height="8.25000677472812px" id="y8hacg63N" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(4.5 11.25)" width="17.250000132121865px"></path><path d="M 3.747 4.998 C 2.701 5.493 1.455 5.244 0.678 4.386 C -0.098 3.528 -0.221 2.263 0.376 1.271 C 0.973 0.28 2.148 -0.204 3.27 0.081 C 4.392 0.365 5.195 1.35 5.247 2.506" fill="transparent" height="5.2503143234810885px" id="KGxCZSsZx" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(12.753 2.998)" width="5.247337732094778px"></path></svg>
+<!-- Icona pallone da calcio: ora viene usata dal link "sport" nella navbar -->
+<svg display="block" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="2218882161"><path d="M 0.014 6.154 C 0.005 5.985 0 5.816 0 5.646 C -0.003 3.591 0.7 1.598 1.99 0 L 3.11 3.779 Z" fill-opacity="var(--1m6trwb, 0)" fill="var(--21h8s6, rgb(0, 0, 0))" height="6.153750000000002px" id="t_2TBMLab" transform="translate(3 6.354)" width="3.1096979367940776px"></path><path d="M 5.339 3.893 C 3.131 3.318 1.223 1.927 0 0 L 3.961 0 Z" fill-opacity="var(--1m6trwb, 0)" fill="var(--21h8s6, rgb(0, 0, 0))" height="3.8925000000000125px" id="mHWgwc_w9" transform="translate(4.399 16.821)" width="5.339062499999997px"></path><path d="M 0 3.893 C 2.21 3.319 4.12 1.928 5.344 0 L 1.378 0 Z" fill-opacity="var(--1m6trwb, 0)" fill="var(--21h8s6, rgb(0, 0, 0))" height="3.8925000000000125px" id="SZ_BcO26a" transform="translate(14.262 16.821)" width="5.34375px"></path><path d="M 3.096 6.154 C 3.105 5.985 3.11 5.816 3.11 5.646 C 3.113 3.591 2.41 1.598 1.119 0 L 0 3.779 Z" fill-opacity="var(--1m6trwb, 0)" fill="var(--21h8s6, rgb(0, 0, 0))" height="6.153750000000002px" id="LoBzgPKbu" transform="translate(17.89 6.354)" width="3.1096979367940776px"></path><path d="M 0 0.664 C 2.179 -0.221 4.618 -0.221 6.797 0.664 L 3.398 3 Z" fill-opacity="var(--1m6trwb, 0)" fill="var(--21h8s6, rgb(0, 0, 0))" height="3.0000076146964965px" id="wfqbw3cqy" transform="translate(8.602 3)" width="6.796875px"></path><path d="M 3.75 0 L 0 2.578 L 1.433 6.75 L 6.067 6.75 L 7.5 2.578 Z" fill-opacity="var(--1m6trwb, 0)" fill="var(--21h8s6, rgb(0, 0, 0))" height="6.75px" id="dWKSNUawR" transform="translate(8.25 8.25)" width="7.5px"></path><path d="M 0 9 C 0 4.029 4.029 0 9 0 C 13.971 0 18 4.029 18 9 C 18 13.971 13.971 18 9 18 C 4.029 18 0 13.971 0 9 Z" fill="transparent" height="18px" id="btPWM2e5Y" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(3 3)" width="18px"></path><path d="M 3.75 0 L 0 2.578 L 1.433 6.75 L 6.067 6.75 L 7.5 2.578 Z" fill="transparent" height="6.75px" id="VJIi0HNVf" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(8.25 8.25)" width="7.5px"></path><path d="M 0 0 L 0 2.25" fill="transparent" height="2.25px" id="xfI5GmwtV" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(12 6)" width="1px"></path><path d="M 0 0 L 2.14 0.695" fill="transparent" height="1px" id="rtV414KVc" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(6.11 10.133)" width="2.1403125000000003px"></path><path d="M 0 1.821 L 1.323 0" fill="transparent" height="1.8206250000000068px" id="Zu9_3n2ku" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(8.36 15)" width="1.3228124999999977px"></path><path d="M 1.323 1.821 L 0 0" fill="transparent" height="1.8206250000000068px" id="YQozE5Wpu" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(14.317 15)" width="1.3228124999999977px"></path><path d="M 2.14 0 L 0 0.695" fill="transparent" height="1px" id="yUNBaqfXl" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(15.75 10.133)" width="2.140312499999993px"></path><path d="M 6.797 0 L 3.398 2.336 L 0 0" fill="transparent" height="2.3362499999999997px" id="M9XmAlcvA" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(8.602 3.664)" width="6.796875px"></path><path d="M 3.097 6.154 L 0 3.778 L 1.12 0" fill="transparent" height="6.153750000000002px" id="uxnfAq5g3" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(17.889 6.354)" width="3.0965625000000045px"></path><path d="M 1.976 0 L 3.096 3.778 L 0 6.154" fill="transparent" height="6.153750000000002px" id="Xn0FmJY1y" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(3.014 6.354)" width="3.095625000000002px"></path><path d="M 0 3.893 L 1.378 0 L 5.339 0" fill="transparent" height="3.8925000000000125px" id="n8KPnYI_6" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(14.262 16.821)" width="5.339062500000011px"></path><path d="M 0 0 L 3.961 0 L 5.339 3.893" fill="transparent" height="3.8925000000000125px" id="P8E0vs9kf" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(4.399 16.821)" width="5.339062499999997px"></path></svg>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const PREVIEWS = document.querySelectorAll(".foto-card-preview[data-img-base]");
+  if (!PREVIEWS.length) return;
+
+  const BASE = "./assets/images";
+  const INTERVAL = 4000;
+  const SLIDE_MS = 420;
+
+  // Cache di immagini precaricate: url → HTMLImageElement
+  const imgCache = new Map();
+
+  function preload(urls) {
+    urls.forEach(url => {
+      if (!imgCache.has(url)) {
+        const el = new Image();
+        el.addEventListener("error", () => {
+          if (url.includes("/thumb_")) {
+            el.src = url.replace(/\/thumb_([^/]+)$/, "/$1");
+          }
+        }, { once: true });
+        el.src = url;
+        imgCache.set(url, el);
+      }
+    });
+  }
+
+  async function getImages(folder) {
+    const res = await fetch(`${BASE}/${folder}/manifest.json`);
+    if (!res.ok) throw new Error(`manifest.json non trovato in ${folder}`);
+    const files = await res.json();
+    return (Array.isArray(files) ? files : []).map(file => {
+      const normalized = String(file || "").trim();
+      if (!normalized) return "";
+
+      const slashIndex = normalized.lastIndexOf("/");
+      const dir = slashIndex >= 0 ? normalized.slice(0, slashIndex + 1) : "";
+      const name = slashIndex >= 0 ? normalized.slice(slashIndex + 1) : normalized;
+      const thumbName = name.startsWith("thumb_") ? name : `thumb_${name}`;
+      return `${BASE}/${folder}/${dir}${thumbName}`;
+    }).filter(Boolean);
+  }
+
+  function initSlider(preview, images) {
+    let idx = 0;
+    let animating = false;
+
+    // Due img sovrapposti per lo scorrimento
+    const imgA = document.createElement("img");
+    imgA.className = "foto-preview-img";
+    imgA.alt = "";
+    imgA.dataset.layer = "front";
+
+    const imgB = document.createElement("img");
+    imgB.className = "foto-preview-img";
+    imgB.alt = "";
+    imgB.dataset.layer = "back";
+
+    preview.replaceChildren(imgA, imgB);
+    const fallbackToOriginal = ev => {
+      const img = ev.currentTarget;
+      if (!(img instanceof HTMLImageElement)) return;
+      if (img.dataset.fallbackApplied === "true") return;
+      if (!img.src.includes("/thumb_")) return;
+
+      img.dataset.fallbackApplied = "true";
+      img.src = img.src.replace(/\/thumb_([^/]+)$/, "/$1");
+    };
+
+    imgA.addEventListener("error", fallbackToOriginal);
+    imgB.addEventListener("error", fallbackToOriginal);
+    imgA.src = images[0];
+
+    const prevBtn = document.createElement("button");
+    prevBtn.type = "button";
+    prevBtn.className = "foto-nav prev";
+    prevBtn.setAttribute("aria-label", "Foto precedente");
+
+    const nextBtn = document.createElement("button");
+    nextBtn.type = "button";
+    nextBtn.className = "foto-nav next";
+    nextBtn.setAttribute("aria-label", "Foto successiva");
+
+    preview.append(prevBtn, nextBtn);
+
+    function slideTo(newIdx, direction) {
+      if (animating) return;
+      animating = true;
+
+      // front = img correntemente visibile
+      const front = preview.querySelector(".foto-preview-img[data-layer='front']");
+      const back  = preview.querySelector(".foto-preview-img[data-layer='back']");
+
+      back.src = images[newIdx];
+      back.style.zIndex = "2";
+      front.style.zIndex = "1";
+
+      const inFrom  = direction === "next" ? "100%" : "-100%";
+      const outTo   = direction === "next" ? "-100%" : "100%";
+
+      // Posiziona back fuori campo senza transizione
+      back.style.transition = "none";
+      back.style.transform = `translateX(${inFrom})`;
+      back.offsetHeight; // force reflow
+
+      // Avvia scorrimento
+      const ease = `transform ${SLIDE_MS}ms cubic-bezier(0.4,0,0.2,1)`;
+      back.style.transition  = ease;
+      front.style.transition = ease;
+      back.style.transform   = "translateX(0)";
+      front.style.transform  = `translateX(${outTo})`;
+
+      back.addEventListener("transitionend", () => {
+        // Scambia i ruoli
+        front.style.transition = "none";
+        front.style.transform  = "translateX(0)";
+        front.dataset.layer = "back";
+        back.dataset.layer  = "front";
+        back.style.zIndex   = "1";
+        front.style.zIndex  = "0";
+        idx = newIdx;
+        animating = false;
+        // Precarica la prossima immagine
+        preload([images[(newIdx + 1) % images.length]]);
+      }, { once: true });
+    }
+
+    function goNext() { slideTo((idx + 1) % images.length, "next"); }
+    function goPrev() { slideTo((idx - 1 + images.length) % images.length, "prev"); }
+
+    let timer = setInterval(goNext, INTERVAL);
+
+    function stopLink(ev) { ev.preventDefault(); ev.stopPropagation(); }
+    prevBtn.addEventListener("click", ev => { stopLink(ev); goPrev(); });
+    nextBtn.addEventListener("click", ev => { stopLink(ev); goNext(); });
+
+    preview.addEventListener("mouseenter", () => clearInterval(timer));
+    preview.addEventListener("mouseleave", () => { timer = setInterval(goNext, INTERVAL); });
+
+    // Precarica tutte le immagini in background dopo il primo render
+    setTimeout(() => preload(images), 800);
+  }
+
+  const tasks = Array.from(PREVIEWS).map(preview => {
+    const folder = preview.dataset.imgBase;
+    return getImages(folder)
+      .then(images => {
+        if (!images.length) {
+          const card = preview.closest(".foto-card");
+          if (card) {
+            card.remove();
+          }
+          return;
+        }
+
+        initSlider(preview, images);
+      })
+      .catch(e => console.error(`Errore preview [${folder}]:`, e));
+  });
+
+  await Promise.all(tasks);
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const shell = document.querySelector(".naviga-carousel-shell");
+  if (!shell) return;
+
+  const track = shell.querySelector("[data-naviga-track]");
+  const cards = Array.from(track ? track.querySelectorAll(".naviga-card") : []);
+  const prevBtn = shell.querySelector(".naviga-carousel-prev");
+  const nextBtn = shell.querySelector(".naviga-carousel-next");
+  const dotsWrap = shell.querySelector(".naviga-carousel-dots");
+  if (!track || !cards.length || !prevBtn || !nextBtn || !dotsWrap) return;
+
+  let pageOffsets = [];
+  let rafScheduled = false;
+
+  function getStepSize() {
+    const gap = parseFloat(getComputedStyle(track).gap || "0");
+    return (cards[0] ? cards[0].offsetWidth : 0) + gap;
+  }
+
+  function hasTrackOverflow() {
+    const gap = parseFloat(getComputedStyle(track).gap || "0");
+    const cardsWidth = cards.reduce((total, card) => total + card.offsetWidth, 0);
+    const gutters = Math.max(0, cards.length - 1) * gap;
+    const contentWidth = cardsWidth + gutters;
+    return contentWidth - track.clientWidth > 4;
+  }
+
+  function getNearestPageIndex() {
+    if (!pageOffsets.length) return 0;
+    const current = track.scrollLeft;
+    let nearest = 0;
+    let minDistance = Infinity;
+
+    pageOffsets.forEach((offset, index) => {
+      const distance = Math.abs(offset - current);
+      if (distance < minDistance) {
+        minDistance = distance;
+        nearest = index;
+      }
+    });
+
+    return nearest;
+  }
+
+  function updateDots() {
+    const active = getNearestPageIndex();
+    dotsWrap.querySelectorAll("button").forEach((dot, index) => {
+      dot.setAttribute("aria-current", index === active ? "true" : "false");
+    });
+  }
+
+  function updateArrows() {
+    if (!pageOffsets.length || pageOffsets.length <= 1) {
+      prevBtn.hidden = true;
+      nextBtn.hidden = true;
+      return;
+    }
+
+    const active = getNearestPageIndex();
+    prevBtn.hidden = active <= 0;
+    nextBtn.hidden = active >= pageOffsets.length - 1;
+  }
+
+  function buildDots() {
+    dotsWrap.innerHTML = "";
+
+    if (pageOffsets.length < 2) {
+      return;
+    }
+
+    pageOffsets.forEach((offset, index) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.setAttribute("aria-label", `Vai alla pagina ${index + 1}`);
+      dot.setAttribute("aria-current", "false");
+      dot.addEventListener("click", () => {
+        track.scrollTo({ left: offset, behavior: "smooth" });
+      });
+      dotsWrap.appendChild(dot);
+    });
+
+    updateDots();
+  }
+
+  function computePages() {
+    const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
+    const step = Math.max(getStepSize(), 1);
+    const offsets = [0];
+
+    for (let offset = step; offset < maxScroll - 1; offset += step) {
+      offsets.push(Math.min(offset, maxScroll));
+    }
+
+    if (!offsets.includes(maxScroll) && maxScroll > 0) {
+      offsets.push(maxScroll);
+    }
+
+    pageOffsets = offsets;
+  }
+
+  function updateCarouselState() {
+    const hasOverflow = hasTrackOverflow();
+    shell.classList.toggle("is-overflow", hasOverflow);
+    prevBtn.hidden = !hasOverflow;
+    nextBtn.hidden = !hasOverflow;
+    dotsWrap.hidden = true;
+
+    if (!hasOverflow) {
+      track.scrollTo({ left: 0 });
+      dotsWrap.innerHTML = "";
+      pageOffsets = [];
+      return;
+    }
+
+    computePages();
+    const canShowDots = pageOffsets.length >= 2;
+    dotsWrap.hidden = !canShowDots;
+
+    if (!canShowDots) {
+      dotsWrap.innerHTML = "";
+      updateArrows();
+      return;
+    }
+
+    buildDots();
+    updateArrows();
+  }
+
+  prevBtn.addEventListener("click", () => {
+    if (!pageOffsets.length) return;
+    const current = getNearestPageIndex();
+    if (current <= 0) return;
+    track.scrollTo({ left: pageOffsets[current - 1], behavior: "smooth" });
+  });
+
+  nextBtn.addEventListener("click", () => {
+    if (!pageOffsets.length) return;
+    const current = getNearestPageIndex();
+    if (current >= pageOffsets.length - 1) return;
+    track.scrollTo({ left: pageOffsets[current + 1], behavior: "smooth" });
+  });
+
+  track.addEventListener("scroll", () => {
+    if (rafScheduled) return;
+    rafScheduled = true;
+    requestAnimationFrame(() => {
+      rafScheduled = false;
+      updateDots();
+      updateArrows();
+    });
+  }, { passive: true });
+
+  window.addEventListener("resize", updateCarouselState);
+  window.addEventListener("load", updateCarouselState);
+
+  if ("ResizeObserver" in window) {
+    const resizeObserver = new ResizeObserver(updateCarouselState);
+    resizeObserver.observe(shell);
+    resizeObserver.observe(track);
+    cards.forEach((card) => resizeObserver.observe(card));
+  }
+
+  setTimeout(updateCarouselState, 120);
+  updateCarouselState();
+});
+</script>
+<script src="assets/navbar-loader.js"></script>
+</body>
+</html>

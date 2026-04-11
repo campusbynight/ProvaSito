@@ -1,0 +1,40 @@
+{
+  "eventi": [
+    {
+      "giorno": "15-01-2026",
+      "ora": "09:00",
+      "titolo": "Riunione di apertura",
+      "descrizione": "Incontro introduttivo con il team"
+    },
+    {
+      "giorno": "15-01-2026",
+      "ora": "11:30",
+      "titolo": "Presentazione progetto",
+      "descrizione": "Presentazione dei dettagli del nuovo progetto"
+    },
+    {
+      "giorno": "15-01-2026",
+      "ora": "14:00",
+      "titolo": "Workshop",
+      "descrizione": "Sessione interattiva sui nuovi strumenti"
+    },
+    {
+      "giorno": "16-01-2026",
+      "ora": "10:00",
+      "titolo": "Brainstorming",
+      "descrizione": "Discussione creativa sulle idee innovative"
+    },
+    {
+      "giorno": "12-03-2026",
+      "ora": "15:30",
+      "titolo": "Revisione progress",
+      "descrizione": "Verifica dello stato di avanzamento"
+    },
+    {
+      "giorno": "18-03-2026",
+      "ora": "09:00",
+      "titolo": "Standup meeting",
+      "descrizione": "Aggiornamento giornaliero del team"
+    }
+  ]
+}

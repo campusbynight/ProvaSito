@@ -1,0 +1,702 @@
+[
+  { "premio": 1, 
+
+  "header": "Scooter Kymco Agility S 125cc", 
+  
+  "descrizione": "Scooter Kymco Agility S 125cc", 
+
+  "numero": "" },
+  
+  { "premio": 2, 
+  
+  "header": "MacBook Air", 
+  
+  "descrizione": "MacBook Air", 
+  
+  "numero": "" },
+  
+  { "premio": 3, 
+
+  "header": "500€ utilizzabili su <a href=\"https://www.weroad.it/\" target=\"_blank\" style=\"color: inherit; text-decoration: underline;\">WeRoad</a>",
+  
+  "descrizione": "Promo Code da 500€ utilizzabile su <a href=\"https://www.weroad.it/\" target=\"_blank\" style=\"color: inherit; text-decoration: underline;\">WeRoad</a>", 
+  
+  "numero": ""
+  },
+  
+  { "premio": 4, 
+  
+  "header": "500€ utilizzabili su <a href=\"https://www.weroad.it/\" target=\"_blank\" style=\"color: inherit; text-decoration: underline;\">WeRoad</a>",
+  
+  "descrizione": "Promo Code da 500€ utilizzabile su <a href=\"https://www.weroad.it/\" target=\"_blank\" style=\"color: inherit; text-decoration: underline;\">WeRoad</a>", 
+  
+  "numero": ""
+  },
+  
+  { "premio": 5, 
+  
+  "header": "500€ utilizzabili su Corrente",
+  
+  "descrizione": "Buono da 500€ utilizzabile per i servizi Corrente", 
+  
+  "numero": "" },
+  
+  { "premio": 6, 
+  
+  "descrizione": "Soggiorno per 2 persone per 1 settimana a Catellammare del Golfo (TP)", 
+  
+  "numero": "" },
+  
+  { "premio": 7, 
+  
+  "descrizione": "Trattamento sbiancamento denti - Studio dentistico dottoressa D'Errico Silvia (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 8, 
+  
+  "descrizione": "Testa di Moro - Ceramica Siciliana offerto da Lao Gioielli (Pachino, SR)", 
+  
+  "numero": "" },
+  
+  { "premio": 9, 
+  
+  "descrizione": "Borsa in pelle - Twinset (Made in Italy)", 
+  
+  "numero": "" },
+  
+  { "premio": 10, 
+  
+  "descrizione": "Buono utilizzabile c/o Tosca Spose (BO)", 
+  
+  "numero": "", 
+  "commento": "Il buono vale 400€ su una spesa minima di 5000€ nel reparto sposa oppure 300€ su una spesa minima di 2000€ nel reparto cerimonia."},
+  
+  { "premio": 11, 
+  
+  "descrizione": "Soggiorno per 2 notti a Termoli (CB)", 
+  
+  "numero": "" },
+  
+  { "premio": 12, 
+  
+  "descrizione": "Bracciale in argento 925 satinato semi rigido - Gioielleria Panigalli (RN)", 
+  
+  "numero": "" },
+  
+  { "premio": 13, 
+  
+  "descrizione": "Set Lego Ninjago da collezione - \"Vascello del destino\"", 
+  
+  "numero": "" },
+  
+  { "premio": 14, 
+  
+  "descrizione": "6 bottiglie di distillati - Rinaldi (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 15, 
+  
+  "descrizione": "Visita ortopanoramica e igiene dentale - Studio dentistico dottoressa D'Errico Silvia (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 16, 
+  
+  "descrizione": "Zaino Rains - modello cargo backpack", 
+  
+  "numero": "" },
+  
+  { "premio": 17, 
+  
+  "descrizione": "Zaino Rains - modello trail mountaineer bag", 
+  
+  "numero": "" },
+  
+  { "premio": 18, 
+  
+  "descrizione": "Zaino Rains - modello rucksack W3", 
+  
+  "numero": "" },
+  
+  { "premio": 19, 
+  
+  "descrizione": "2 cartoni misti di vino - Paltrinieri (MO)", 
+  
+  "numero": "" },
+  
+  { "premio": 20, 
+  
+  "descrizione": "2 biglietti per UmbriaJazz ", 
+  
+  "numero": "" },
+  
+  { "premio": 21, 
+  
+  "descrizione": "Buono pasto per 2 persone c/o Vini D'Italia (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 22, 
+  
+  "descrizione": "Bracciale in argento - Beg'Oreficeria (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 23, 
+  
+  "descrizione": "Portafoglio Gabs", 
+  
+  "numero": "" },
+  
+  { "premio": 24, 
+  
+  "descrizione": "Buono da 100€ per Le Spiagge (RN)", 
+  
+  "numero": "" },
+  
+  { "premio": 25, 
+  
+  "descrizione": "Cassa di Vino - Tre Monti (Imola)", 
+  
+  "numero": "" },
+  
+  { "premio": 26, 
+  
+  "descrizione": "Cassa di Vino Tre Monti (Imola)", 
+  
+  "numero": "" },
+  
+  { "premio": 27, 
+  
+  "descrizione": "Kit Scrittura - Cartoleria Biagini", 
+  
+  "numero": "" },
+  
+  { "premio": 28, 
+  
+  "descrizione": "Buono pasto per 2 persone c/o Antica Trattoria La Piazza (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 29, 
+  
+  "descrizione": "3 coupon 2x1 Mirabilandia ", 
+  
+  "numero": "",
+  "commento": "I coupon devono essere presentati in originale." },
+  
+  { "premio": 30, 
+  
+  "descrizione": "Cena per 2 persone c/o ristorante pizzeria Casa Altabella (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 31, 
+  
+  "descrizione": "Buono per 4 giorni c/o Bagno Cesare 66 (Riccione)", 
+  
+  "numero": "" },
+  
+  { "premio": 32, 
+  
+  "descrizione": "Buono da 80€ c/o ristorante L'orto di Mari (Imola)", 
+  
+  "numero": "" },
+  
+  { "premio": 33, 
+  
+  "descrizione": "Degustazione per 2 persone c/o Cantina Tomisa (San Lazzaro, BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 34, 
+  
+  "descrizione": "Cena per 2 persone c/o Freelandia (RN)", 
+  
+  "numero": "" },
+  
+  { "premio": 35, 
+  
+  "descrizione": "3 Biglietti per tre parchi della Riviera Romagnola", 
+  
+  "numero": "" },
+  
+  { "premio": 36, 
+  
+  "descrizione": "5 Ingressi Terme San Petronio (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 37, 
+  
+  "descrizione": "Collana - Gogo ", 
+  
+  "numero": "" },
+  
+  { "premio": 38, 
+  
+  "descrizione": "Cena per 2 persone ristorante Lampino (Acqualagna, PU)", 
+  
+  "numero": "" },
+  
+  { "premio": 39, 
+  
+  "descrizione": "Anello - Beg'Oreficeria (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 40, 
+  
+  "descrizione": "Collana collezione albero della vita - Guidetti Gioielleria (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 41, 
+  
+  "descrizione": "Passeggiata a cavallo per due persone presso ASD Cavallo Maremma (Massa Marittima)", 
+  
+  "numero": "" },
+  
+  { "premio": 42, 
+  
+  "descrizione": "Borsa fatta a mano - Artaj", 
+  
+  "numero": "" },
+  
+  { "premio": 43, 
+  
+  "descrizione": "Degustazione per 2 persone c/o Terre Rosse (Zola Predosa, Bo)", 
+  
+  "numero": "" },
+  
+  { "premio": 44, 
+  
+  "descrizione": "Visita guidata con degustazione e cena c/o Vecchia Orsa", 
+  
+  "numero": "" },
+  
+  { "premio": 45, 
+  
+  "descrizione": "2 coupon 2x1 Mirabilandia ", 
+  
+  "numero": "",
+  "commento": "I coupon devono essere presentati in originale." },
+  
+  { "premio": 46, 
+  
+  "descrizione": "2 coupon 2x1 Mirabilandia ", 
+  
+  "numero": "",
+  "commento": "I coupon devono essere presentati in originale." },
+  
+  { "premio": 47, 
+  
+  "descrizione": "Degustazione per 2 persone c/o Fratelli Frontali (RN)", 
+  
+  "numero": "" },
+  
+  { "premio": 48, 
+  
+  "descrizione": "3 Biglietti (1×Acquario di Genova, 1×Biosfera e 1×Acquario di Livorno)", 
+  
+  "numero": "" },
+  
+  { "premio": 49, 
+  
+  "descrizione": "Catenina con ciondolo - Beg'Oreficeria", 
+  
+  "numero": "" },
+  
+  { "premio": 50, 
+  
+  "descrizione": "1 buono Formula Super GP c/o RomagnaKarting", 
+  
+  "numero": "" },
+  
+  { "premio": 51, 
+  
+  "descrizione": "Cassa da 12 birre - Vecchia Orsa", 
+  
+  "numero": "" },
+  
+  { "premio": 52, 
+  
+  "descrizione": "Buono cena per 2 persone c/o Spiller ", 
+  
+  "numero": "" },
+  
+  { "premio": 53, 
+  
+  "descrizione": "Montatura occhiali da donna Karl Lagerfeld ", 
+  
+  "numero": "" },
+  
+  { "premio": 54, 
+  
+  "descrizione": "Buono c/o Mastri Cartai (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 55, 
+  
+  "descrizione": "Pacchi Pasta Felicetti", 
+  
+  "numero": "" },
+  
+  { "premio": 56, 
+  
+  "descrizione": "Pacchi Pasta Felicetti", 
+  
+  "numero": "" },
+  
+  { "premio": 57, 
+  
+  "descrizione": "Kit di profumi - Bibalab (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 58, 
+  
+  "descrizione": "Kit da spiaggia (cappello e borsa) - Bibalab (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 59, 
+  
+  "descrizione": "Orologio Vintage - Gioelleria Orologeria Cardetti (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 60, 
+  
+  "descrizione": "Buono c/o Libreria Patron (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 61, 
+  
+  "descrizione": "Buono c/o Libreria Universitaria Tinarelli (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 62, 
+  
+  "descrizione": "Cardigan 90% lana e 10% cashmere Seventy + maglia intimo Armani", 
+  
+  "numero": "" },
+  
+  { "premio": 63, 
+  
+  "descrizione": "2 maglie intimo Armani ", 
+  
+  "numero": "" },
+  
+  { "premio": 64, 
+  
+  "descrizione": "Maglione lungo trasparente 50% lana 50% alpaca D-cln + maglia intimo Armani", 
+  
+  "numero": "" },
+  
+  { "premio": 65, 
+  
+  "descrizione": "Zaino offerto da Cartolibreia Scuolandia (RN)", 
+  
+  "numero": "" },
+  
+  { "premio": 66, 
+  
+  "descrizione": "Canottiera CRAFT xs donna", 
+  
+  "numero": "" },
+  
+  { "premio": 67, 
+  
+  "descrizione": "Canottiera CRAFT xs donna", 
+  
+  "numero": "" },
+  
+  { "premio": 68, 
+  
+  "descrizione": "Canottiera CRAFT xs donna", 
+  
+  "numero": "" },
+  
+  { "premio": 69, 
+  
+  "descrizione": "Cesta di prodotti alimentari - Panificio Fellini (RN)", 
+  
+  "numero": "" },
+  
+  { "premio": 70, 
+  
+  "descrizione": "Orecchini - Gioielleria Preziosi (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 71, 
+  
+  "descrizione": "2 biglietti per il museo dell'automobile di Torino", 
+  
+  "numero": "" },
+  
+  { "premio": 72, 
+  
+  "descrizione": "1 buono Formula Eco GP da RomagnaKarting", 
+  
+  "numero": "" },
+  
+  { "premio": 73, 
+  
+  "descrizione": "Guanti in pelle - Campora Pelletteria (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 74, 
+  
+  "descrizione": "Borsa Avène + cofanetto benessere Klorane + 2 saponette e 2 creme mani ", 
+  
+  "numero": "" },
+  
+  { "premio": 75, 
+  
+  "descrizione": "Portachiavi - Campora Pelletteria (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 76, 
+  
+  "descrizione": "Portachiavi - Campora Pelletteria (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 77, 
+  
+  "descrizione": "Buono cassonata XXL + 2 spritz da Bello Garno (Via Zamboni, BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 78, 
+  
+  "descrizione": "Buono gelato - Gelateria VERO (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 79, 
+  
+  "descrizione": "Buono gelato - Gelateria VERO (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 80, 
+  
+  "descrizione": "Buono gelato - Gelateria VERO (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 81, 
+  
+  "descrizione": "Cesta di prodotti agricoli - \"Gruppo Grifo Agrialimentare\" (PG)", 
+  
+  "numero": "" },
+  
+  { "premio": 82, 
+  
+  "descrizione": "Cesta di prodotti agricoli - \"Gruppo Grifo Agrialimentare\" (PG)", 
+  
+  "numero": "" },
+  
+  { "premio": 83, 
+  
+  "descrizione": "Cesta di prodotti agricoli - \"Gruppo Grifo Agrialimentare\" (PG)", 
+  
+  "numero": "" },
+  
+  { "premio": 84, 
+  
+  "descrizione": "1 buono Formula GP Imola da RomagnaKarting", 
+  
+  "numero": "" },
+  
+  { "premio": 85, 
+  
+  "descrizione": "Gilet Abitificio + maglia intimo Armani ", 
+  
+  "numero": "" },
+  
+  { "premio": 86, 
+  
+  "descrizione": "Cofanetto benessere Klorane + 2 saponette e 2 creme mani ", 
+  
+  "numero": "" },
+  
+  { "premio": 87, 
+  
+  "descrizione": "Cofanetto benessere Klorane + 2 saponette e 2 creme mani ", 
+  
+  "numero": "" },
+  
+  { "premio": 88, 
+  
+  "descrizione": "1kg di gelato c/o \"Gelateria Gianni\"", 
+  
+  "numero": "" },
+  
+  { "premio": 89, 
+  
+  "descrizione": "Buono per 1kg di gelato c/o Gelateria Fini (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 90, 
+  
+  "descrizione": "Buono per 2 cassoni + 2 spritz da Bello Garno (VIa Zamboni, BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 91, 
+  
+  "descrizione": "Zaino e astuccio Sostenium + matite + porta bedge", 
+  
+  "numero": "" },
+  
+  { "premio": 92, 
+  
+  "descrizione": "Zaino e astuccio Sostenium + matite + porta bedge", 
+  
+  "numero": "" },
+  
+  { "premio": 93, 
+  
+  "descrizione": "Buono per 750gr di gelato c/o Gelatauro (via San Vitale, BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 94, 
+  
+  "descrizione": "2 salami - Macelleria Luca Carni (RN)", 
+  
+  "numero": "" },
+  
+  { "premio": 95, 
+  
+  "descrizione": "Buono Pranzo/Cena per 2 persone Italy&Italy (RN)", 
+  
+  "numero": "" },
+  
+  { "premio": 96, 
+  
+  "descrizione": "Buono Pranzo/Cena per 2 persone Italy&Italy (RN)", 
+  
+  "numero": "" },
+  
+  { "premio": 97, 
+  
+  "descrizione": "2 bottiglie di vino - Il Monticino (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 98, 
+  
+  "descrizione": "Cesta di farine e lieviti - Molino Benini (RA)", 
+  
+  "numero": "" },
+  
+  { "premio": 99, 
+  
+  "descrizione": "Buono 500g di gelato c/o Gelateria Fini,(BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 100, 
+  
+  "descrizione": "Buono 500g di gelato c/o Gelateria Fini,(BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 101, 
+  
+  "descrizione": "2 bottiglie di vino - Cantina Tizzano (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 102, 
+  
+  "descrizione": "Pizzone farcito Irnerio Caffè Bologna 20 (BO) ", 
+  
+  "numero": "" },
+  
+  { "premio": 103, 
+  
+  "descrizione": "Confetti Zigulì alla fragola ", 
+  
+  "numero": "" },
+  
+  { "premio": 104, 
+  
+  "descrizione": "Confetti Zigulì al succo di fragola ", 
+  
+  "numero": "" },
+  
+  { "premio": 105, 
+  
+  "descrizione": "Aperitivo per 2 persone c/o Lab16 (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 106, 
+  
+  "descrizione": "Aperitivo per 2 persone c/o Lab16 (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 107, 
+  
+  "descrizione": "kit per cani - porta sacchetti, sacchetti e ciotola pieghevole", 
+  
+  "numero": "" },
+  
+  { "premio": 108, 
+  
+  "descrizione": "Set di collana e orecchini -  Memoires ", 
+  
+  "numero": "" },
+  
+  { "premio": 109, 
+  
+  "descrizione": "Set di collana e orecchini -  Memoires ", 
+  
+  "numero": "" },
+  
+  { "premio": 110, 
+  
+  "descrizione": "Set di collana e orecchini -  Memoires ", 
+  
+  "numero": "" },
+  
+  { "premio": 111, 
+  
+  "descrizione": "Set di collana e orecchini -  Memoires ", 
+  
+  "numero": "" },
+  
+  { "premio": 112, 
+  
+  "descrizione": "Set di collana e orecchini -  Memoires ", 
+  
+  "numero": "" },
+  
+  { "premio": 113, 
+  
+  "descrizione": "Agenda Paperblanks 2026 - La bottega delle Formiche (BO)", 
+  
+  "numero": "" },
+  
+  { "premio": 114, 
+  
+  "descrizione": "Agenda Paperblanks 2026 - La bottega delle Formiche (BO)", 
+  
+  "numero": "" }
+
+]

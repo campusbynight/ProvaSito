@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" type="image/png" href="assets/images/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="assets/images/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="assets/images/favicon/site.webmanifest" />
+  <title>campusbynight - lotteria</title>
+  <meta name="description" content="Campus by Night - Lotteria">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="campusbynight - lotteria">
+  <meta property="og:description" content="Campus by Night - Lotteria">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="campusbynight - lotteria">
+  <meta name="twitter:description" content="Campus by Night - Lotteria">
+  <meta name="robots" content="max-image-preview:large">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .lotteria-page {
+      background: var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2, #fffae3);
+      color: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .lotteria-container {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .lotteria-hero {
+      min-height: 78vh;
+      padding-top: 92px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: left;
+    }
+
+    .lotteria-hero .lotteria-container {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .lotteria-title {
+      font-family: "Ltt Recoleta Compressed Light", "Ltt Recoleta Compressed Light Placeholder", sans-serif;
+      font-size: clamp(60px, 12vw, 99px);
+      line-height: 0.9;
+      font-weight: 300;
+      color: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+      margin: 0;
+      text-align: center;
+    }
+
+    .lotteria-hero .lotteria-title + .lotteria-title {
+      margin-top: 8px;
+    }
+
+    .lotteria-countdown {
+      text-align: center;
+      margin-top: 22px;
+      font-family: "Inter", "Inter Placeholder", sans-serif;
+      font-size: clamp(40px, 7.6vw, 125px);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: 0.01em;
+      font-variant-numeric: tabular-nums;
+      color: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+      white-space: nowrap;
+    }
+
+    .lotteria-countdown-sep {
+      color: rgba(118, 20, 24, 0.5);
+    }
+
+    .lotteria-countdown-digit {
+      display: inline-block;
+      min-width: 2.2ch;
+      text-align: center;
+    }
+
+    .lotteria-prizes {
+      background: var(--token-d453de31-a28f-4b58-b5d3-fb3a6b7682a5, #21274e);
+      padding: 6px 0 10px;
+      width: 100vw;
+      min-height: 100vh;
+      margin-left: calc(-50vw + 50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+
+    .lotteria-prizes-title {
+      margin: 0;
+      margin-left: 24px;
+      font-family: "Ltt Recoleta Compressed Regular", "Ltt Recoleta Compressed Regular Placeholder", sans-serif;
+      font-size: clamp(48px, 8vw, 90px);
+      font-weight: 500;
+      line-height: 1;
+      color: var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3, #ec631a);
+    }
+
+    .lotteria-prizes-list {
+      list-style: none;
+      margin: 28px 0 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .lotteria-prizes-item {
+      font-family: "Ltt Recoleta Compressed Regular", "Ltt Recoleta Compressed Regular Placeholder", sans-serif;
+      font-size: clamp(32px, 8vw, 85px);
+      line-height: 0.9;
+      color: var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3, #ec631a);
+      margin: 15px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 15px;
+    }
+
+    .lotteria-prizes-item:nth-child(even) {
+      text-align: right;
+      justify-content: flex-end;
+    }
+
+    .lotteria-prizes-item:nth-child(even) .lotteria-prize-label {
+      order: 1;
+    }
+
+    .lotteria-prizes-item:nth-child(even) .lotteria-prize-rank {
+      order: 2;
+    }
+
+    .lotteria-prizes-item:nth-child(even) .lotteria-prize-image {
+      order: 3;
+    }
+
+    .lotteria-prize-rank {
+      min-width: 3ch;
+      flex: 0 0 3ch;
+      display: inline-block;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .lotteria-prize-rank-ordinal {
+      font-size: 0.62em;
+      vertical-align: super;
+      line-height: 1;
+    }
+
+    .lotteria-prizes-list .lotteria-prize-rank {
+      font-size: clamp(32px, 8vw, 85px);
+      min-width: 2.4ch;
+      flex: 0 0 2.4ch;
+      text-align: center;
+    }
+
+    .lotteria-prize-label {
+      display: inline-block;
+    }
+
+    .lotteria-prizes-list .lotteria-prize-label {
+      font-size: clamp(44px, 5.8vw, 60px);
+    }
+
+    .lotteria-prizes-list .lotteria-prize-image {
+      width: clamp(30px, 5.4vw, 56px);
+      height: clamp(30px, 5.4vw, 56px);
+      object-fit: contain;
+      border-radius: 0;
+      background: transparent;
+      flex-shrink: 0;
+      filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.18));
+    }
+
+    .lotteria-prizes-list .lotteria-prizes-item:nth-child(even) .lotteria-prize-image {
+      order: 0;
+    }
+
+    .lotteria-prizes-list .lotteria-prizes-item:nth-child(even) .lotteria-prize-content {
+      order: 1;
+    }
+
+    .lotteria-prize-image {
+      width: clamp(50px, 7.5vw, 90px);
+      height: clamp(50px, 7.5vw, 90px);
+      object-fit: cover;
+      border-radius: 14px;
+    }
+
+    .lotteria-extra {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 34px;
+      padding: 64px 20px 88px;
+      text-align: center;
+    }
+
+    .lotteria-button {
+      font-family: "Ltt Recoleta Compressed Regular", "Ltt Recoleta Compressed Regular Placeholder", sans-serif;
+      font-size: clamp(24px, 3vw, 31px);
+      font-weight: 600;
+      color: var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2, #fffae3);
+      background: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+      border: 0;
+      border-radius: 999px;
+      height: 56px;
+      min-width: 240px;
+      cursor: pointer;
+    }
+
+    .lotteria-extra-title {
+      margin: 0;
+      font-family: "Ltt Recoleta Compressed Light", "Ltt Recoleta Compressed Light Placeholder", sans-serif;
+      font-size: clamp(60px, 12vw, 99px);
+      line-height: 0.9;
+      font-weight: 300;
+      color: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+      width: 100vw;
+      text-align: left;
+      padding-left: 140px;
+    }
+
+    .lotteria-more-prizes-wrapper {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-in-out;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0 140px;
+      box-sizing: border-box;
+    }
+
+    .lotteria-info-box {
+      background: #761418;
+      color: #fffae3;
+      padding: 0 20px;
+      margin: 0;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: all 0.4s ease-in-out;
+      border-radius: 16px;
+      font-family: "Inter", "Inter Placeholder", sans-serif;
+      font-size: clamp(16px, 2vw, 20px);
+      text-align: center;
+      width: clamp(280px, 90vw, 1200px);
+      box-sizing: border-box;
+      line-height: 1.5;
+    }
+
+    .lotteria-info-box.open {
+      max-height: 300px;
+      padding: 24px 30px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      opacity: 1;
+    }
+
+    .lotteria-more-prizes-wrapper.open {
+      max-height: 30000px;
+    }
+
+    .lotteria-more-prizes-list-container {
+      flex: 1;
+    }
+
+    .lotteria-more-prizes-list {
+      list-style: none;
+      margin: 20px 0 0;
+      padding: 0;
+      display: grid;
+      gap: 20px;
+    }
+
+    .lotteria-more-prizes-list .lotteria-prizes-item {
+      color: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+      font-size: clamp(44px, 6vw, 60px);
+      margin: 10px 0;
+      text-align: left;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    
+    .lotteria-more-prizes-list .lotteria-prizes-item .lotteria-prize-content {
+      display: flex;
+      flex-direction: column;
+      order: 2 !important;
+    }
+    
+    .lotteria-more-prizes-list .lotteria-prizes-item .lotteria-prize-comment,
+    .lotteria-more-prizes-list .lotteria-prizes-item .lotteria-prize-code-text {
+      font-family: "Inter", "Inter Placeholder", sans-serif;
+      font-size: clamp(16px, 2vw, 24px);
+      color: rgba(118, 20, 24, 0.7);
+      margin-top: 4px;
+    }
+    
+    .lotteria-more-prizes-list .lotteria-prizes-item .lotteria-prize-label {
+      order: unset !important;
+    }
+    
+    .lotteria-more-prizes-list .lotteria-prizes-item .lotteria-prize-rank {
+      order: 1 !important;
+    }
+    
+    .lotteria-more-prizes-list .lotteria-prizes-item .lotteria-prize-image {
+      order: 3 !important;
+    }
+    
+    .lotteria-more-prizes-list .lotteria-prize-image {
+      width: clamp(44px, 6vw, 60px);
+      height: clamp(44px, 6vw, 60px);
+    }
+
+    .lotteria-search-container {
+      width: clamp(200px, 25vw, 350px);
+      margin-top: 40px;
+      margin-left: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .lotteria-search-input {
+      width: 100%;
+      height: 56px;
+      border-radius: 999px;
+      border: 2px solid var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+      background: transparent;
+      padding: 0 24px;
+      font-family: "Ltt Recoleta Compressed Regular", "Ltt Recoleta Compressed Regular Placeholder", sans-serif;
+      font-size: 24px;
+      color: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+      outline: none;
+      box-sizing: border-box;
+      transition: all 0.2s ease;
+    }
+
+    .lotteria-search-input::placeholder {
+      color: rgba(118, 20, 24, 0.5);
+    }
+
+    .lotteria-search-input:focus {
+      background: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+      color: var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2, #fffae3);
+    }
+
+    .lotteria-search-input:focus::placeholder {
+      color: rgba(255, 250, 227, 0.5);
+    }
+
+    .lotteria-search-message {
+      font-family: "Inter", "Inter Placeholder", sans-serif;
+      font-size: 16px;
+      color: var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3, #ec631a);
+      margin: 0;
+      min-height: 20px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .lotteria-search-message.visible {
+      opacity: 1;
+    }
+
+    @media (max-width: 780px) {
+      .lotteria-hero {
+        min-height: 62vh;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .lotteria-hero .lotteria-container {
+        width: 100vw;
+        max-width: 100vw;
+      }
+
+      .lotteria-title {
+        font-size: clamp(72px, 18vw, 128px);
+      }
+
+      .lotteria-countdown {
+        font-size: clamp(52px, 13.5vw, 112px);
+        margin-top: 28px;
+        letter-spacing: 0;
+        padding: 0 20px;
+        box-sizing: border-box;
+      }
+
+      .lotteria-countdown-digit {
+        min-width: 1.9ch;
+      }
+
+      .lotteria-prizes {
+        padding: 2px 0 6px;
+      }
+
+      .lotteria-prizes-list {
+        gap: 30px;
+        margin-top: 14px;
+      }
+
+      .lotteria-prizes-item {
+        margin: 10px 40px;
+      }
+
+      .lotteria-button {
+        min-width: 220px;
+      }
+      
+      .lotteria-extra-title {
+        padding-left: 40px;
+      }
+      
+      .lotteria-more-prizes-wrapper {
+        flex-direction: column;
+        padding: 0 40px;
+      }
+
+      .lotteria-search-container {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        order: -1;
+      }
+      
+      .lotteria-more-prizes-list .lotteria-prizes-item {
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="main" class="pagina lotteria-page">
+    <div class="navbar-wrapper hidden-1wu7hlw" data-navbar-placeholder="true"></div>
+
+    <header class="lotteria-hero">
+      <div class="lotteria-container">
+        <h1 class="lotteria-title">lotteria</h1>
+        <p class="lotteria-title">estraiamo tra</p>
+        <p class="lotteria-countdown" id="lotteria-countdown" data-target="2026-05-09T20:00:00">
+          <span class="lotteria-countdown-digit">00</span> <span class="lotteria-countdown-sep">:</span> <span class="lotteria-countdown-digit">00</span>
+          <span class="lotteria-countdown-sep">:</span> <span class="lotteria-countdown-digit">00</span>
+          <span class="lotteria-countdown-sep">:</span> <span class="lotteria-countdown-digit">00</span>
+        </p>
+      </div>
+    </header>
+
+    <section class="lotteria-prizes" aria-labelledby="lotteria-prizes-title">
+      <div class="lotteria-container">
+        <h2 class="lotteria-prizes-title" id="lotteria-prizes-title">primi premi</h2>
+        <ol class="lotteria-prizes-list" id="lotteria-prizes-list"></ol>
+        <p id="lotteria-prizes-error" hidden>Impossibile caricare i premi in questo momento.</p>
+      </div>
+    </section>
+
+    <section class="lotteria-extra">
+      <h2 class="lotteria-extra-title">ma non finisce qua...</h2>
+      <button class="lotteria-button" id="lotteria-more-button" type="button">tutti i premi</button>
+      <div id="lotteria-info-box" class="lotteria-info-box">
+        Per confermare la propria vincita contattare al +39 3478886602 (Arianna) oppure al numero +39 3382833134 (Anthony).<br>
+        I premi devono essere ritirati presso Via Valverde 14, Bologna (40136) tassativamente entro il 31 luglio 2026.
+      </div>
+      <div id="lotteria-more-prizes-wrapper" class="lotteria-more-prizes-wrapper">
+        <div class="lotteria-more-prizes-list-container">
+          <ol class="lotteria-more-prizes-list" id="lotteria-more-prizes-list"></ol>
+        </div>
+        <div class="lotteria-search-container">
+          <input type="text" id="lotteria-search-input" class="lotteria-search-input" placeholder="Cerca numero..." aria-label="Cerca codice premio">
+          <p id="lotteria-search-message" class="lotteria-search-message">numero non vincente</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      function formatUnit(value) {
+        return String(value).padStart(2, "0");
+      }
+
+      function renderCountdown(node, parts) {
+        node.innerHTML =
+          "<span class=\"lotteria-countdown-digit\">" + formatUnit(parts.days) + "</span> <span class=\"lotteria-countdown-sep\">:</span> " +
+          "<span class=\"lotteria-countdown-digit\">" + formatUnit(parts.hours) + "</span> <span class=\"lotteria-countdown-sep\">:</span> " +
+          "<span class=\"lotteria-countdown-digit\">" + formatUnit(parts.minutes) + "</span> <span class=\"lotteria-countdown-sep\">:</span> " +
+          "<span class=\"lotteria-countdown-digit\">" + formatUnit(parts.seconds) + "</span>";
+      }
+
+      function computeCountdown(targetDate) {
+        var now = new Date();
+        var diff = targetDate.getTime() - now.getTime();
+
+        if (diff <= 0) {
+          return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+        }
+
+        var totalSeconds = Math.floor(diff / 1000);
+        var days = Math.floor(totalSeconds / 86400);
+        var hours = Math.floor((totalSeconds % 86400) / 3600);
+        var minutes = Math.floor((totalSeconds % 3600) / 60);
+        var seconds = totalSeconds % 60;
+
+        return {
+          days: days,
+          hours: hours,
+          minutes: minutes,
+          seconds: seconds
+        };
+      }
+
+      function normalizePrize(prize) {
+        if (typeof prize === "string") {
+          return { title: prize, image: "" };
+        }
+
+        if (!prize || typeof prize !== "object") {
+          return null;
+        }
+
+        if (typeof prize.descrizione !== "string" || prize.descrizione.trim() === "") {
+          return null;
+        }
+
+        var codeVal = "";
+        if (typeof prize.numero === "number") {
+          codeVal = String(prize.numero);
+        } else if (typeof prize.numero === "string") {
+          codeVal = prize.numero.trim();
+        }
+
+        return {
+          title: prize.descrizione.trim(),
+          header: typeof prize.header === "string" ? prize.header.trim() : "",
+          image: typeof prize.image === "string" ? prize.image.trim() : "",
+          code: codeVal,
+          comment: typeof prize.commento === "string" ? prize.commento.trim() : "",
+          rank: prize.premio
+        };
+      }
+
+      function renderPrizes(prizes) {
+        var list = document.getElementById("lotteria-prizes-list");
+        var moreList = document.getElementById("lotteria-more-prizes-list");
+        var errorNode = document.getElementById("lotteria-prizes-error");
+        var moreButton = document.getElementById("lotteria-more-button");
+        var searchContainer = document.querySelector(".lotteria-search-container");
+        var searchMessage = document.getElementById("lotteria-search-message");
+        if (!list) return;
+
+        list.innerHTML = "";
+        if (moreList) moreList.innerHTML = "";
+
+        var firstPrizes = prizes.slice(0, 5);
+        var extraPrizes = prizes.slice(5);
+        var hasPrizeCodes = prizes.some(function (prize) {
+          return Boolean(prize.code && prize.code.trim() !== "");
+        });
+
+        if (searchContainer) {
+          searchContainer.style.display = hasPrizeCodes ? "flex" : "none";
+        }
+
+        if (!hasPrizeCodes && searchMessage) {
+          searchMessage.classList.remove("visible");
+        }
+
+        firstPrizes.forEach(function (prize, index) {
+          var firstPrizeDisplay = Object.assign({}, prize, {
+            title: prize.header || prize.title
+          });
+          list.appendChild(createPrizeItem(firstPrizeDisplay, prize.rank || (index + 1), false, true));
+        });
+
+        if (moreList && prizes.length > 0) {
+          prizes.forEach(function (prize, index) {
+            moreList.appendChild(createPrizeItem(prize, prize.rank || (index + 1), true, false));
+          });
+        } else if (moreButton) {
+          moreButton.style.display = "none";
+        }
+
+        if (errorNode) {
+          errorNode.hidden = true;
+        }
+      }
+
+      function createPrizeItem(prize, rankValue, isSecondary, isTopListe) {
+        var item = document.createElement("li");
+        item.className = "lotteria-prizes-item";
+
+        var rank = document.createElement("span");
+        rank.className = "lotteria-prize-rank";
+
+        rank.innerHTML = String(rankValue) + "<span class=\"lotteria-prize-rank-ordinal\">º</span>";
+        
+        item.appendChild(rank);
+
+        var contentDiv = document.createElement("div");
+        contentDiv.className = "lotteria-prize-content";
+
+        var label = document.createElement("span");
+        label.className = "lotteria-prize-label";
+        var labelText = prize.title;
+        if (isSecondary && prize.code) {
+          item.setAttribute("data-code", prize.code.toLowerCase());
+        }
+        label.innerHTML = labelText;
+        contentDiv.appendChild(label);
+        
+        if (isSecondary && prize.comment) {
+          var commentSpan = document.createElement("span");
+          commentSpan.className = "lotteria-prize-comment";
+          commentSpan.textContent = prize.comment;
+          contentDiv.appendChild(commentSpan);
+        }
+
+        if (isSecondary && prize.code) {
+          var codeSpan = document.createElement("span");
+          codeSpan.className = "lotteria-prize-code-text";
+          codeSpan.innerHTML = "<strong>Numero vincente: " + prize.code + "</strong>";
+          contentDiv.appendChild(codeSpan);
+        }
+
+        item.appendChild(contentDiv);
+
+        var imageSource = isTopListe ? prize.image : "";
+
+        if (imageSource) {
+          var image = document.createElement("img");
+          image.className = "lotteria-prize-image";
+          image.src = imageSource;
+          image.alt = prize.title;
+          image.loading = "lazy";
+          item.appendChild(image);
+        }
+
+        return item;
+      }
+
+      function loadPrizes() {
+        var errorNode = document.getElementById("lotteria-prizes-error");
+
+        fetch("./assets/premiLotteria.json", { cache: "no-store" })
+          .then(function (response) {
+            if (!response.ok) {
+              throw new Error("Premi JSON non disponibile");
+            }
+            return response.json();
+          })
+          .then(function (data) {
+            if (!Array.isArray(data)) {
+              throw new Error("Formato premi non valido");
+            }
+
+            var prizes = data
+              .map(normalizePrize)
+              .filter(function (item) { return Boolean(item); });
+
+            if (prizes.length === 0) {
+              throw new Error("Nessun premio valido");
+            }
+
+            renderPrizes(prizes);
+          })
+          .catch(function () {
+            if (errorNode) {
+              errorNode.hidden = false;
+            }
+          });
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        var countdown = document.getElementById("lotteria-countdown");
+        if (countdown) {
+          var targetRaw = countdown.getAttribute("data-target");
+          var targetDate = targetRaw ? new Date(targetRaw) : null;
+
+          if (targetDate && !Number.isNaN(targetDate.getTime())) {
+            function tick() {
+              renderCountdown(countdown, computeCountdown(targetDate));
+            }
+
+            tick();
+            window.setInterval(tick, 1000);
+          }
+        }
+
+        loadPrizes();
+
+        var moreButton = document.getElementById("lotteria-more-button");
+        var morePrizesWrapper = document.getElementById("lotteria-more-prizes-wrapper");
+        var infoBox = document.getElementById("lotteria-info-box");
+
+        if (moreButton && morePrizesWrapper) {
+          moreButton.addEventListener("click", function () {
+            var isOpen = morePrizesWrapper.classList.contains("open");
+            if (isOpen) {
+              morePrizesWrapper.classList.remove("open");
+              if (infoBox) infoBox.classList.remove("open");
+              moreButton.textContent = "tutti i premi";
+            } else {
+              morePrizesWrapper.classList.add("open");
+              if (infoBox) infoBox.classList.add("open");
+              moreButton.textContent = "mostra meno";
+            }
+          });
+        }
+
+        var searchInput = document.getElementById("lotteria-search-input");
+        var searchMessage = document.getElementById("lotteria-search-message");
+        
+        if (searchInput) {
+          searchInput.addEventListener("input", function(e) {
+            var searchTerm = e.target.value.trim().toLowerCase();
+            var items = document.querySelectorAll(".lotteria-more-prizes-list .lotteria-prizes-item");
+            var foundAny = false;
+
+            if (searchTerm === "") {
+              items.forEach(function(item) { item.style.display = "flex"; });
+              searchMessage.classList.remove("visible");
+              return;
+            }
+
+            items.forEach(function(item) {
+              var code = item.getAttribute("data-code");
+              if (code && code.startsWith(searchTerm)) {
+                item.style.display = "flex";
+                foundAny = true;
+              } else {
+                item.style.display = "none";
+              }
+            });
+
+            if (!foundAny) {
+              searchMessage.classList.add("visible");
+            } else {
+              searchMessage.classList.remove("visible");
+            }
+          });
+        }
+      });
+    })();
+  </script>
+  <script src="assets/navbar-loader.js"></script>
+</body>
+</html>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="assets/images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="assets/images/favicon/site.webmanifest" />
+    <title>Foto Nuove</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --bg-color: #FDF7E2;
+            --radius: 20px;
+            --gap: 15px;
+            --primary: #ec631a;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            font-family: sans-serif;
+            box-sizing: border-box;
+        }
+
+        /* Container della griglia con padding generoso */
+        .grid-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            margin-top: 100px; /* Aggiunto margine per distanziarsi dalla navbar sticky */
+        }
+
+        /* Griglia Bento */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto auto auto;
+            gap: var(--gap);
+        }
+
+        /* Box Immagine - Posizionamento e proporzioni */
+        .img-box {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius);
+            cursor: pointer;
+            width: 100%;
+            padding-top: 60%; /* Ratio indicativo */
+        }
+
+        /* Regole specifiche per il posizionamento */
+        .img-1 {
+            grid-column: 1 / -1;
+            grid-row: 1;
+            padding-top: 30%; /* L'immagine sopra è più schiacciata/panoramica */
+        }
+        
+        .img-2 {
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        .img-3 {
+            grid-column: 2;
+            grid-row: 2;
+        }
+
+        .img-4-tall {
+            grid-column: 3;
+            grid-row: 2 / 4; /* Si estende su due righe */
+            padding-top: 0; /* Lo gestiamo tramite altezza effettiva, essendo alto due blocchi */
+            height: 100%;
+        }
+
+        .img-5 {
+            grid-column: 1;
+            grid-row: 3;
+        }
+        
+        .img-6 {
+            grid-column: 2;
+            grid-row: 3;
+        }
+
+        /* Stile Immagini interne ai box */
+        .img-box img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .img-box:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Responsive - Collasso su mobile */
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+            .img-1, .img-2, .img-3, .img-4-tall, .img-5, .img-6 {
+                grid-column: 1;
+                grid-row: auto;
+                height: auto;
+                padding-top: 70%; 
+            }
+        }
+
+        /* Stili Modal Lightbox */
+        .modal {
+            display: none; /* Nascosto di default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            max-width: calc(100vw - 220px);
+            max-height: calc(100vh - 170px);
+            border-radius: 8px;
+            object-fit: contain;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: medium;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: rgb(0, 0, 0);
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s ease-in-out;
+            padding: 0;
+            transform: scale(1);
+        }
+
+        .close-btn:hover {
+            transform: scale(1.05);
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        .close-btn svg {
+            width: 20px;
+            height: 20px;
+            display: block;
+        }
+
+        .download-btn {
+            position: absolute;
+            top: 20px;
+            right: 70px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: medium;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: rgb(0, 0, 0);
+            font-size: 20px;
+            text-decoration: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s ease-in-out;
+            padding: 0;
+            transform: scale(1);
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        .download-btn svg {
+            width: 20px;
+            height: 20px;
+            display: block;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%) scale(1);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: medium;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: rgb(0, 0, 0);
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s ease-in-out;
+            padding: 0;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-50%) scale(1.05);
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        .nav-btn svg {
+            width: 24px;
+            height: 24px;
+            display: block;
+        }
+
+        .nav-prev {
+            left: 22px;
+        }
+
+        .nav-next {
+            right: 22px;
+        }
+
+        .image-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 8px 16px;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: rgb(0, 0, 0);
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .download-btn {
+                right: 70px;
+                font-size: 20px;
+                width: 40px;
+                height: 40px;
+            }
+
+            .close-btn {
+                right: 20px;
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .nav-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+            }
+
+            .nav-prev {
+                left: 12px;
+            }
+
+            .nav-next {
+                right: 12px;
+            }
+
+            .image-counter {
+                bottom: 16px;
+                font-size: 14px;
+                padding: 7px 14px;
+            }
+
+            .modal-content {
+                max-width: calc(100vw - 140px);
+                max-height: calc(100vh - 150px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Placeholder per Navbar (Verrà caricata da script) -->
+    <div class="navbar-wrapper hidden-1wu7hlw" data-navbar-placeholder="true"></div>
+
+    <div class="grid-container">
+        <div class="bento-grid" id="bento-container">
+            <!-- Le immagini verranno caricate dinamicamente qui -->
+        </div>
+    </div>
+
+    <!-- Modal Lightbox -->
+    <div id="lightbox-modal" class="modal">
+        <a class="download-btn" id="modal-download" href="#" download aria-label="Download image">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
+                <path d="M10 3V13M10 13L6 9M10 13L14 9" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M4 17H16" stroke="#000" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+        </a>
+        <button class="close-btn" id="modal-close" aria-label="Close lightbox">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
+                <line x1="5" y1="5" x2="15" y2="15" stroke="#000" stroke-width="2" stroke-linecap="round"></line>
+                <line x1="15" y1="5" x2="5" y2="15" stroke="#000" stroke-width="2" stroke-linecap="round"></line>
+            </svg>
+        </button>
+        <button class="nav-btn nav-prev" id="modal-prev" aria-label="Immagine precedente">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
+                <path d="M15 18L9 12L15 6" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+        </button>
+        <img class="modal-content" id="modal-img">
+        <button class="nav-btn nav-next" id="modal-next" aria-label="Immagine successiva">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
+                <path d="M9 18L15 12L9 6" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+        </button>
+        <div class="image-counter" id="image-counter">0 / 0</div>
+    </div>
+
+    <script src="./assets/navbar-loader.js"></script>
+    <script>
+        // --- 2. Logica Lightbox e Caricamento Dinamico Immagini dal Manifest ---
+        const modal = document.getElementById("lightbox-modal");
+        const modalImg = document.getElementById("modal-img");
+        const closeBtn = document.getElementById("modal-close");
+        const prevBtn = document.getElementById("modal-prev");
+        const nextBtn = document.getElementById("modal-next");
+        const downloadBtn = document.getElementById("modal-download");
+        const imageCounter = document.getElementById("image-counter");
+        const bentoContainer = document.getElementById("bento-container");
+
+        // Ordine di assegnazione classi per il layout asimmetrico (max 6 posti in griglia)
+        const gridClasses = ['img-1', 'img-2', 'img-3', 'img-4-tall', 'img-5', 'img-6'];
+        const IMAGE_BASE_URL = "./assets/images/new/";
+        let galleryImages = [];
+        let currentImageIndex = -1;
+
+        function updateModalImage() {
+            if (currentImageIndex < 0 || currentImageIndex >= galleryImages.length) return;
+
+            const filePath = galleryImages[currentImageIndex];
+            const fullSrc = IMAGE_BASE_URL + filePath;
+            const fileName = filePath.split('/').pop() || "immagine";
+
+            modalImg.src = fullSrc;
+            downloadBtn.href = fullSrc;
+            downloadBtn.setAttribute("download", fileName);
+            imageCounter.textContent = (currentImageIndex + 1) + " / " + galleryImages.length;
+        }
+
+        function openModalAt(index) {
+            if (!galleryImages.length) return;
+
+            currentImageIndex = (index + galleryImages.length) % galleryImages.length;
+            updateModalImage();
+            modal.classList.add("show");
+        }
+
+        function showPrevImage() {
+            openModalAt(currentImageIndex - 1);
+        }
+
+        function showNextImage() {
+            openModalAt(currentImageIndex + 1);
+        }
+
+        // Fetch del file JSON per caricare le immagini
+        fetch(IMAGE_BASE_URL + 'manifest.json')
+            .then(res => {
+                if(!res.ok) throw new Error("Errore nel caricamento del manifest.json");
+                return res.json();
+            })
+            .then(imagesArray => {
+                galleryImages = [...imagesArray];
+
+                galleryImages.forEach((filename, index) => {
+                    // Prendi la classe in base all'indice. Se ci sono più di 6 foto, si ripete il pattern
+                    const boxClass = gridClasses[index % gridClasses.length];
+                    const fullSrc = IMAGE_BASE_URL + filename;
+                    const thumbSrc = IMAGE_BASE_URL + "thumb_" + filename;
+                    
+                    const box = document.createElement("div");
+                    box.className = `img-box ${boxClass}`;
+                    box.setAttribute("data-full", fullSrc);
+
+                    const imgEl = document.createElement("img");
+                    imgEl.src = thumbSrc;
+                    imgEl.alt = "Foto " + (index + 1);
+                    imgEl.loading = "lazy";
+
+                    box.appendChild(imgEl);
+
+                    // Aggiungi click listener per aprire nel modal l'immagine in HD
+                    box.addEventListener("click", () => {
+                        openModalAt(index);
+                    });
+
+                    bentoContainer.appendChild(box);
+                });
+            })
+            .catch(error => {
+                console.error("Non è stato possibile caricare le foto:", error);
+            });
+
+        // Event listener per la chiusura del lightbox
+        closeBtn.addEventListener("click", () => {
+            closeModal();
+        });
+
+        prevBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            showPrevImage();
+        });
+
+        nextBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            showNextImage();
+        });
+
+        downloadBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
+
+        // Chiude il modal cliccando al di fuori dell'immagine (sfondo)
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Permette chiusura anche con il tasto ESC
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'Escape' && modal.classList.contains('show')) {
+                closeModal();
+            }
+
+            if(e.key === 'ArrowLeft' && modal.classList.contains('show')) {
+                showPrevImage();
+            }
+
+            if(e.key === 'ArrowRight' && modal.classList.contains('show')) {
+                showNextImage();
+            }
+        });
+
+        function closeModal() {
+            modal.classList.remove("show");
+            // Ripulisce il src dopo un breve delay per nasconderla in modo fluido
+            setTimeout(() => {
+                modalImg.src = ""; 
+            }, 300);
+
+            currentImageIndex = -1;
+            imageCounter.textContent = "0 / " + galleryImages.length;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="assets/images/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="assets/images/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="assets/images/favicon/site.webmanifest" />
+  <title>campusbynight - chi siamo</title>
+  <meta name="description" content="Campus By Night - Chi siamo e storia del progetto.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="campusbynight - chi siamo">
+  <meta property="og:description" content="Scopri chi siamo e la storia di Campus By Night.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="campusbynight - chi siamo">
+  <meta name="twitter:description" content="Scopri chi siamo e la storia di Campus By Night.">
+  <meta name="robots" content="max-image-preview:large">
+
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    html,
+    body {
+      margin: 0;
+      background: #21274e;
+      color: var(--token-d453de31-a28f-4b58-b5d3-fb3a6b7682a5, rgb(33, 39, 78));
+    }
+
+    #main,
+    .pagina {
+      background: #21274e;
+    }
+
+    .chi-page {
+      min-height: 100vh;
+      padding-top: 92px;
+      padding-bottom: 64px;
+      background: #21274e;
+    }
+
+    .chi-shell {
+      width: min(980px, calc(100vw - 56px));
+      margin: 0 auto;
+      display: grid;
+      gap: 28px;
+    }
+
+    .chi-box {
+      background: #fffae3;
+      border: 1px solid rgba(236, 99, 26, 0.24);
+      border-radius: 26px;
+      box-shadow: 0 28px 58px rgba(10, 14, 30, 0.4);
+      padding: 46px 50px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chi-box::before,
+    .chi-box::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .chi-box::before {
+      width: 270px;
+      height: 270px;
+      top: -130px;
+      right: -90px;
+      background: radial-gradient(circle, rgba(236, 99, 26, 0.2), rgba(236, 99, 26, 0));
+    }
+
+    .chi-box::after {
+      width: 230px;
+      height: 230px;
+      bottom: -120px;
+      left: -95px;
+      background: radial-gradient(circle, rgba(33, 39, 78, 0.15), rgba(33, 39, 78, 0));
+    }
+
+    .chi-kicker {
+      margin: 0 0 8px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-family: "Articulat CF Normal", "Articulat CF Normal Placeholder", sans-serif;
+      color: #ec631a;
+      position: relative;
+      z-index: 1;
+    }
+
+    .chi-title {
+      margin: 12px 0 0;
+      font-family: "Ltt Recoleta Compressed Regular", "Ltt Recoleta Compressed Regular Placeholder", sans-serif;
+      font-size: clamp(46px, 8vw, 90px);
+      line-height: 0.92;
+      letter-spacing: 0.01em;
+      color: #ec631a;
+      position: relative;
+      z-index: 1;
+    }
+
+    .chi-subtitle {
+      margin: 20px 0 0;
+      max-width: 58ch;
+      font-family: "Articulat CF Normal", "Articulat CF Normal Placeholder", sans-serif;
+      font-size: clamp(16px, 1.9vw, 20px);
+      line-height: 1.62;
+      font-style: italic;
+      color: #000000;
+      border-bottom: 1px solid rgba(33, 39, 78, 0.22);
+      padding-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .chi-body {
+      position: relative;
+      z-index: 1;
+    }
+
+    .chi-body p {
+      margin: 20px 0 0;
+      font-family: "Articulat CF Normal", "Articulat CF Normal Placeholder", sans-serif;
+      font-size: clamp(16px, 1.65vw, 19px);
+      line-height: 1.78;
+      color: #000000;
+      max-width: 74ch;
+    }
+
+    .chi-body p:first-child {
+      font-size: clamp(17px, 1.75vw, 20px);
+    }
+
+    .chi-temi {
+      margin: 26px 0 0;
+      padding: 0;
+      display: grid;
+      gap: 8px;
+      color: #ec631a;
+      font-family: "Ltt Recoleta Compressed Light", "Ltt Recoleta Compressed Light Placeholder", sans-serif;
+      font-size: clamp(23px, 3.6vw, 35px);
+      line-height: 1.08;
+      list-style: none;
+    }
+
+    .chi-temi li {
+      padding: 6px 0 9px;
+      border-bottom: 1px dashed rgba(33, 39, 78, 0.24);
+    }
+
+    @media (max-width: 809.98px) {
+      .chi-page {
+        padding-top: 86px;
+        padding-bottom: 48px;
+      }
+
+      .chi-shell {
+        width: calc(100vw - 26px);
+        gap: 14px;
+      }
+
+      .chi-box {
+        border-radius: 18px;
+        padding: 24px 18px 18px;
+      }
+
+      .chi-body p {
+        line-height: 1.66;
+      }
+
+      .chi-temi {
+        font-size: clamp(22px, 8.4vw, 31px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="main" class="pagina">
+    <div class="navbar-wrapper hidden-1wu7hlw" data-navbar-placeholder="true"></div>
+
+    <main class="chi-page" aria-labelledby="chi-title">
+      <div class="chi-shell">
+        <section class="chi-box" aria-label="Chi siamo e storia">
+          <p class="chi-kicker">Campus By Night</p>
+          <h1 id="chi-title" class="chi-title">Chi siamo e la nostra storia</h1>
+          <p class="chi-subtitle">Una storia nata tra le aule universitarie e cresciuta insieme alla citta di Bologna.</p>
+
+          <div class="chi-body">
+          <p>L'associazione studentesca Student Office nasce negli anni '90 dalla necessita di alcuni universitari di vivere da protagonisti gli anni di studio. Oggi, in piu di trecento, portiamo avanti lo stesso ideale impegnandoci nella costruzione e cura dell'Alma Mater e della citta di Bologna. L'Associazione The Crew ODV, in collaborazione con la lista e associazione studentesca Student Office, organizza il "Campus By Night", arrivato alla sua XXIII edizione, quale significativo evento culturale con cadenza annuale rivolto agli studenti dell'Alma Mater Studiorum-Universita di Bologna e alla citta intera.</p>
+          <p>Il "Campus by Night" nasce dal desiderio di poter incontrare tutta la comunita Accademica, diventando una grande occasione di incontro, confronto e dibattito, tramite mostre, spettacoli, conferenze e tornei sportivi. Partendo dall'ascolto delle sfide contemporanee che il mondo pone, ogni anno propone un tema centrale, rappresentato dal titolo, con cui invita l'universita e la citta a confrontarsi.</p>
+
+          <ul class="chi-temi" aria-label="Temi delle ultime edizioni">
+            <li>"Cosa rende la vita vita?"</li>
+            <li>"Sei felice in questo mondo?"</li>
+            <li>"Un'amicizia per vivere, vivere per un'amicizia"</li>
+            <li>"In che cosa posso sperare?"</li>
+            <li>"Dove si accende la vita?"</li>
+          </ul>
+
+          <p>Nelle scorse edizioni del "Campus By Night" sono intervenuti personaggi appartenenti al mondo dello spettacolo, della musica, dello sport, dell'universita ed esponenti politici tra cui: Paolo Benanti, Farhad Bitani, Lino Lardo, Nando Sanvito, Luciano Violante, Mario Mauro, Morgan, Paolo Cevoli, Leonardo, Gherardo Colombo, Agnese Moro, Giorgio De Rita e tanti docenti dell'Alma Mater.</p>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/navbar-loader.js"></script>
+</body>
+</html>

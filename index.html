@@ -78,6 +78,8 @@
           `<span class="lotteria-countdown-digit">${formatUnit(parts.hours)}</span> <span class="lotteria-countdown-sep">:</span> ` +
           `<span class="lotteria-countdown-digit">${formatUnit(parts.minutes)}</span> <span class="lotteria-countdown-sep">:</span> ` +
           `<span class="lotteria-countdown-digit">${formatUnit(parts.seconds)}</span>`;
+
+        fitProgrammaCountdown(node);
       }
 
       function computeCountdown(targetDate) {
@@ -97,6 +99,39 @@
         return { days, hours, minutes, seconds };
       }
 
+      function fitProgrammaCountdown(countdownNode) {
+        if (!countdownNode) return;
+
+        const computedStyle = window.getComputedStyle(countdownNode);
+        const baseFontSize = Number(
+          countdownNode.dataset.baseFontSize || computedStyle.fontSize.replace('px', '')
+        );
+
+        if (!countdownNode.dataset.baseFontSize) {
+          countdownNode.dataset.baseFontSize = String(baseFontSize);
+        }
+
+        let currentFontSize = baseFontSize;
+        countdownNode.style.fontSize = `${currentFontSize}px`;
+
+        for (let i = 0; i < 4; i += 1) {
+          const overflow = countdownNode.scrollWidth - countdownNode.clientWidth;
+          if (overflow <= 1) break;
+
+          const scale = countdownNode.clientWidth / countdownNode.scrollWidth;
+          const nextFontSize = Math.max(24, currentFontSize * scale * 0.98);
+
+          if (Math.abs(nextFontSize - currentFontSize) < 0.1) break;
+
+          currentFontSize = nextFontSize;
+          countdownNode.style.fontSize = `${currentFontSize}px`;
+        }
+      }
+
+      function adjustProgrammaCountdown() {
+        fitProgrammaCountdown(document.querySelector('.programma-countdown'));
+      }
+
       function renderProgrammaCountdown(programmaGriglia) {
         clearProgrammaCountdown();
 
@@ -114,8 +149,8 @@
             <span class="lotteria-countdown-digit">00</span>
           </p>
           <div class="programma-countdown-meta" aria-label="Informazioni evento">
-            <p class="programma-countdown-meta-item"><span>luogo</span> Piazza Scaravilli</p>
-            <p class="programma-countdown-meta-item"><span>data</span> 7-8-9 maggio</p>
+            <p class="programma-countdown-meta-item">Piazza Scaravilli</p>
+            <p class="programma-countdown-meta-item">7-8-9 maggio</p>
           </div>
         `;
 
@@ -129,6 +164,7 @@
         };
 
         tick();
+        fitProgrammaCountdown(countdownNode);
         programmaCountdownInterval = window.setInterval(tick, 1000);
       }
 
@@ -583,9 +619,11 @@
 
                 if (document.fonts?.ready) {
                   document.fonts.ready.then(adjustProgrammaTitles);
+                  document.fonts.ready.then(adjustProgrammaCountdown);
                 }
 
                 window.addEventListener('resize', adjustProgrammaTitles);
+                window.addEventListener('resize', adjustProgrammaCountdown);
                     window.addEventListener('beforeunload', clearProgrammaCountdown);
       });
     </script>
@@ -659,7 +697,7 @@
           </div>
           <p class="framer-text naviga-card-line" dir="auto"
             style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgUmVndWxhcg==;--framer-font-family:"Ltt Recoleta Compressed Regular","Ltt Recoleta Compressed Regular Placeholder",sans-serif;--framer-font-size:55px;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))'
-            >fund raising</p>
+            >fundraising</p>
           <div class="naviga-card-cta">
             <p class="framer-text naviga-card-cta-text" dir="auto"
               style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTGlnaHQ=;--framer-font-family:"Ltt Recoleta Compressed Light","Ltt Recoleta Compressed Light Placeholder",sans-serif;--framer-font-size:22px;--framer-font-weight:300;--framer-text-color:var(--token-d453de31-a28f-4b58-b5d3-fb3a6b7682a5,rgb(33,39,78))'

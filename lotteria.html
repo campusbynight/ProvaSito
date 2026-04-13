@@ -40,6 +40,7 @@
       align-items: center;
       justify-content: center;
       text-align: left;
+      width: 100%;
     }
 
     .lotteria-hero .lotteria-container {
@@ -117,7 +118,7 @@
 
     .lotteria-prizes-item {
       font-family: "Ltt Recoleta Compressed Regular", "Ltt Recoleta Compressed Regular Placeholder", sans-serif;
-      font-size: clamp(32px, 8vw, 85px);
+      font-size: clamp(32px, 8vw, 65px);
       line-height: 0.9;
       color: var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3, #ec631a);
       margin: 15px 80px;
@@ -289,12 +290,12 @@
 
     .lotteria-more-prizes-list .lotteria-prizes-item {
       color: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
-      font-size: clamp(44px, 6vw, 60px);
+      font-size: clamp(34px, 6vw, 45px);
       margin: 10px 0;
       text-align: left;
       justify-content: flex-start;
       align-items: flex-start;
-      gap: 12px;
+      gap: 8px;
     }
     
     .lotteria-more-prizes-list .lotteria-prizes-item .lotteria-prize-content {
@@ -477,7 +478,7 @@
       <h2 class="lotteria-extra-title">ma non finisce qua...</h2>
       <button class="lotteria-button" id="lotteria-more-button" type="button">tutti i premi</button>
       <div id="lotteria-info-box" class="lotteria-info-box">
-        Per confermare la propria vincita contattare al +39 3478886602 (Arianna) oppure al numero +39 3382833134 (Anthony).<br>
+        Per confermare la propria vincita contattare Arianna al numero +39 3478886602  oppure Anthony al numero +39 3382833134.<br>
         I premi devono essere ritirati presso Via Valverde 14, Bologna (40136) tassativamente entro il 31 luglio 2026.
       </div>
       <div id="lotteria-more-prizes-wrapper" class="lotteria-more-prizes-wrapper">
@@ -504,6 +505,41 @@
           "<span class=\"lotteria-countdown-digit\">" + formatUnit(parts.hours) + "</span> <span class=\"lotteria-countdown-sep\">:</span> " +
           "<span class=\"lotteria-countdown-digit\">" + formatUnit(parts.minutes) + "</span> <span class=\"lotteria-countdown-sep\">:</span> " +
           "<span class=\"lotteria-countdown-digit\">" + formatUnit(parts.seconds) + "</span>";
+
+        fitLotteriaCountdown(node);
+      }
+
+      function fitLotteriaCountdown(countdownNode) {
+        if (!countdownNode) return;
+
+        var computedStyle = window.getComputedStyle(countdownNode);
+        var baseFontSize = Number(
+          countdownNode.dataset.baseFontSize || computedStyle.fontSize.replace("px", "")
+        );
+
+        if (!countdownNode.dataset.baseFontSize) {
+          countdownNode.dataset.baseFontSize = String(baseFontSize);
+        }
+
+        var currentFontSize = baseFontSize;
+        countdownNode.style.fontSize = currentFontSize + "px";
+
+        for (var i = 0; i < 4; i += 1) {
+          var overflow = countdownNode.scrollWidth - countdownNode.clientWidth;
+          if (overflow <= 1) break;
+
+          var scale = countdownNode.clientWidth / countdownNode.scrollWidth;
+          var nextFontSize = Math.max(24, currentFontSize * scale * 0.98);
+
+          if (Math.abs(nextFontSize - currentFontSize) < 0.1) break;
+
+          currentFontSize = nextFontSize;
+          countdownNode.style.fontSize = currentFontSize + "px";
+        }
+      }
+
+      function adjustLotteriaCountdown() {
+        fitLotteriaCountdown(document.getElementById("lotteria-countdown"));
       }
 
       function computeCountdown(targetDate) {
@@ -704,6 +740,12 @@
             window.setInterval(tick, 1000);
           }
         }
+
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(adjustLotteriaCountdown);
+        }
+
+        window.addEventListener("resize", adjustLotteriaCountdown);
 
         loadPrizes();
 

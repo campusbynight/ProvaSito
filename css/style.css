@@ -4837,8 +4837,18 @@ html {
 
 @media (max-width: 809.98px) {
   .hero-titolo {
+    display: flex !important;
+  }
+  
+  .hero-titolo p:nth-child(1) {
     display: none !important;
   }
+  
+  .hero-titolo p:nth-child(2) {
+    font-size: clamp(30px, 8vw, 60px) !important;
+    margin-top: 0px !important;
+  }
+  
   .navbar-content {
     padding: 0 !important;
   }

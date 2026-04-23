@@ -2292,9 +2292,9 @@ MODIFICA QUI I MARGINI DELLA TUA NAVBAR
 .navbar-main .nav-icona-sport-container,
 .navbar-main .nav-icona-lotteria-container,
 .navbar-main .nav-icona-fondi-container {
-  flex: none;
-  width: 40px;
-  height: 40px;
+  flex: 0 1 auto;
+  width: clamp(33px, 7vw, 40px);
+  height: clamp(33px, 7vw, 40px);
   position: relative;
 }
 .navbar-main .nav-linea {
@@ -4850,7 +4850,8 @@ html {
   }
   
   .navbar-content {
-    padding: 0 !important;
+    padding: 0 4px !important; /* Dà un po' più di respiro ai lati */
+    box-sizing: border-box !important;
   }
   .navbar-logo {
     margin-left: 0 !important;
@@ -4881,7 +4882,7 @@ html {
   padding-right: 0 !important;
   display: flex !important;
   justify-content: flex-end !important;
-  gap: 5px !important;
+  gap: clamp(3px, 2vw, 5px) !important;
 }
 .navbar-links svg {
   --21h8s6: rgb(236, 99, 26) !important;

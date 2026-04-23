@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" type="image/png" href="assets/images/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="assets/images/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="assets/images/favicon/site.webmanifest" />
+  <title>campusbynight - the cage</title>
+  <meta name="description" content="Campus by Night – The Cage: Torneo di Calcio 2vs2">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="campusbynight - the cage">
+  <meta property="og:description" content="Campus by Night – The Cage: Torneo di Calcio 2vs2">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="campusbynight - the cage">
+  <meta name="twitter:description" content="Campus by Night – The Cage: Torneo di Calcio 2vs2">
+  <meta name="robots" content="max-image-preview:large">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── Base page ── */
+    .sport-page {
+      background: var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2, #fffae3);
+      color: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Hero ── */
+    .sport-hero {
+      min-height: 100vh;
+      padding-top: 92px;
+      padding-bottom: 12vh; /* Sposta il testo verso l'alto */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      background-color: var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2, #fffae3);
+      /* Gradiente da trasparente sopra al colore di sfondo sotto */
+      background-image: linear-gradient(to top, rgba(255, 250, 227, 0) 0%, var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2, #fffae3) 100%), url('assets/images/old/2021/thumb_img01.JPEG');
+      background-size: cover;
+      background-position: center top; /* Prende la parte superiore dell'immagine */
+      background-repeat: no-repeat;
+    }
+
+    .sport-hero-inner {
+      width: 100%;
+      padding: 0 40px;
+      box-sizing: border-box;
+      transform: translateY(-13vh); /* Sposta il contenuto leggermente verso l'alto */
+    }
+
+    .sport-title {
+      font-family: "Ltt Recoleta Compressed Light", "Ltt Recoleta Compressed Light Placeholder", sans-serif;
+      font-size: clamp(80px, 18vw, 180px);
+      line-height: 0.85;
+      font-weight: 300;
+      color: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+      margin: 0;
+    }
+
+    .sport-title-accent {
+      font-family: "Ltt Recoleta Compressed Regular", "Ltt Recoleta Compressed Regular Placeholder", sans-serif;
+      font-weight: 500;
+      color: var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3, #ec631a);
+    }
+
+    .sport-hero-format {
+      font-family: "Ltt Recoleta Compressed Regular", "Ltt Recoleta Compressed Regular Placeholder", sans-serif;
+      font-size: clamp(26px, 5vw, 52px);
+      font-weight: 500;
+      line-height: 1;
+      color: var(--token-d453de31-a28f-4b58-b5d3-fb3a6b7682a5, #21274e);
+      margin: 14px 0 0;
+    }
+
+    /* ── Info strip ── */
+    .sport-info-strip {
+      background: var(--token-d453de31-a28f-4b58-b5d3-fb3a6b7682a5, #21274e);
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      padding: 0 0 144px; /* Aumentato per non far coprire il contenuto dalla sezione successiva */
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    /* cards row */
+    .sport-info-strip-cards {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: stretch;
+      width: 100%;
+    }
+
+    .sport-info-card {
+      flex: 1;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 40px 24px 36px;
+      position: relative;
+    }
+
+    /* divisore verticale uniforme: stessa altezza per tutte le card */
+    .sport-info-card + .sport-info-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 48px;
+      background: rgba(255, 250, 227, 0.18);
+    }
+
+    .sport-info-card-icon { font-size: 32px; line-height: 1; margin-bottom: 2px; }
+
+    .sport-info-card-label {
+      font-family: "Inter", "Inter Placeholder", sans-serif;
+      font-size: clamp(11px, 1.3vw, 13px);
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255, 250, 227, 0.45);
+    }
+
+    .sport-info-card-value {
+      font-family: "Ltt Recoleta Compressed Regular", "Ltt Recoleta Compressed Regular Placeholder", sans-serif;
+      font-size: clamp(20px, 3vw, 36px);
+      font-weight: 500;
+      line-height: 1.05;
+      color: var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2, #fffae3);
+    }
+
+    .sport-info-card-sub {
+      font-family: "Inter", "Inter Placeholder", sans-serif;
+      font-size: clamp(12px, 1.2vw, 13px);
+      color: rgba(255, 250, 227, 0.4);
+    }
+
+    /* CTA dentro lo strip */
+    .sport-info-strip-cta {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 0 40px 0;
+      border-top: 1px solid rgba(255, 250, 227, 0.12);
+      margin-top: 60px;
+      padding-top: 72px;
+    }
+
+    .sport-strip-button {
+      font-family: "Ltt Recoleta Compressed Regular", "Ltt Recoleta Compressed Regular Placeholder", sans-serif;
+      font-size: clamp(24px, 3.2vw, 36px);
+      font-weight: 300;
+      color: var(--token-d453de31-a28f-4b58-b5d3-fb3a6b7682a5, #21274e);
+      background: var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2, #fffae3);
+      border: 0;
+      border-radius: 999px;
+      height: 72px;
+      padding: 0 56px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .sport-strip-button:hover { opacity: 0.88; }
+
+    .sport-strip-warning {
+      font-family: "Inter", "Inter Placeholder", sans-serif;
+      font-size: clamp(18px, 1.6vw, 25px);
+      font-weight: 480;
+      color: var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3, #ec631a);
+      letter-spacing: 0.06em;
+      margin: 0;
+    }
+
+    /* ── Prizes ── */
+    .sport-prizes {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      box-sizing: border-box;
+    }
+
+    .sport-prizes-maschile {
+      background: var(--token-d453de31-a28f-4b58-b5d3-fb3a6b7682a5, #21274e);
+      padding: 64px 0 60px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .sport-prizes-femminile {
+      background: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+      padding: 64px 0 60px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .sport-prizes-inner {
+      padding: 0 80px;
+      box-sizing: border-box;
+    }
+
+    .sport-prizes-cat-label {
+      font-family: "Inter", "Inter Placeholder", sans-serif;
+      font-size: clamp(11px, 1.4vw, 14px);
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255, 250, 227, 0.45);
+      margin: 0 0 10px;
+    }
+
+    .sport-prizes-title {
+      font-family: "Ltt Recoleta Compressed Regular", "Ltt Recoleta Compressed Regular Placeholder", sans-serif;
+      font-size: clamp(50px, 9vw, 88px);
+      font-weight: 500;
+      line-height: 0.92;
+      color: var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3, #ec631a);
+      margin: 0 0 60px;
+    }
+
+    .sport-prizes-femminile .sport-prizes-title {
+      color: var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2, #fffae3);
+    }
+
+    .sport-prize-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .sport-prize-item {
+      font-family: "Ltt Recoleta Compressed Regular", "Ltt Recoleta Compressed Regular Placeholder", sans-serif;
+      font-size: clamp(30px, 5vw, 56px);
+      line-height: 0.92;
+      color: var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3, #ec631a);
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(236, 99, 26, 0.22);
+      display: flex;
+      align-items: baseline;
+      gap: 18px;
+    }
+
+    .sport-prize-item:first-child {
+      border-top: 1px solid rgba(236, 99, 26, 0.22);
+    }
+
+    .sport-prizes-femminile .sport-prize-item {
+      color: var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2, #fffae3);
+      border-bottom-color: rgba(255, 250, 227, 0.2);
+    }
+
+    .sport-prizes-femminile .sport-prize-item:first-child {
+      border-top-color: rgba(255, 250, 227, 0.2);
+    }
+
+    .sport-prize-rank {
+      font-size: 0.78em;
+      opacity: 0.4;
+      min-width: 3ch;
+      flex-shrink: 0;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .sport-prize-rank sup {
+      font-size: 0.55em;
+      vertical-align: super;
+      line-height: 1;
+    }
+
+    .sport-prize-label { flex: 1; }
+
+    .sport-prize-note {
+      font-family: "Inter", "Inter Placeholder", sans-serif;
+      font-size: clamp(18px, 3vw, 25px);
+      opacity: 0.6;
+      margin-top: 4px;
+      display: block;
+      font-weight: 400;
+    }
+
+    .sport-prize-medal { font-size: 0.72em; flex-shrink: 0; }
+
+    .sport-prize-item.capocannoniere {
+      font-size: clamp(26px, 4vw, 46px);
+    }
+
+    /* ── Contatti ── */
+    .sport-contacts {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      background: var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2, #fffae3);
+      padding: 72px 40px 80px;
+      box-sizing: border-box;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .sport-contacts-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .sport-section-label {
+      font-family: "Inter", "Inter Placeholder", sans-serif;
+      font-size: clamp(11px, 1.4vw, 14px);
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3, #ec631a);
+      margin: 0 0 12px;
+    }
+
+    .sport-contacts-heading {
+      font-family: "Ltt Recoleta Compressed Light", "Ltt Recoleta Compressed Light Placeholder", sans-serif;
+      font-size: clamp(48px, 8vw, 80px);
+      font-weight: 300;
+      line-height: 0.9;
+      color: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+      margin: 0 0 36px;
+    }
+
+    .sport-contacts-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .sport-contact-card {
+      background: rgba(118, 20, 24, 0.06);
+      border-radius: 18px;
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1 1 200px;
+    }
+
+    .sport-contact-name {
+      font-family: "Ltt Recoleta Compressed Regular", "Ltt Recoleta Compressed Regular Placeholder", sans-serif;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 500;
+      line-height: 1;
+      color: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+    }
+
+    .sport-contact-phone {
+      font-family: "Inter", "Inter Placeholder", sans-serif;
+      font-size: clamp(15px, 1.8vw, 18px);
+      color: var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3, #ec631a);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .sport-contact-phone:hover { text-decoration: underline; }
+
+    /* ── CTA ── */
+     .sport-cta {
+      background: var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2, #fffae3);
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      padding: 84px 40px 100px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      gap: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(118, 20, 24, 0.1);
+    }
+
+    .sport-cta-heading {
+        font-family: "Ltt Recoleta Compressed Light", "Ltt Recoleta Compressed Light Placeholder", sans-serif;
+        font-size: clamp(56px, 11vw, 100px);
+        font-weight: 300;
+        line-height: 0.88;
+        color: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+        margin: 0;
+      }
+
+      .sport-cta-sub {
+        font-family: "Inter", "Inter Placeholder", sans-serif;
+        font-size: clamp(18px, 1.8vw, 25px);
+        color: rgba(118, 20, 24, 0.65);
+        margin: 0;
+        max-width: 480px;
+        line-height: 1.6;
+      }
+
+      .sport-cta-price {
+        font-family: "Ltt Recoleta Compressed Regular", "Ltt Recoleta Compressed Regular Placeholder", sans-serif;
+        font-size: clamp(28px, 4vw, 44px);
+        color: var(--token-d453de31-a28f-4b58-b5d3-fb3a6b7682a5, #21274e);
+        margin: 0;
+      }
+
+      .sport-button {
+        font-family: "Ltt Recoleta Compressed Regular", "Ltt Recoleta Compressed Regular Placeholder", sans-serif;
+        font-size: clamp(22px, 2.6vw, 30px);
+        font-weight: 600;
+        color: var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2, #fffae3);
+        background: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+        border: 0;
+        border-radius: 999px;
+        height: 60px;
+        padding: 0 48px;
+        cursor: pointer;
+        transition: opacity 0.2s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .sport-button:hover { opacity: 0.84; }
+
+      .sport-warning {
+        font-family: "Inter", "Inter Placeholder", sans-serif;
+        font-size: clamp(18px, 1.6vw, 25px);
+        font-weight: 480;
+        color: var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3, #ec631a);
+        margin: 0;
+        letter-spacing: 0.04em;
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 780px) {
+        .sport-hero { min-height: 72vh; padding-top: 76px; }
+        .sport-hero-inner { padding: 0 24px; }
+        .sport-info-strip { padding: 0 0 136px; }
+        .sport-info-strip-cards { flex-wrap: wrap; }
+        .sport-info-card {
+          flex: 1 1 calc(50% - 1px);
+          padding: 28px 16px 24px;
+        }
+        .sport-info-card + .sport-info-card::before { display: none; }
+        .sport-info-strip-cta { padding-top: 28px; padding-left: 24px; padding-right: 24px; }
+        .sport-prizes-inner { padding: 0 24px; }
+        .sport-prize-item { gap: 10px; }
+        .sport-contacts { padding: 52px 24px 60px; }
+        .sport-cta { padding: 60px 24px 76px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main" class="pagina sport-page">
+      <div class="navbar-wrapper hidden-1wu7hlw" data-navbar-placeholder="true"></div>
+
+      <!-- ── HERO ── -->
+      <header class="sport-hero">
+        <div class="sport-hero-inner">
+          <h1 class="sport-title">
+            the<br>
+            <span class="sport-title-accent">cage</span>
+          </h1>
+          <p class="sport-hero-format">torneo di calcio 2 vs 2</p>
+        </div>
+      </header>
+
+      <!-- ── INFO STRIP ── -->
+      <div class="sport-info-strip" aria-label="Informazioni torneo">
+        <div class="sport-info-strip-cards" role="list">
+          <div class="sport-info-card" role="listitem">
+            <div class="sport-info-card-icon">📅</div>
+            <div class="sport-info-card-label">Date</div>
+            <div class="sport-info-card-value">7 · 8 · 9 maggio</div>
+          </div>
+          <div class="sport-info-card" role="listitem">
+            <div class="sport-info-card-icon">📍</div>
+            <div class="sport-info-card-label">Dove</div>
+            <div class="sport-info-card-value"><a href="https://maps.app.goo.gl/5Mn7woH8523ySNtU7" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline; text-underline-offset: 3px;">Pza. V. Puntoni &#x2197;</a></div>
+          </div>
+          <div class="sport-info-card" role="listitem">
+            <div class="sport-info-card-icon">👥</div>
+            <div class="sport-info-card-label">Formato</div>
+            <div class="sport-info-card-value">2 vs 2</div>
+          </div>
+          <div class="sport-info-card" role="listitem">
+            <div class="sport-info-card-icon">🏆</div>
+            <div class="sport-info-card-label">Categorie</div>
+            <div class="sport-info-card-value">Maschile &amp; Femminile</div>
+          </div>
+          <div class="sport-info-card" role="listitem">
+            <div class="sport-info-card-icon">💶</div>
+            <div class="sport-info-card-label">Costo</div>
+            <div class="sport-info-card-value">20€</div>
+            <div class="sport-info-card-sub">a squadra</div>
+          </div>
+        </div>
+
+        <div class="sport-info-strip-cta">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeaevhrIuES_-d-GubFaOwE1lrJzxXJdkx5p1jkvdxVpo_21w/viewform?usp=publish-editor"
+             class="sport-strip-button" target="_blank" rel="noopener">
+            iscriviti ora
+          </a>
+          <p class="sport-strip-warning">⚠ posti limitati ⚠</p>
+
+          <div style="height: 60px;"></div>
+
+          <!-- Link per scaricare il PDF delle regole -->
+          <a href="assets/Regolamento The Cage.pdf"
+             class="sport-strip-button"
+             target="_blank" rel="noopener">
+            scarica il regolamento
+          </a>
+          <p class="sport-strip-warning">⚠ leggere con attenzione ⚠</p>
+        </div>
+      </div>
+
+      
+      <!-- ── PREMI TORNEO MASCHILE ── -->
+      <div class="sport-prizes" style="margin-top: -100px;">
+        <div class="sport-prizes-maschile">
+          <div class="sport-prizes-inner">
+            <p class="sport-prizes-cat-label">Categoria</p>
+            <h2 class="sport-prizes-title">torneo maschile</h2>
+            <ol class="sport-prize-list">
+              <li class="sport-prize-item">
+                <span class="sport-prize-rank">1<sup>º</sup></span>
+                <span class="sport-prize-label">Premio 1 — da definire</span>
+                <span class="sport-prize-medal">🥇</span>
+              </li>
+              <li class="sport-prize-item">
+                <span class="sport-prize-rank">2<sup>º</sup></span>
+                <span class="sport-prize-label">Premio 2 — da definire</span>
+                <span class="sport-prize-medal">🥈</span>
+              </li>
+              <li class="sport-prize-item">
+                <span class="sport-prize-rank">3<sup>º</sup></span>
+                <span class="sport-prize-label">Premio 3 — da definire</span>
+                <span class="sport-prize-medal">🥉</span>
+              </li>
+              <li class="sport-prize-item capocannoniere">
+                <span class="sport-prize-rank">⚽</span>
+                <span class="sport-prize-label">
+                  Capocannoniere
+                  <span class="sport-prize-note">Maglia del Bologna autografata</span>
+                </span>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- ── PREMI TORNEO FEMMINILE ── -->
+        <div class="sport-prizes-femminile">
+          <div class="sport-prizes-inner">
+            <p class="sport-prizes-cat-label">Categoria</p>
+            <h2 class="sport-prizes-title">torneo femminile</h2>
+            <ol class="sport-prize-list">
+              <li class="sport-prize-item">
+                <span class="sport-prize-rank">1<sup>º</sup></span>
+                <span class="sport-prize-label">Premio 1 — da definire</span>
+                <span class="sport-prize-medal">🥇</span>
+              </li>
+              <li class="sport-prize-item">
+                <span class="sport-prize-rank">2<sup>º</sup></span>
+                <span class="sport-prize-label">Premio 2 — da definire</span>
+                <span class="sport-prize-medal">🥈</span>
+              </li>
+              <li class="sport-prize-item">
+                <span class="sport-prize-rank">3<sup>º</sup></span>
+                <span class="sport-prize-label">Premio 3 — da definire</span>
+                <span class="sport-prize-medal">🥉</span>
+              </li>
+              <li class="sport-prize-item capocannoniere">
+                <span class="sport-prize-rank">⚽</span>
+                <span class="sport-prize-label">
+                  Capocannoniere
+                  <span class="sport-prize-note">Maglia del Bologna autografata</span>
+                </span>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CONTATTI ── -->
+      <section class="sport-contacts" aria-labelledby="contacts-heading">
+        <div class="sport-contacts-inner">
+          <p class="sport-section-label">Per info</p>
+          <h2 class="sport-contacts-heading" id="contacts-heading">contattaci</h2>
+          <div class="sport-contacts-row">
+            <div class="sport-contact-card">
+              <span class="sport-contact-name">Rocco</span>
+              <a class="sport-contact-phone" href="tel:+393495601897">+39 349 560 1897</a>
+            </div>
+            <div class="sport-contact-card">
+              <span class="sport-contact-name">Frencio</span>
+              <a class="sport-contact-phone" href="tel:+393381604584">+39 338 160 4584</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── CTA ISCRIZIONE ── -->
+      <section class="sport-cta">
+        <h2 class="sport-cta-heading">
+          fatti trovare<br>pronto!
+        </h2>
+        <p class="sport-cta-sub">
+          Il campo non aspetta nessuno.<br>
+          Iscriviti con il tuo compagno di squadra.
+        </p>
+        <p class="sport-cta-price">20€ a squadra</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeaevhrIuES_-d-GubFaOwE1lrJzxXJdkx5p1jkvdxVpo_21w/viewform?usp=publish-editor"
+           class="sport-button" target="_blank" rel="noopener">
+          iscriviti ora
+        </a>
+        <p class="sport-warning">⚠ I posti sono limitati!</p>
+      </section>
+    </div>
+
+    <script src="assets/navbar-loader.js"></script>
+  </body>
+</html>

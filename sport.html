@@ -274,8 +274,8 @@
     }
 
     .sport-prize-rank {
-      font-size: 0.78em;
-      opacity: 0.4;
+      font-size: clamp(30px, 5vw, 56px);
+      opacity: 1;
       min-width: 3ch;
       flex-shrink: 0;
       font-variant-numeric: tabular-nums;
@@ -536,25 +536,38 @@
         <div class="sport-prizes-maschile">
           <div class="sport-prizes-inner">
             <p class="sport-prizes-cat-label">Categoria</p>
-            <h2 class="sport-prizes-title">torneo maschile</h2>
+            <h2 class="sport-prizes-title">Torneo maschile</h2>
+            <p class="sport-prizes-cat-label">Premi</p>
             <ol class="sport-prize-list">
-              <!--
               <li class="sport-prize-item">
                 <span class="sport-prize-rank">1<sup>º</sup></span>
-                <span class="sport-prize-label">Premio 1 — da definire</span>
+                <span class="sport-prize-label">
+                  <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                    <li><span style="display: inline-flex; align-items: center; margin-right: 14px;">🎟️<span style="margin-left: -45px; transform: rotate(-30deg);">🎟️</span>
+                    </span> 2x biglietti gara 1 e 2 playoff Virtus Pallacanestro Bologna</li>
+                    <li>🍨 2 vaschette 800gr Sorbetteria Castiglione</li>
+                  </ul>
+                </span>
                 <span class="sport-prize-medal">🥇</span>
               </li>
               <li class="sport-prize-item">
                 <span class="sport-prize-rank">2<sup>º</sup></span>
-                <span class="sport-prize-label">Premio 2 — da definire</span>
+                  <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                    <li>
+                    <span class="sport-prize-label">🍷 4 bottiglie di vino</span>
+                    <li>🍨 2 vaschette 600gr Sorbetteria Castiglione</li>
+                  </ul>
                 <span class="sport-prize-medal">🥈</span>
               </li>
               <li class="sport-prize-item">
                 <span class="sport-prize-rank">3<sup>º</sup></span>
-                <span class="sport-prize-label">Premio 3 — da definire</span>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                    <li>
+                    <span class="sport-prize-label">🏟️ visita al centro sportivo a Coverciano + museo del calcio con il professore Paco D'Onofrio</span>
+                    <li>🍨 2 vaschette 400gr Sorbetteria Castiglione</li>
+                  </ul>
                 <span class="sport-prize-medal">🥉</span>
               </li>
-            -->
               <li class="sport-prize-item capocannoniere">
                 <span class="sport-prize-rank">⚽</span>
                 <span class="sport-prize-label">
@@ -572,10 +585,9 @@
             <p class="sport-prizes-cat-label">Categoria</p>
             <h2 class="sport-prizes-title">torneo femminile</h2>
             <ol class="sport-prize-list">
-              <!--
               <li class="sport-prize-item">
                 <span class="sport-prize-rank">1<sup>º</sup></span>
-                <span class="sport-prize-label">Premio 1 — da definire</span>
+                <span class="sport-prize-label">due vaschette da 800 gr + 2 mini abbonamenti (gara 1 e 2 dei quarti di finale playoff) per Virtus Pallacanestro Bologna</span>
                 <span class="sport-prize-medal">🥇</span>
               </li>
               <li class="sport-prize-item">
@@ -588,7 +600,6 @@
                 <span class="sport-prize-label">Premio 3 — da definire</span>
                 <span class="sport-prize-medal">🥉</span>
               </li>
-              -->
               <li class="sport-prize-item capocannoniere">
                 <span class="sport-prize-rank">⚽</span>
                 <span class="sport-prize-label">

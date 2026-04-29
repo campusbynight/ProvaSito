@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incontri - Campus By Night</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { 
+            background-color: #fdf8e3; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Articulat CF Normal', sans-serif; 
+            color: #21274e;
+        }
+        .programma-header { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 150px 20px 60px 20px; 
+            text-align: center; 
+        }
+        .programma-subtitle { 
+            font-family: 'Articulat CF Heavy', sans-serif; 
+            font-size: 28px; 
+            color: #21274e; 
+            margin: 10px 0; 
+            font-weight: 900; 
+        }
+        .programma-title { 
+            font-family: 'Articulat CF Heavy', sans-serif; 
+            font-size: 157px; 
+            color: #21274e; 
+            margin: 0; 
+            line-height: 0.8; 
+            letter-spacing: -0.04em;
+        }
+        @media (max-width: 768px) {
+            .programma-header {
+                padding: 100px 15px 40px 15px;
+            }
+            .programma-title {
+                font-size: 60px;
+            }
+            .programma-subtitle {
+                font-size: 16px;
+            }
+            .programma-desc {
+                font-size: 20px;
+                text-align: center;
+            }
+            .giorno-title {
+                font-size: 45px;
+                margin: 40px 0 30px 0;
+            }
+            .evento-item {
+                margin-left: 0;
+                margin-bottom: 30px;
+            }
+            .evento-ora {
+                font-size: 40px;
+            }
+            .evento-head {
+                font-size: 18px;
+            }
+            .evento-titolo {
+                font-size: 22px;
+            }
+            .evento-descrizione {
+                font-size: 18px;
+                margin-left: 10px;
+            }
+            .evento-descrizione-lunga {
+                font-size: 16px;
+                margin-left: 20px;
+            }
+        }
+        .programma-desc { 
+            font-family: 'Recoleta CBN Compressed Medium', serif; 
+            font-size: 28px; 
+            color: #21274e; 
+            margin-top: 20px; 
+            text-align: right;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .giornata-section {
+            max-width: 900px;
+            margin: 0 auto 100px auto;
+            padding: 0 20px;
+        }
+        .giorno-title {
+            font-family: 'Ltt Recoleta Compressed Black', serif;
+            font-size: 65px;
+            color: #21274e;
+            margin: 60px 0 40px 0;
+            line-height: 0.8;
+            font-weight: 900;
+        }
+
+        .evento-item {
+            margin-bottom: 40px;
+            margin-left: 50px;
+        }
+        .evento-head {
+            font-family: 'Articulat CF Normal', sans-serif;
+            font-size: 24px;
+            color: #21274e;
+            line-height: 1.1;
+            margin-bottom: 0;
+            font-weight: 400;
+        }
+
+        .evento-ora {
+            font-family: 'Articulat CF Heavy', sans-serif;
+            font-size: 59px;
+            font-weight: 900;
+        }
+        .evento-titolo {
+            font-style: italic;
+            font-weight: 500;
+            font-family: 'Articulat CF Medium', sans-serif;
+            font-size: 32px;
+        }
+        .evento-descrizione {
+            font-family: 'Articulat CF Medium', sans-serif;
+            font-size: 24px;
+            line-height: 1.6;
+            color: #21274e;
+            font-weight: 500;
+            letter-spacing: -0.04em;
+            margin-left: 20px;
+        }
+        .evento-descrizione-lunga {
+            font-family: 'Articulat CF Normal', sans-serif;
+            font-size: 20px;
+            line-height: 1.6;
+            color: #21274e;
+            font-weight: 400;
+            letter-spacing: -0.04em;
+            margin-left: 60px;
+            margin-top: 10px;
+        }
+        .evento-item.speciale .evento-ora,
+        .evento-item.speciale .evento-head {
+            color: #761418;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar-placeholder"></div>
+    
+    <div class="programma-header">
+        <p class="programma-subtitle">CAMPUS BY NIGHT - 7,8,9 MAGGIO 2026 - PIAZZA SCARAVILLI, BOLOGNA (BO)</p>
+        <h1 class="programma-title">scopri<br>il programma</h1>
+        <p class="programma-desc">l'Umano arriva dove arriva l'Amore</p>
+    </div>
+
+    <div id="programma-list"></div>
+
+    <script src="assets/navbar-loader.js"></script>
+    <script>
+        const mesi = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
+        
+        fetch('assets/programma.json')
+            .then(res => res.json())
+            .then(data => {
+                const list = document.getElementById('programma-list');
+                const eventiPerGiorno = {};
+                
+                // Raggruppa eventi per giorno
+                data.eventi.forEach(evento => {
+                    const parts = evento.giorno.split('-');
+                    if (parts.length === 3) {
+                        const giorno = parseInt(parts[0], 10);
+                        const meseIdx = parseInt(parts[1], 10) - 1;
+                        const dataFormat = `${giorno} ${mesi[meseIdx]}`;
+                        
+                        if (!eventiPerGiorno[dataFormat]) {
+                            eventiPerGiorno[dataFormat] = [];
+                        }
+                        eventiPerGiorno[dataFormat].push(evento);
+                    }
+                });
+                
+                // Crea l'HTML
+                for (const [dataGiorno, eventi] of Object.entries(eventiPerGiorno)) {
+                    const section = document.createElement('div');
+                    section.className = 'giornata-section';
+                    
+                    const title = document.createElement('h2');
+                    title.className = 'giorno-title';
+                    title.textContent = dataGiorno;
+                    section.appendChild(title);
+                    
+                    eventi.forEach(evento => {
+                        const item = document.createElement('div');
+                        item.className = 'evento-item';
+                            if (evento.titolo.startsWith("Aritmie –")) {
+                            item.classList.add('speciale'); // Per colorare di rosso come nell'immagine
+                        }
+                        
+                        const head = document.createElement('div');
+                        head.className = 'evento-head';
+                        
+                        const oraSpan = document.createElement('span');
+                        oraSpan.className = 'evento-ora';
+                        // Sostituisci i due punti con il punto come da immagine
+                        oraSpan.textContent = evento.ora.replace(':', '.');
+                        
+                        const separator = document.createElement('span');
+                        separator.innerHTML = '<span style="font-family: \'Articulat CF Heavy\', sans-serif; font-weight: 900;">:</span> ';
+                        
+                        const titoloSpan = document.createElement('span');
+                        titoloSpan.className = 'evento-titolo';
+                        titoloSpan.innerHTML = evento.titolo;
+                        
+                        head.appendChild(oraSpan);
+                        head.appendChild(separator);
+                        head.appendChild(titoloSpan);
+                        
+                        item.appendChild(head);
+                        
+                        if (evento.descrizione) {
+                            const desc = document.createElement('div');
+                            desc.className = 'evento-descrizione';
+                            desc.innerHTML = `<p>${evento.descrizione.replace(/\n/g, '<br>')}</p>`;
+                            item.appendChild(desc);
+                        }
+
+                        if (evento.descrizioneLunga) {
+                            const descLunga = document.createElement('div');
+                            descLunga.className = 'evento-descrizione-lunga';
+                            descLunga.innerHTML = `<p>${evento.descrizioneLunga.replace(/\n/g, '<br>')}</p>`;
+                            item.appendChild(descLunga);
+                        }
+                        
+                        section.appendChild(item);
+                    });
+                    
+                    list.appendChild(section);
+                }
+            })
+            .catch(err => console.error('Errore caricamento programma:', err));
+    </script>
+</body>
+</html>

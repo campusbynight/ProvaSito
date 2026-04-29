@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostre - Campus By Night</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { 
+            background-color: #fdf8e3; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Articulat CF Normal', sans-serif; 
+        }
+        .mostre-header { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 150px 20px 60px 20px; 
+            text-align: center; 
+        }
+        .mostre-title { 
+            font-family: 'Ltt Recoleta Condensed Bold', serif; 
+            font-size: 10vw; 
+            color: #761418; 
+            margin: 0; 
+            line-height: 1; 
+            text-transform: uppercase; 
+        }
+        .mostre-subtitle { 
+            font-family: 'Ltt Recoleta Condensed Bold', serif; 
+            font-size: 28px; 
+            color: #761418; 
+            margin: 10px 0; 
+            font-weight: 900; 
+        }
+        .mostre-desc { 
+            font-family: 'Ltt Recoleta Compressed Light', sans-serif; 
+            font-size: 42px; 
+            color: #761418; 
+            margin-bottom: 0; 
+        }
+        
+        /* Stili per le section alternate */
+        .mostra-section {
+            padding: 100px 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .mostra-section.dark {
+            background-color: #761418;
+            color: #fffae3;
+        }
+        .mostra-section.light {
+            background-color: #fffae3;
+            color: #761418;
+        }
+        .mostra-section-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .mostra-titolo { 
+            font-family: 'Ltt Recoleta Condensed Bold', serif; 
+            font-size: 50px; 
+            margin: 0 0 20px 0; 
+            line-height: 1.1; 
+            text-align: center;
+        }
+        .mostra-descrizione { 
+            font-family: 'Articulat CF Normal', sans-serif; 
+            font-size: 24px; 
+            line-height: 1.6; 
+            margin: 0; 
+        }
+        
+        /* Colori per le section alternate */
+        .mostra-section.dark .mostra-titolo, 
+        .mostra-section.dark .mostra-descrizione {
+            color: #fffae3;
+        }
+        .mostra-section.light .mostra-titolo, 
+        .mostra-section.light .mostra-descrizione {
+            color: #761418;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar-placeholder"></div>
+    
+    <div class="mostre-header">
+        <h1 class="mostre-title">mostre</h1>
+        <p class="mostre-subtitle">CAMPUS BY NIGHT - 7,8,9 MAGGIO 2026 - PIAZZA SCARAVILLI, BOLOGNA (BO)</p>
+        <p class="mostre-desc">scopri le mostre del Campus By Night 2026</p>
+    </div>
+
+    <!-- Le section verranno aggiunte qua dentro -->
+    <div id="mostre-list"></div>
+
+    <script src="assets/navbar-loader.js"></script>
+    <script>
+        fetch('assets/mostre.json')
+            .then(res => res.json())
+            .then(data => {
+                const list = document.getElementById('mostre-list');
+                data.forEach((mostra, index) => {
+                    // Creazione tag <section> invece del div
+                    const section = document.createElement('section');
+                    // Aggiunta dinamica della classe dark/light in base all'indice
+                    section.className = 'mostra-section ' + (index % 2 === 0 ? 'dark' : 'light');
+                    
+                    const innerDiv = document.createElement('div');
+                    innerDiv.className = 'mostra-section-inner';
+                    
+                    const title = document.createElement('h5');
+                    title.className = 'mostra-titolo';
+                    title.textContent = mostra.titolo;
+                    
+                    const desc = document.createElement('p');
+                    desc.className = 'mostra-descrizione';
+                    desc.innerHTML = mostra.descrizione.replace(/\n/g, '<br>');
+                    
+                    innerDiv.appendChild(title);
+                    innerDiv.appendChild(desc);
+                    section.appendChild(innerDiv);
+                    
+                    list.appendChild(section);
+                });
+            })
+            .catch(err => console.error('Errore caricamento mostre:', err));
+    </script>
+</body>
+</html>

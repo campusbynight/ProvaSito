@@ -1,40 +1,80 @@
 {
   "eventi": [
     {
-      "giorno": "15-01-2026",
-      "ora": "09:00",
-      "titolo": "Riunione di apertura",
-      "descrizione": "Incontro introduttivo con il team"
+      "giorno": "07-05-2026",
+      "ora": "18:00",
+      "titolo": "Inaugurazione",
+      "descrizione": "Inaugurazione dell'evento."
     },
     {
-      "giorno": "15-01-2026",
-      "ora": "11:30",
-      "titolo": "Presentazione progetto",
-      "descrizione": "Presentazione dei dettagli del nuovo progetto"
+      "giorno": "07-05-2026",
+      "ora": "18:30",
+      "titolo": "Un’economia per la dignità umana",
+      "descrizione": "Un’economia per la dignità umana: Prospettive teoriche ed empiriche per arginare le disuguaglianze economiche con Stefano Zamagni, professore a contratto di Economia Politica all’Università di Bologna e Adjunct Professor of International Political Economy, Johns Hopkins University, SAIS Europe e Vincenzo Colla, Vicepresidente della Regione Emilia-Romagna con delega a Sviluppo economico e green economy, Energia, Formazione professionale, Università e ricerca."
     },
     {
-      "giorno": "15-01-2026",
-      "ora": "14:00",
-      "titolo": "Workshop",
-      "descrizione": "Sessione interattiva sui nuovi strumenti"
+      "giorno": "07-05-2026",
+      "ora": "21:00",
+      "titolo": "Luoghi di pace in contesti di guerra",
+      "descrizione": "Luoghi di pace in contesti di guerra, voci dal Medio Oriente con padre Francesco Ielpo, Custode di Terra Santa e Jean Francois Thiry, coordinatore dei progetti di Pro Terra Sancta in Siria."
     },
     {
-      "giorno": "16-01-2026",
-      "ora": "10:00",
-      "titolo": "Brainstorming",
-      "descrizione": "Discussione creativa sulle idee innovative"
+      "giorno": "07-05-2026",
+      "ora": "22:30",
+      "titolo": "Aritmie – Fuori orario",
+      "descrizione": "Aritmie – Fuori orario: live con De Stradis."
+    },
+
+
+    {
+      "giorno": "08-05-2026",
+      "ora": "16:15",
+      "titolo": "Aritmie – Questa stanza non ha più pareti",
+      "descrizione": "Dialogo sulla musica con Edoardo Vilella e Giulia Mir."
     },
     {
-      "giorno": "12-03-2026",
-      "ora": "15:30",
-      "titolo": "Revisione progress",
-      "descrizione": "Verifica dello stato di avanzamento"
+      "giorno": "08-05-2026",
+      "ora": "18:30",
+      "titolo": "Oltre i giornali: la sfida della coscienza nella crisi dell'informazione",
+      "descrizione": "con Marco Bardazzi, giornalista e scrittore e Augusto Valeriani, professore ordinario di Sociologia dei processi culturali e comunicativi all’Università di Bologna."
     },
     {
-      "giorno": "18-03-2026",
-      "ora": "09:00",
-      "titolo": "Standup meeting",
-      "descrizione": "Aggiornamento giornaliero del team"
+      "giorno": "08-05-2026",
+      "ora": "21:00",
+      "titolo": "“I desideri stavano strappandomi l’anima”",
+      "descrizione": "Rappresentazione teatrale tratta da Novecento di Alessandro Baricco."
+    },
+    {
+      "giorno": "08-05-2026",
+      "ora": "22:30",
+      "titolo": "Aritmie – Fuori orario",
+      "descrizione": "Aritmie – Fuori orario: live con Mazzoli."
+    },
+
+
+    {
+      "giorno": "09-05-2026",
+      "ora": "16:15",
+      "titolo": "Aritmie – Chi fa il turno di notte?",
+      "descrizione": "Dialogo sulla letteratura contemporanea con Valentina Maini e Andrea Donaera."
+    },
+    {
+      "giorno": "09-05-2026",
+      "ora": "18:30",
+      "titolo": "Più in là dell’orizzonte. Dialogo sulla disabilità",
+      "descrizione": "Con Claudio Imprudente, Presidente onorario dell’Associazione “Centro Documentazione Handicap” e Cristiano Guarneri, giornalista e scrittore."
+    },
+    {
+      "giorno": "09-05-2026",
+      "ora": "20:00",
+      "titolo": "Estrazione biglietti lotteria",
+      "descrizione": ""
+    },
+    {
+      "giorno": "09-05-2026",
+      "ora": "21:30",
+      "titolo": "Serata finale con musica dal vivo",
+      "descrizione": ""
     }
   ]
 }

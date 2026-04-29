@@ -794,11 +794,11 @@ body {
 .pagina .hero-sfondo {
   flex: none;
   width: 100%;
-  height: 212%;
+  height: 100%;
   position: absolute;
-  bottom: -554px;
-  left: 0%;
-  overflow: visible;
+  top: 0;
+  left: 0;
+  overflow: hidden;
 }
 .pagina .hero-overlay {
   flex: none;

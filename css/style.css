@@ -5,6 +5,13 @@
   font-weight: 900;
 }
 @font-face {
+  font-family: "Ltt Recoleta Compressed Black";
+  src: url("../assets/fonts/font titoli/RecoletaCBN-Compressed Black.otf") format("opentype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 900;
+}
+@font-face {
   font-family: "Ltt Recoleta Compressed Regular";
   src: url("../assets/fonts/font titoli/RecoletaCBN-Compressed Regular.otf")
     format("opentype");
@@ -35,6 +42,14 @@
   font-display: swap;
   font-style: normal;
   font-weight: 400;
+}
+@font-face {
+  font-family: "Articulat CF Heavy";
+  src: url("../assets/fonts/font corpo/articulat/ArticulatCF-Heavy.otf")
+    format("opentype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 900;
 }
 @font-face {
   font-family: "Ltt Recoleta Condensed Bold";
@@ -1401,16 +1416,14 @@ body {
   position: relative;
 }
 .pagina .menu-titolo {
-  --framer-font-family:
-    "Ltt Recoleta Compressed Regular",
-    "Ltt Recoleta Compressed Regular Placeholder",
-    sans-serif;
+  --framer-font-family: "Articulat CF Heavy", sans-serif;
   --framer-font-size: 120px;
   --framer-text-color: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
   white-space: pre-wrap;
   word-break: break-word;
   word-wrap: break-word;
   width: min(100%, 900px);
+  text-align: center;
 }
 .pagina .menu-completo {
   --framer-font-family:
@@ -2101,7 +2114,7 @@ body {
   .pagina .menu-intestazione {
     flex-direction: column;
     order: 0;
-    width: 90%;
+    width: 100%;
   }
   .pagina .menu-titolo {
     white-space: pre-wrap;
@@ -4781,13 +4794,13 @@ html {
 
 /* Base Icon colors (Orange) - we force override framer inline variables */
 .navbar-links svg {
-  --21h8s6: rgb(236, 99, 26) !important;
-  color: rgb(236, 99, 26) !important;
+  --21h8s6: rgb(33, 39, 78) !important;
+  color: rgb(33, 39, 78) !important;
   fill: transparent !important;
   transition: all 0.3s ease !important;
 }
 .navbar-links svg use {
-  fill: rgb(236, 99, 26) !important;
+  fill: rgb(33, 39, 78) !important;
 }
 
 /* --- NAVBAR SHRUNK (RIDOTTA) --- */
@@ -4800,7 +4813,7 @@ html {
   width: max-content !important;
   height: 50px !important;
   border-radius: 50px !important;
-  background-color: rgb(236, 99, 26) !important; /* BACKGROUD ARANCIONE PURO */
+  background-color: rgb(33, 39, 78) !important; /* BACKGROUD ARANCIONE PURO */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
 }
 
@@ -4885,20 +4898,20 @@ html {
   gap: clamp(3px, 2vw, 5px) !important;
 }
 .navbar-links svg {
-  --21h8s6: rgb(236, 99, 26) !important;
-  color: rgb(236, 99, 26) !important;
+  --21h8s6: rgb(33, 39, 78) !important;
+  color: rgb(33, 39, 78) !important;
 }
 .navbar-links svg use,
 .navbar-links svg path {
   fill: transparent !important;
-  stroke: rgb(236, 99, 26) !important;
+  stroke: rgb(33, 39, 78) !important;
   stroke-width: 1.5 !important;
 }
 
 /* Lotteria: piena arancione (non trasparente) */
 .navbar-links .nav-icona-lotteria-container svg path {
-  fill: rgb(236, 99, 26) !important;
-  stroke: rgb(236, 99, 26) !important;
+  fill: rgb(33, 39, 78) !important;
+  stroke: rgb(33, 39, 78) !important;
   stroke-width: 8 !important;
 }
 
@@ -4920,7 +4933,7 @@ html {
 .navbar-links .nav-icona-sport-container svg path[fill-opacity],
 .navbar-links .nav-icona-lotteria-container svg path[fill-opacity],
 .navbar-links .nav-icona-fondi-container svg path[fill-opacity] {
-  fill: rgb(236, 99, 26) !important;
+  fill: rgb(33, 39, 78) !important;
   fill-opacity: 0;
   stroke: none !important;
   transition: fill-opacity 220ms ease;
@@ -4964,12 +4977,12 @@ html {
 /* Fund-raising: stato base identico al SVG fornito (senza hover/focus) */
 .navbar-links .nav-icona-fondi-container:not(:hover):not(:focus-within) svg path {
   fill: transparent !important;
-  stroke: rgb(236, 99, 26) !important;
+  stroke: rgb(33, 39, 78) !important;
   stroke-width: 1.5 !important;
 }
 
 .navbar-links .nav-icona-fondi-container:not(:hover):not(:focus-within) svg path[fill-opacity] {
-  fill: rgb(236, 99, 26) !important;
+  fill: rgb(33, 39, 78) !important;
   fill-opacity: 0 !important;
   stroke: none !important;
 }
@@ -4995,7 +5008,7 @@ html {
 .navbar-links .nav-icona-fondi-container:hover .fund-coin-outline,
 .navbar-links .nav-icona-fondi-container:focus-within .fund-coin-outline {
   fill: transparent !important;
-  stroke: rgb(236, 99, 26) !important;
+  stroke: rgb(33, 39, 78) !important;
 }
 
 /* Fund-raising: dopo lo scroll il bordo resta bianco anche in hover/focus */

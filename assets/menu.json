@@ -1,2 +1,538 @@
 [
+    {
+        "giorno": "07-05-2026",
+        "sezioni": [
+            {
+                "titolo": "Piadine e Cassoni",
+                "contenuto":[
+                    {
+                        "nome": "Balorda",
+                        "descrizione": "Piadina con Salsiccia, Cipolle caramellate, Stracchino",
+                        "prezzo": "4,00€"
+                    },
+                    {
+                        "nome": "MortadElly",
+                        "descrizione": "Piadina con Mortadella, Stracchino, Rucola",
+                        "prezzo": "4,00€"
+                    },
+                    {
+                        "nome": "Piazza Verde",
+                        "descrizione": "Cassone alle erbe",
+                        "prezzo": "3,50€"
+                    },
+                    {
+                        "nome": "Cassone sbROCCO",
+                        "descrizione": "Cassone pomodoro e mozzarella",
+                        "prezzo": "3,50€"
+                    }
+                ]
+            },
+            {
+                "titolo": "Contorni e Aggiunte",
+                "contenuto":[
+                    {
+                        "nome": "Patate",
+                        "descrizione": "Porzione di patate al forno",
+                        "prezzo": "3,00€"
+                    },
+                    {
+                        "nome": "Nuggets",
+                        "descrizione": "Porzione da 6 pezzi",
+                        "prezzo": "3,50€"
+                    },
+                    {
+                        "nome": "Box Aperitivo x2",
+                        "descrizione": "Taralli, Arachidi, Patatine, Prosciutto",
+                        "prezzo": "3,00€"
+                    },
+                    {
+                        "nome": "Combo Aperitivo",
+                        "descrizione": "2 birra/spritz + Box Aperitivo",
+                        "prezzo": "10,00€"
+                    }
+                ]
+            },
+            {
+                "titolo": "Dessert",
+                "contenuto":[
+                    {
+                        "nome": "Crepes con crema alla gianduia Babbi",
+                        "descrizione": "",
+                        "prezzo": "3,50€"
+                    },
+                    {
+                        "nome": "Crepes con crema al pistacchio Babbi",
+                        "descrizione": "",
+                        "prezzo": "3,50€"
+                    },
+                    {
+                        "nome": "Cannolo Siciliano",
+                        "descrizione": "",
+                        "prezzo": "3,00€"
+                    }
+                ]
+            },
+            {
+                "titolo": "Bibite",
+                "contenuto":[
+                    {
+                        "nome": "Coca Cola alla spina",
+                        "descrizione": "",
+                        "prezzo": "2,50€"
+                    },
+                    {
+                        "nome": "Coca Zero lattina",
+                        "descrizione": "",
+                        "prezzo": "2,00€"
+                    },
+                    {
+                        "nome": "Acqua naturale 0,5L",
+                        "descrizione": "",
+                        "prezzo": "1,00€"
+                    },
+                    {
+                        "nome": "Acqua frizzante 0,5L",
+                        "descrizione": "",
+                        "prezzo": "1,00€"
+                    },
+                    {
+                        "nome": "The limone",
+                        "descrizione": "",
+                        "prezzo": "2,00€"
+                    },
+                    {
+                        "nome": "The pesca",
+                        "descrizione": "",
+                        "prezzo": "2,00€"
+                    }
+                ]
+            },
+            {
+                "titolo": "Birre",
+                "contenuto":[
+                    {
+                        "nome": "Moretti",
+                        "descrizione": "",
+                        "prezzo": "4,00€"
+                    },
+                    {
+                        "nome": "Ducato Freeride",
+                        "descrizione": "",
+                        "prezzo": "4,50€"
+                    },
+                    {
+                        "nome": "Hirter Kellermeister Bio",
+                        "descrizione": "",
+                        "prezzo": "4,00€"
+                    },
+                    {
+                        "nome": "Aurora Birrificio Becchia Orsa",
+                        "descrizione": "",
+                        "prezzo": "4,50€"
+                    }
+                ]
+            },
+            {
+                "titolo": "Vino",
+                "contenuto":[
+                    {
+                        "nome": "Calice di Lambrusco",
+                        "descrizione": "Lambrusco Solco Paltrinieri",
+                        "prezzo": "3,50€"
+                    },
+                    {
+                        "nome": "Bottiglia di Lambrusco",
+                        "descrizione": "Lambrusco Solco Paltrinieri",
+                        "prezzo": "14,00€"
+                    },
+                    {
+                        "nome": "Calice di Rosè",
+                        "descrizione": "Rosè Piria Paltrinieri",
+                        "prezzo": "3,50€"
+                    },                    
+                    {
+                        "nome": "Bottiglia di Rosè",
+                        "descrizione": "Rosè Piria Paltrinieri",
+                        "prezzo": "14,00€"
+                    }
+                ]
+            },
+            {
+                "titolo": "Bevande Speciali",
+                "contenuto":[
+                    {
+                        "nome": "Spritz",
+                        "descrizione": "",
+                        "prezzo": "4,00€"
+                    },
+                    {
+                        "nome": "2 Spritz",
+                        "descrizione": "",
+                        "prezzo": "7,00€"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "giorno": "08-05-2026",
+        "sezioni": [
+            {
+                "titolo": "Hamburger",
+                "contenuto":[
+                    {
+                        "nome": "Camillo",
+                        "descrizione": "Pane, Patty di carne, Cheddar, Bacon, Salsa Burger, Pomodoro, Iceberg",
+                        "prezzo": "4,50€"
+                    },
+                    {
+                        "nome": "Patapam",
+                        "descrizione": "Pane, Zucchine grigliate, Scamorza, Cipolle caramellate",
+                        "prezzo": "4,50€"
+                    },
+                    {
+                        "nome": "Ross-T (Disponibile solo la sera)",
+                        "descrizione": "Pane, Patty di carne, Rosti di patate, Scamorza, Bacon, Salsa Burger",
+                        "prezzo": "4,50€"
+                    },
+                    {
+                        "nome": "Aggiunta patatine",
+                        "descrizione": "Aggiunta patate al forno al panino",
+                        "prezzo": "1,50€"
+                    }
+                ]
+            },
+            {
+                "titolo": "Contorni e Aggiunte",
+                "contenuto":[
+                    {
+                        "nome": "Patate",
+                        "descrizione": "Porzione di patate al forno",
+                        "prezzo": "3,00€"
+                    },
+                    {
+                        "nome": "Nuggets",
+                        "descrizione": "Porzione da 6 pezzi",
+                        "prezzo": "3,50€"
+                    },
+                    {
+                        "nome": "Box Aperitivo x2",
+                        "descrizione": "Taralli, Arachidi, Patatine, Prosciutto",
+                        "prezzo": "3,00€"
+                    },
+                    {
+                        "nome": "Combo Aperitivo",
+                        "descrizione": "2 birra/spritz + Box Aperitivo",
+                        "prezzo": "10,00€"
+                    }
+                ]
+            },
+            {
+                "titolo": "Dessert",
+                "contenuto":[
+                    {
+                        "nome": "Crepes con crema alla gianduia Babbi",
+                        "descrizione": "",
+                        "prezzo": "3,50€"
+                    },
+                    {
+                        "nome": "Crepes con crema al pistacchio Babbi",
+                        "descrizione": "",
+                        "prezzo": "3,50€"
+                    },
+                    {
+                        "nome": "Cannolo Siciliano",
+                        "descrizione": "",
+                        "prezzo": "3,00€"
+                    }
+                ]
+            },
+            {
+                "titolo": "Bibite",
+                "contenuto":[
+                    {
+                        "nome": "Coca Cola alla spina",
+                        "descrizione": "",
+                        "prezzo": "2,50€"
+                    },
+                    {
+                        "nome": "Coca Zero lattina",
+                        "descrizione": "",
+                        "prezzo": "2,00€"
+                    },
+                    {
+                        "nome": "Acqua naturale 0,5L",
+                        "descrizione": "",
+                        "prezzo": "1,00€"
+                    },
+                    {
+                        "nome": "Acqua frizzante 0,5L",
+                        "descrizione": "",
+                        "prezzo": "1,00€"
+                    },
+                    {
+                        "nome": "The limone",
+                        "descrizione": "",
+                        "prezzo": "2,00€"
+                    },
+                    {
+                        "nome": "The pesca",
+                        "descrizione": "",
+                        "prezzo": "2,00€"
+                    }
+                ]
+            },
+            {
+                "titolo": "Birre",
+                "contenuto":[
+                    {
+                        "nome": "Moretti",
+                        "descrizione": "",
+                        "prezzo": "4,00€"
+                    },
+                    {
+                        "nome": "Ducato Freeride",
+                        "descrizione": "",
+                        "prezzo": "4,50€"
+                    },
+                    {
+                        "nome": "Hirter Kellermeister Bio",
+                        "descrizione": "",
+                        "prezzo": "4,00€"
+                    },
+                    {
+                        "nome": "Aurora Birrificio Becchia Orsa",
+                        "descrizione": "",
+                        "prezzo": "4,50€"
+                    }
+                ]
+            },
+            {
+                "titolo": "Vino",
+                "contenuto":[
+                    {
+                        "nome": "Calice di Lambrusco",
+                        "descrizione": "Lambrusco Solco Paltrinieri",
+                        "prezzo": "3,50€"
+                    },
+                    {
+                        "nome": "Bottiglia di Lambrusco",
+                        "descrizione": "Lambrusco Solco Paltrinieri",
+                        "prezzo": "14,00€"
+                    },
+                    {
+                        "nome": "Calice di Rosè",
+                        "descrizione": "Rosè Piria Paltrinieri",
+                        "prezzo": "3,50€"
+                    },                    
+                    {
+                        "nome": "Bottiglia di Rosè",
+                        "descrizione": "Rosè Piria Paltrinieri",
+                        "prezzo": "14,00€"
+                    }
+                ]
+            },
+            {
+                "titolo": "Bevande Speciali",
+                "contenuto":[
+                    {
+                        "nome": "Spritz",
+                        "descrizione": "",
+                        "prezzo": "4,00€"
+                    },
+                    {
+                        "nome": "2 Spritz",
+                        "descrizione": "",
+                        "prezzo": "7,00€"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "giorno": "09-05-2026",
+        "sezioni": [
+            {
+                "titolo": "Hamburger",
+                "contenuto":[
+                    {
+                        "nome": "Camillo",
+                        "descrizione": "Pane, Patty di carne, Cheddar, Bacon, Salsa Burger, Pomodoro, Iceberg",
+                        "prezzo": "4,50€"
+                    },
+                    {
+                        "nome": "Patapam",
+                        "descrizione": "Pane, Zucchine grigliate, Scamorza, Cipolle caramellate",
+                        "prezzo": "4,50€"
+                    },
+                    {
+                        "nome": "Bombo (Disponibile solo la sera)",
+                        "descrizione": "Pane, Pulled Pork, Salsa BBQ, Cavolo cappuccio, Maionese",
+                        "prezzo": "4,50€"
+                    },
+                    {
+                        "nome": "Aggiunta patatine",
+                        "descrizione": "Aggiunta patate al forno al panino",
+                        "prezzo": "1,50€"
+                    }
+                ]
+            },
+            {
+                "titolo": "Contorni e Aggiunte",
+                "contenuto":[
+                    {
+                        "nome": "Patate",
+                        "descrizione": "Porzione di patate al forno",
+                        "prezzo": "3,00€"
+                    },
+                    {
+                        "nome": "Nuggets",
+                        "descrizione": "Porzione da 6 pezzi",
+                        "prezzo": "3,50€"
+                    },
+                    {
+                        "nome": "Box Aperitivo x2",
+                        "descrizione": "Taralli, Arachidi, Patatine, Prosciutto",
+                        "prezzo": "3,00€"
+                    },
+                    {
+                        "nome": "Combo Aperitivo",
+                        "descrizione": "2 birra/spritz + Box Aperitivo",
+                        "prezzo": "10,00€"
+                    }
+                ]
+            },
+            {
+                "titolo": "Dessert",
+                "contenuto":[
+                    {
+                        "nome": "Crepes con crema alla gianduia Babbi",
+                        "descrizione": "",
+                        "prezzo": "3,50€"
+                    },
+                    {
+                        "nome": "Crepes con crema al pistacchio Babbi",
+                        "descrizione": "",
+                        "prezzo": "3,50€"
+                    },
+                    {
+                        "nome": "Cannolo Siciliano",
+                        "descrizione": "",
+                        "prezzo": "3,00€"
+                    }
+                ]
+            },
+            {
+                "titolo": "Bibite",
+                "contenuto":[
+                    {
+                        "nome": "Coca Cola alla spina",
+                        "descrizione": "",
+                        "prezzo": "2,50€"
+                    },
+                    {
+                        "nome": "Coca Zero lattina",
+                        "descrizione": "",
+                        "prezzo": "2,00€"
+                    },
+                    {
+                        "nome": "Acqua naturale 0,5L",
+                        "descrizione": "",
+                        "prezzo": "1,00€"
+                    },
+                    {
+                        "nome": "Acqua frizzante 0,5L",
+                        "descrizione": "",
+                        "prezzo": "1,00€"
+                    },
+                    {
+                        "nome": "The limone",
+                        "descrizione": "",
+                        "prezzo": "2,00€"
+                    },
+                    {
+                        "nome": "The pesca",
+                        "descrizione": "",
+                        "prezzo": "2,00€"
+                    }
+                ]
+            },
+            {
+                "titolo": "Birre",
+                "contenuto":[
+                    {
+                        "nome": "Moretti",
+                        "descrizione": "",
+                        "prezzo": "4,00€"
+                    },
+                    {
+                        "nome": "Ducato Freeride",
+                        "descrizione": "",
+                        "prezzo": "4,50€"
+                    },
+                    {
+                        "nome": "Hirter Kellermeister Bio",
+                        "descrizione": "",
+                        "prezzo": "4,00€"
+                    },
+                    {
+                        "nome": "Aurora Birrificio Becchia Orsa",
+                        "descrizione": "",
+                        "prezzo": "4,50€"
+                    }
+                ]
+            },
+            {
+                "titolo": "Vino",
+                "contenuto":[
+                    {
+                        "nome": "Calice di Lambrusco",
+                        "descrizione": "Lambrusco Solco Paltrinieri",
+                        "prezzo": "3,50€"
+                    },
+                    {
+                        "nome": "Bottiglia di Lambrusco",
+                        "descrizione": "Lambrusco Solco Paltrinieri",
+                        "prezzo": "14,00€"
+                    },
+                    {
+                        "nome": "Calice di Rosè",
+                        "descrizione": "Rosè Piria Paltrinieri",
+                        "prezzo": "3,50€"
+                    },                    
+                    {
+                        "nome": "Bottiglia di Rosè",
+                        "descrizione": "Rosè Piria Paltrinieri",
+                        "prezzo": "14,00€"
+                    }
+                ]
+            },
+            {
+                "titolo": "Bevande Speciali",
+                "contenuto":[
+                    {
+                        "nome": "Spritz",
+                        "descrizione": "",
+                        "prezzo": "4,00€"
+                    },
+                    {
+                        "nome": "2 Spritz",
+                        "descrizione": "",
+                        "prezzo": "7,00€"
+                    },
+                    {
+                        "nome": "Gin tonic (Disponibile solo la sera)",
+                        "descrizione": "",
+                        "prezzo": "5,00€"
+                    },
+                    {
+                        "nome": "3 Gin tonic (Disponibile solo la sera)",
+                        "descrizione": "",
+                        "prezzo": "12,00€"
+                    }
+                ]
+            }
+        ]
+    }
+
 ]

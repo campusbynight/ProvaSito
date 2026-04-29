@@ -182,15 +182,11 @@
       }
 
           // Carica e popola le liste menu da assets/menu.json.
-          // Formato atteso: [{ titolo: string, lista: string[] }, ...]
           async function loadMenu() {
             const menuSection = document.querySelector('#menu.sezione-menu');
-            const menuSlots = [
-              document.querySelector('.menu-piatto-a'),
-              document.querySelector('.menu-piatto-b')
-            ];
+            const menuContainer = document.querySelector('#menu-container');
 
-            if (!menuSlots[0] || !menuSlots[1]) return;
+            if (!menuContainer) return;
 
             try {
               const response = await fetch('assets/menu.json', { cache: 'no-store' });
@@ -203,59 +199,137 @@
                 throw new Error('menu.json deve essere un array');
               }
 
+              // Prendiamo il primo elemento o l'elemento del giorno corrente se necessario
+              // Per ora prendiamo il primo per semplicità
               if (data.length === 0) {
-                if (menuSection) {
-                  menuSection.hidden = true;
-                }
+                if (menuSection) menuSection.hidden = true;
                 return;
               }
-
+              
               if (menuSection) {
                 menuSection.hidden = false;
               }
 
-              const normalized = data
-                .filter((item) => item && typeof item === 'object')
-                .map((item) => ({
-                  titolo: typeof item.titolo === 'string' ? item.titolo.trim() : '',
-                  lista: Array.isArray(item.lista)
-                    ? item.lista.filter((entry) => typeof entry === 'string').map((entry) => entry.trim())
-                    : []
-                }))
-                .filter((item) => item.titolo || item.lista.length);
+              // Trova il menu per il giorno corrente, altrimenti prendi il primo
+              const today = new Date();
+              const formattedToday = String(today.getDate()).padStart(2, '0') + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + today.getFullYear();
+              
+              let todayMenu = data.find(m => m.giorno === formattedToday) || data[0];
 
-              menuSlots.forEach((slot, index) => {
-                const listData = normalized[index];
-                if (!listData) {
-                  slot.hidden = true;
-                  return;
+              if (!todayMenu || !Array.isArray(todayMenu.sezioni)) {
+                return;
+              }
+
+              const menuTitoloEl = document.querySelector(".menu-titolo");
+              if (menuTitoloEl && todayMenu.giorno) {
+                const parts = todayMenu.giorno.split("-");
+                if (parts.length === 3) {
+                  const d = new Date(`${parts[2]}-${parts[1]}-${parts[0]}T12:00:00`);
+                  const opzioni = { weekday: "long", day: "numeric", month: "long" };
+                  const dataFormattata = d.toLocaleDateString("it-IT", opzioni);
+                  menuTitoloEl.textContent = "cosa mangiare";
+
+                  window.todayDateFormattata = dataFormattata;
                 }
+              }
 
-                const nodes = [];
-
-                if (listData.titolo) {
-                  const title = document.createElement('li');
-                  title.className = 'menu-lista-title';
-                  title.textContent = listData.titolo;
-                  nodes.push(title);
+              // Genera i riquadri per ogni sezione
+              const nodes = todayMenu.sezioni.map((sezione, index) => {
+                const sectionDiv = document.createElement('div');
+                sectionDiv.style.backgroundColor = '#761418';
+                sectionDiv.style.color = '#fffae3';
+                sectionDiv.style.padding = '25px';
+                sectionDiv.style.borderRadius = '15px';
+                sectionDiv.style.display = 'flex';
+                sectionDiv.style.flexDirection = 'column';
+                sectionDiv.style.gap = '20px';
+                
+                // Imposta il comportamento flex per affiancare a coppie le sezioni successive alla prima
+                if (index === 0) {
+                  sectionDiv.style.flex = '1 1 100%';
+                } else {
+                  sectionDiv.style.flex = '1 1 calc(50% - 10px)';
+                  sectionDiv.style.minWidth = '280px';
                 }
+                
+                const titleEl = document.createElement('h2');
+                titleEl.textContent = sezione.titolo || '';
+                titleEl.style.margin = '0';
+                titleEl.style.fontSize = 'clamp(40px, 8vw, 60px)';
+                titleEl.style.fontFamily = '"Ltt Recoleta Compressed Black", sans-serif';
+                sectionDiv.appendChild(titleEl);
 
-                listData.lista.forEach((entry) => {
-                  const li = document.createElement('li');
-                  li.className = 'framer-text';
-                  li.textContent = entry;
-                  nodes.push(li);
-                });
+                if (Array.isArray(sezione.contenuto)) {
+                  sezione.contenuto.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.style.display = 'flex';
+                    itemDiv.style.flexDirection = 'column';
+                    itemDiv.style.gap = '8px';
 
-                if (nodes.length) {
-                  slot.hidden = false;
-                  slot.replaceChildren(...nodes);
+                    const topRow = document.createElement('div');
+                    topRow.style.display = 'flex';
+                    topRow.style.justifyContent = 'space-between';
+                    topRow.style.alignItems = 'baseline';
+                    topRow.style.gap = '15px';
+                    
+                    const leftCol = document.createElement('div');
+                    leftCol.style.display = 'flex';
+                    leftCol.style.alignItems = 'baseline';
+                    leftCol.style.gap = '12px'; // Distanza tra nome e descrizione
+                    leftCol.style.flexWrap = 'wrap'; // Permette di andare a capo su schermi microscopici
+                    
+                    const nameEl = document.createElement('strong');
+                    nameEl.textContent = item.nome || '';
+                    nameEl.style.fontSize = 'clamp(1.2rem, 5vw, 1.6rem)';
+                    nameEl.style.fontFamily = '"Articulat CF Heavy", sans-serif';
+                    leftCol.appendChild(nameEl);
+
+                    if (item.descrizione) {
+                      const descEl = document.createElement('span');
+                      descEl.textContent = '- ' + item.descrizione;
+                      descEl.style.fontSize = 'clamp(0.8rem, 3.5vw, 1.2rem)';
+                      descEl.style.fontFamily = '"Articulat CF Normal", sans-serif';
+                      descEl.style.opacity = '0.9';
+                      leftCol.appendChild(descEl);
+                    }
+                    
+                    const priceEl = document.createElement('span');
+                    priceEl.textContent = item.prezzo || '';
+                    priceEl.style.fontSize = 'clamp(1.2rem, 5vw, 1.6rem)';
+                    priceEl.style.fontFamily = '"Articulat CF Heavy", sans-serif';
+                    priceEl.style.whiteSpace = 'nowrap'; // Non spezza il prezzo
+
+                    topRow.appendChild(leftCol);
+                    topRow.appendChild(priceEl);
+                    itemDiv.appendChild(topRow);
+
+                    sectionDiv.appendChild(itemDiv);
+                  });
                 }
+                return sectionDiv;
               });
 
-              if (normalized.length > menuSlots.length) {
-                console.warn(`menu.json contiene ${normalized.length} liste: questa sezione ne mostra al massimo ${menuSlots.length}.`);
+              let dataContainer = document.createElement("div");
+              dataContainer.className = "menu-data-container";
+              dataContainer.style.width = "100%";
+              dataContainer.style.display = "flex";
+              dataContainer.style.justifyContent = "flex-end";
+              dataContainer.style.alignItems = "flex-end";
+              dataContainer.style.marginBottom = "-5px"; // Bring it very close to the cards
+              
+              const dateEl = document.createElement("span");
+              dateEl.className = "menu-data";
+              dateEl.style.fontFamily = '"Articulat CF Heavy", sans-serif';
+              dateEl.style.fontSize = "clamp(1.4rem, 4vw, 2rem)";
+              dateEl.style.fontWeight = "700";
+              dateEl.style.color = "var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418)";
+              dateEl.style.whiteSpace = "nowrap"; 
+              if (window.todayDateFormattata) {
+                 dateEl.textContent = `${window.todayDateFormattata}`;
               }
+              dataContainer.appendChild(dateEl);
+              
+              menuContainer.replaceChildren(dataContainer, ...nodes);
             } catch (error) {
               // Fallback: in caso di errore resta visibile il contenuto statico HTML.
               console.error('Errore nel caricamento del menu:', error);
@@ -557,7 +631,7 @@
               const titleDiv = document.createElement('div');
               titleDiv.className = 'programma-colonne';
               titleDiv.innerHTML = `<p class="framer-text" dir="auto"
-                style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgUmVndWxhcg==;--framer-font-family:"Ltt Recoleta Compressed Regular","Ltt Recoleta Compressed Regular Placeholder",sans-serif;--framer-font-size:120px;--framer-text-alignment:left;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))'
+                style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgUmVndWxhcg==;--framer-font-family:"Ltt Recoleta Compressed Regular","Ltt Recoleta Compressed Regular Placeholder",sans-serif;--framer-font-size:120px;--framer-text-alignment:left;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(33, 39, 78))'
                 >oggi</p>`;
               programmaGriglia.appendChild(titleDiv);
               
@@ -569,12 +643,12 @@
                       colSx.innerHTML = `
                           <div class="programma-txt-a">
                               <p class="framer-text" dir="auto"
-                                style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTGlnaHQ=;--framer-font-family:"Ltt Recoleta Compressed Light","Ltt Recoleta Compressed Light Placeholder",sans-serif;--framer-font-size:46px;--framer-font-weight:300;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))'>
+                                style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTGlnaHQ=;--framer-font-family:"Ltt Recoleta Compressed Light","Ltt Recoleta Compressed Light Placeholder",sans-serif;--framer-font-size:46px;--framer-font-weight:300;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(33, 39, 78))'>
                                 ore ${evento.ora}</p>
                           </div>
                           <div class="programma-txt-c programma-event-title-wrap">
                               <p class="framer-text" dir="auto"
-                                style='--font-selector:Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTWVkaXVt;--framer-font-family:"Ltt Recoleta Compressed Medium","Ltt Recoleta Compressed Medium Placeholder",sans-serif;--framer-font-size:96px;--framer-font-weight:500;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))'>
+                                style='--font-selector:Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTWVkaXVt;--framer-font-family:"Ltt Recoleta Compressed Medium","Ltt Recoleta Compressed Medium Placeholder",sans-serif;--framer-font-size:96px;--framer-font-weight:500;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(33, 39, 78))'>
                                 ${evento.titolo}</p>
                           </div>
                       `;
@@ -586,12 +660,12 @@
                       colDx.innerHTML = `
                           <div class="programma-txt-d">
                               <p class="framer-text" dir="auto"
-                                style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTGlnaHQ=;--framer-font-family:"Ltt Recoleta Compressed Light","Ltt Recoleta Compressed Light Placeholder",sans-serif;--framer-font-size:46px;--framer-font-weight:300;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))'>
+                                style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTGlnaHQ=;--framer-font-family:"Ltt Recoleta Compressed Light","Ltt Recoleta Compressed Light Placeholder",sans-serif;--framer-font-size:46px;--framer-font-weight:300;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(33, 39, 78))'>
                                 ore ${evento.ora}</p>
                           </div>
                           <div class="programma-txt-f programma-event-title-wrap">
                               <p class="framer-text" dir="auto"
-                                style='--font-selector:Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTWVkaXVt;--framer-font-family:"Ltt Recoleta Compressed Medium","Ltt Recoleta Compressed Medium Placeholder",sans-serif;--framer-font-size:96px;--framer-font-weight:500;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))'>
+                                style='--font-selector:Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTWVkaXVt;--framer-font-family:"Ltt Recoleta Compressed Medium","Ltt Recoleta Compressed Medium Placeholder",sans-serif;--framer-font-size:96px;--framer-font-weight:500;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(33, 39, 78))'>
                                 ${evento.titolo}</p>
                           </div>
                       `;
@@ -603,7 +677,7 @@
                   const sepDiv = document.createElement('div');
                   sepDiv.className = isLeftColumn ? 'programma-sep-b' : 'programma-sep-a';
                   sepDiv.innerHTML = `<p class="framer-text" dir="auto"
-                    style='--font-selector: Q1VTVE9NVjI7QXJ0aWN1bGF0IENGIE5vcm1hbA==;--framer-font-family:"Articulat CF Normal","Articulat CF Normal Placeholder",sans-serif;--framer-font-size:18px;--framer-text-alignment:right;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))'>
+                    style='--font-selector: Q1VTVE9NVjI7QXJ0aWN1bGF0IENGIE5vcm1hbA==;--framer-font-family:"Articulat CF Normal","Articulat CF Normal Placeholder",sans-serif;--framer-font-size:18px;--framer-text-alignment:right;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(33, 39, 78))'>
                     ${evento.descrizione}</p>`;
                   programmaGriglia.appendChild(sepDiv);
               });
@@ -661,7 +735,7 @@
             <img src="./assets/images/home/lotteria.png" alt="" loading="lazy" decoding="async">
           </div>
           <p class="framer-text naviga-card-line" dir="auto"
-            style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgUmVndWxhcg==;--framer-font-family:"Ltt Recoleta Compressed Regular","Ltt Recoleta Compressed Regular Placeholder",sans-serif;--framer-font-size:55px;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))'
+            style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgUmVndWxhcg==;--framer-font-family:"Ltt Recoleta Compressed Regular","Ltt Recoleta Compressed Regular Placeholder",sans-serif;--framer-font-size:55px;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(33, 39, 78))'
             >lotteria</p>
           <div class="naviga-card-cta">
             <p class="framer-text naviga-card-cta-text" dir="auto"
@@ -691,7 +765,7 @@
             <img src="./assets/images/home/fundRaising.png" alt="" loading="lazy" decoding="async">
           </div>
           <p class="framer-text naviga-card-line" dir="auto"
-            style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgUmVndWxhcg==;--framer-font-family:"Ltt Recoleta Compressed Regular","Ltt Recoleta Compressed Regular Placeholder",sans-serif;--framer-font-size:55px;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))'
+            style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgUmVndWxhcg==;--framer-font-family:"Ltt Recoleta Compressed Regular","Ltt Recoleta Compressed Regular Placeholder",sans-serif;--framer-font-size:55px;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(33, 39, 78))'
             >fundraising</p>
           <div class="naviga-card-cta">
             <p class="framer-text naviga-card-cta-text" dir="auto"
@@ -704,7 +778,7 @@
             <img src="./assets/images/home/chiSiamo.jpg" alt="" loading="lazy" decoding="async">
           </div>
           <p class="framer-text naviga-card-line" dir="auto"
-            style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgUmVndWxhcg==;--framer-font-family:"Ltt Recoleta Compressed Regular","Ltt Recoleta Compressed Regular Placeholder",sans-serif;--framer-font-size:55px;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))'
+            style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgUmVndWxhcg==;--framer-font-family:"Ltt Recoleta Compressed Regular","Ltt Recoleta Compressed Regular Placeholder",sans-serif;--framer-font-size:55px;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(33, 39, 78))'
             >chi siamo</p>
           <div class="naviga-card-cta">
             <p class="framer-text naviga-card-cta-text" dir="auto"
@@ -721,41 +795,13 @@
   <!-- MENU  -->
   <a class="sezione-menu link-pointer" href="menu.html"
     id="menu">
-    <!-- Contenitore contenuti menu: titolo + blocco piatti.
-         Per spostare/impilare gli elementi intervieni su .menu-body in CSS. -->
     <div class="menu-body" id="menu-phone">
-      <!-- Intestazione sezione menu:
-           modifica testo e gerarchia visiva in .menu-intestazione/.menu-titolo/.menu-completo -->
-      <div class="menu-intestazione">
-        <h1 class="menu-titolo framer-text" dir="auto">cosa mangiare oggi</h1>
-        <!-- <p class="menu-completo framer-text" dir="auto">menu' completo</p> -->
+      <div class="menu-intestazione pagina">
+        <h1 class="menu-titolo framer-text" dir="auto">cosa mangiare</h1>
       </div>
-      <!-- Area card menu (sfondo + due liste piatti).
-           Dimensioni/posizione del box: .menu-piatti e .menu-piatti-sfondo -->
-      <div class="menu-piatti">
-        <div aria-hidden="true" class="menu-piatti-sfondo hidden-1wu7hlw" radius="23"
-          style="image-rendering:pixelated;flex-shrink:0">
-          <div class="svgContainer" style="width:100%;height:100%;aspect-ratio:inherit"><svg height="100%"
-              preserveAspectRatio="none" style="width:100%;height:100%" width="100%">
-              <use href="#svg-1385455016_419"></use>
-            </svg></div>
-        </div>
-        <!-- Prima colonna lista: posizione con .menu-piatto-a, stile testo con .menu-lista -->
-        <ul class="menu-piatto-a menu-lista framer-text" dir="auto"></ul>
-        <!-- Seconda colonna lista: posizione con .menu-piatto-b -->
-        <ul class="menu-piatto-b menu-lista framer-text" dir="auto"></ul>
+      <!-- Area card menu (sfondo + due liste piatti, popolati dinamicamente) -->
+      <div id="menu-container" style="display: flex; flex-wrap: wrap; gap: 20px; width: 100%;">
       </div>
-    </div>
-    <!-- Immagine decorativa lato destro (desktop):
-         posizione/dimensioni in .menu-immagine, nascosta in mobile. -->
-    <div class="menu-immagine hidden-1wu7hlw"
-      style="will-change:transform;opacity:1;transform:translateX(-50%)">
-      <img
-          alt="" decoding="auto" height="2092" loading="lazy" sizes=""
-          src="./assets/images/home/piada.avif"
-          srcset=""
-          style="position:absolute;inset:0px;border-radius:inherit;display:block;width:100%;height:100%;border-radius:inherit;object-position:center center;object-fit:fill"
-          width="2052" />
     </div>
   </a>
   <!-- /mappa -->
@@ -779,7 +825,7 @@
     <div class="foto-body">
       <div class="foto-col-info">
         <h1 class="framer-text framer-styles-preset-qqmdfr" dir="auto"
-          style="--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26))">bacheca</h1>
+          style="--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(33, 39, 78))">bacheca</h1>
       </div>
       <div class="foto-grid hidden-1wu7hlw">
         <a class="foto-card link-pointer" href="foto-anni-scorsi.html">
@@ -838,9 +884,9 @@
   <!-- Libreria SVG nascosta: qui definiamo forme/icone riusabili con <use href="#id"> -->
   <div id="svg-templates" style="position: absolute; overflow: hidden; bottom: 0; left: 0; width: 0; height: 0; z-index: 0; contain: strict" aria-hidden="true">
 <!-- Linea orizzontale usata nel divider della navbar (versione larga desktop) -->
-<svg viewBox="0 0 1787.306 1" overflow="visible" id="svg1175538082_370"><path d="M 0 0 L 1787.306 0" fill="transparent" stroke-width="0.5" stroke="var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3, rgb(236, 99, 26)) /* {&quot;name&quot;:&quot;arancione&quot;} */" stroke-linejoin="round" opacity="0.63"></path></svg>
+<svg viewBox="0 0 1787.306 1" overflow="visible" id="svg1175538082_370"><path d="M 0 0 L 1787.306 0" fill="transparent" stroke-width="0.5" stroke="rgb(33, 39, 78)" stroke-linejoin="round" opacity="0.63"></path></svg>
 <!-- Linea orizzontale usata nel separatore inferiore della navbar -->
-<svg viewBox="0 0 3334 1" overflow="visible" id="svg-1272790531_347"><path d="M 0 0 L 3334 0" fill="transparent" stroke-width="0.5" stroke="var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3, rgb(236, 99, 26)) /* {&quot;name&quot;:&quot;arancione&quot;} */" stroke-linejoin="round"></path></svg>
+<svg viewBox="0 0 3334 1" overflow="visible" id="svg-1272790531_347"><path d="M 0 0 L 3334 0" fill="transparent" stroke-width="0.5" stroke="rgb(33, 39, 78)" stroke-linejoin="round"></path></svg>
 <!-- Varianti di linee/archetti per elementi grafici secondari -->
 <svg viewBox="0 0 411.56 1" overflow="visible" id="svg-1566436403_254"><path d="M 0 0 L 411.56 0" fill="transparent" stroke-width="0.5" stroke="rgb(251, 125, 20)" stroke-linejoin="round"></path></svg>
 <svg viewBox="0 0 429.5 1" overflow="visible" id="svg831131077_252"><path d="M 0 0 L 429.5 0" fill="transparent" stroke-width="0.5" stroke="rgb(251, 125, 20)" stroke-linejoin="round"></path></svg>

@@ -71,25 +71,33 @@ Regole importanti:
 
 Uso:
 - Letto nella home con fetch no-store.
-- Il rendering ha due slot: menu-piatto-a e menu-piatto-b.
-- Se nel JSON ci sono piu di 2 blocchi, quelli extra vengono ignorati (con warning in console).
+- Genera un riquadro per ogni sezione del menu del giorno corrente (attualmente carica il primo giorno trovato).
+- Ogni riquadro ha sfondo `"#761418"` e testo `"#fffae3"`.
 
 Formato atteso:
 
   [
     {
-      "titolo": "Primi",
-      "lista": ["Piatto 1", "Piatto 2"]
-    },
-    {
-      "titolo": "Secondi",
-      "lista": ["Piatto A", "Piatto B"]
+      "giorno": "GG-MM-AAAA",
+      "sezioni": [
+        {
+          "titolo": "Primi",
+          "contenuto": [
+            {
+              "nome": "Carbocream",
+              "descrizione": "Crema al mascarpone con guanciale",
+              "prezzo": "6,00 €"
+            }
+          ]
+        }
+      ]
     }
   ]
 
 Regole importanti:
-- File root: array.
-- Ogni elemento: oggetto con titolo (stringa) e lista (array di stringhe).
+- File root: array di oggetti raggruppati per `giorno`.
+- Ogni giorno contiene un array `sezioni` con `titolo` e `contenuto`.
+- Il `contenuto` è un array di pietanze, ciascuna con `nome`, `descrizione` e `prezzo`.
 - Se l'array e vuoto ([]), la sezione menu nella home viene nascosta completamente.
 - Se il caricamento fallisce, resta visibile il contenuto statico HTML di fallback.
 
@@ -238,8 +246,8 @@ Esempio server locale:
 - Non vedo il programma:
   - Controlla formato giorno GG-MM-AAAA e data odierna.
 - Menu non aggiornato:
-  - Verifica che menu.json sia un array valido.
-  - Ricorda: vengono mostrati al massimo 2 blocchi.
+  - Verifica che menu.json sia un array valido e rispetti la nuova struttura con 'giorno' e 'sezioni'.
+  - Assicurati che i giorni corrispondano alle date previste.
 - Sponsor non caricati:
   - Controlla che sponsor.json sia un array valido.
   - Verifica che almeno un record abbia il campo image presente e non vuoto.

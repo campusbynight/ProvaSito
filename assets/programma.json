@@ -4,25 +4,25 @@
       "giorno": "07-05-2026",
       "ora": "18:00",
       "titolo": "Inaugurazione",
-      "descrizione": "Inaugurazione dell'evento."
+      "descrizione": "Inaugurazione della XXIII edizione del Campus By Night."
     },
     {
       "giorno": "07-05-2026",
       "ora": "18:30",
       "titolo": "Un’economia per la dignità umana",
-      "descrizione": "Un’economia per la dignità umana: Prospettive teoriche ed empiriche per arginare le disuguaglianze economiche con Stefano Zamagni, professore a contratto di Economia Politica all’Università di Bologna e Adjunct Professor of International Political Economy, Johns Hopkins University, SAIS Europe e Vincenzo Colla, Vicepresidente della Regione Emilia-Romagna con delega a Sviluppo economico e green economy, Energia, Formazione professionale, Università e ricerca."
+      "descrizione": "Prospettive teoriche ed empiriche per arginare le disuguaglianze economiche con Stefano Zamagni, professore a contratto di Economia Politica all’Università di Bologna e Adjunct Professor of International Political Economy, Johns Hopkins University, SAIS Europe e Vincenzo Colla, Vicepresidente della Regione Emilia-Romagna con delega a Sviluppo economico e green economy, Energia, Formazione professionale, Università e ricerca."
     },
     {
       "giorno": "07-05-2026",
       "ora": "21:00",
       "titolo": "Luoghi di pace in contesti di guerra",
-      "descrizione": "Luoghi di pace in contesti di guerra, voci dal Medio Oriente con padre Francesco Ielpo, Custode di Terra Santa e Jean Francois Thiry, coordinatore dei progetti di Pro Terra Sancta in Siria."
+      "descrizione": "Voci dal Medio Oriente con padre Francesco Ielpo, Custode di Terra Santa e Jean Francois Thiry, coordinatore dei progetti di Pro Terra Sancta in Siria."
     },
     {
       "giorno": "07-05-2026",
       "ora": "22:30",
       "titolo": "Aritmie – Fuori orario",
-      "descrizione": "Aritmie – Fuori orario: live con De Stradis."
+      "descrizione": "Live con De Stradis."
     },
 
 
@@ -36,7 +36,7 @@
       "giorno": "08-05-2026",
       "ora": "18:30",
       "titolo": "Oltre i giornali: la sfida della coscienza nella crisi dell'informazione",
-      "descrizione": "con Marco Bardazzi, giornalista e scrittore e Augusto Valeriani, professore ordinario di Sociologia dei processi culturali e comunicativi all’Università di Bologna."
+      "descrizione": "Con Marco Bardazzi, giornalista e scrittore e Augusto Valeriani, professore ordinario di Sociologia dei processi culturali e comunicativi all’Università di Bologna."
     },
     {
       "giorno": "08-05-2026",
@@ -48,7 +48,7 @@
       "giorno": "08-05-2026",
       "ora": "22:30",
       "titolo": "Aritmie – Fuori orario",
-      "descrizione": "Aritmie – Fuori orario: live con Mazzoli."
+      "descrizione": "Live con Mazzoli."
     },
 
 
@@ -61,8 +61,8 @@
     {
       "giorno": "09-05-2026",
       "ora": "18:30",
-      "titolo": "Più in là dell’orizzonte. Dialogo sulla disabilità",
-      "descrizione": "Con Claudio Imprudente, Presidente onorario dell’Associazione “Centro Documentazione Handicap” e Cristiano Guarneri, giornalista e scrittore."
+      "titolo": "Più in là dell’orizzonte",
+      "descrizione": "Dialogo sulla disabilità con Claudio Imprudente, Presidente onorario dell’Associazione “Centro Documentazione Handicap” e Cristiano Guarneri, giornalista e scrittore."
     },
     {
       "giorno": "09-05-2026",
@@ -73,8 +73,8 @@
     {
       "giorno": "09-05-2026",
       "ora": "21:30",
-      "titolo": "Serata finale con musica dal vivo",
-      "descrizione": ""
+      "titolo": "Completamente",
+      "descrizione": "Serata finale con musica dal vivo"
     }
   ]
 }

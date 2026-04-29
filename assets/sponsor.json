@@ -1,3 +1,72 @@
 [
-  
+    {
+        "nome": "camplus",
+        "image": "assets/images/sponsor/camplus@4x.png",
+        "link": "https://www.camplus.it/"
+    },
+    {
+      "nome": "colligo",
+      "image": "assets/images/sponsor/colligo@4x.png",
+      "link": "https://colligoingegneria.it/"
+    },
+    {
+      "nome": "corrente",
+      "image": "assets/images/sponsor/corrente@4x.png",
+      "link": "https://corrente.app/"
+    },
+    {
+      "nome": "egaf",
+      "image": "assets/images/sponsor/egaf@4x.png",
+      "link": "https://www.egaf.it/"
+    },
+    {
+      "nome": "emilbanca",
+      "image": "assets/images/sponsor/emilbanca@4x.png",
+      "link": "https://www.emilbanca.it/"
+    },
+    {
+      "nome": "illumia",
+      "image": "assets/images/sponsor/illumia@4x.png",
+      "link": "https://www.illumia.it/"
+    },
+    {
+      "nome": "iuxteam",
+      "image": "assets/images/sponsor/iuxteam@4x.png",
+      "link": "https://iuxteam.com/"
+    },
+    {
+      "nome": "marchesini",
+      "image": "assets/images/sponsor/marchesini@4x.png",
+      "link": "https://www.marchesini.com/it"
+    },
+    {
+      "nome": "nier",
+      "image": "assets/images/sponsor/nier@4x.png",
+      "link": "https://www.niering.it/"
+    },
+    {
+        "nome": "reabilita",
+        "image": "assets/images/sponsor/reabilita@4x.png",
+        "link": "https://www.reabilita.it/"
+    },
+    {
+      "nome": "papylla mitico hotel",
+      "image": "assets/images/sponsor/papylla_mitico@4x.png",
+      "link": "https://www.miticohotel.it/ristorante-hotel-bologna/"
+    },
+    {
+      "nome": "progamma",
+      "image": "assets/images/sponsor/progamma@4x.png",
+      "link": "https://www.instantdeveloper.com/"
+    },
+    {
+      "nome": "teddy",
+      "image": "assets/images/sponsor/teddy@4x.png",
+      "link": "https://www.teddy.it/it-it"
+    },
+    {
+      "nome": "TH",
+      "image": "assets/images/sponsor/th@4x.png",
+      "link": "https://www.th-resorts.com/it/"
+    }
 ]

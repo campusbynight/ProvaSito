@@ -1,14 +1,17 @@
 [
     {
       "titolo": "L’umano arriva dove arriva l’amore. Italo Calvino",
-      "descrizione": "Immerso in un contesto che sfida le sue concezioni più certe, Amerigo Ormea - scrutatore per il PCI nel seggio del Cottolengo di Torino - scopre un orizzonte nuovo dell'umanità nel riconoscere in due generi diversi d'amore - quello liberamente scelto delle suore che animano l'istituto e quello senza scelta del padre di un ragazzo in cura - due volti della stessa realtà. La mostra vuole attraversare questo testo tenendo insieme il racconto e la biografia di Calvino, interrogandosi su come questa esperienza abbia inciso sul suo modo di guardare la vita."
+      "descrizione": "Immerso in un contesto che sfida le sue concezioni più certe, Amerigo Ormea - scrutatore per il PCI nel seggio del Cottolengo di Torino - scopre un orizzonte nuovo dell'umanità nel riconoscere in due generi diversi d'amore - quello liberamente scelto delle suore che animano l'istituto e quello senza scelta del padre di un ragazzo in cura - due volti della stessa realtà. La mostra vuole attraversare questo testo tenendo insieme il racconto e la biografia di Calvino, interrogandosi su come questa esperienza abbia inciso sul suo modo di guardare la vita.",
+      "image": "assets/images/home/mostra_calvino.png"
     },
     {
       "titolo": "Oltre la fine del mondo. Sarajevo",
-      "descrizione": "Questa mostra mette a tema la risposta della cultura alla guerra. Il punto di partenza è la realtà di Scuole per l’Europa, iniziativa educativa nata durante il conflitto a Sarajevo degli anni ‘90 per promuovere la convivenza multietnica e la pace. A partire da questa esperienza concreta, la mostra intende approfondire e guardare come la cultura sia stata e possa essere, ancora oggi, custode dell’umano."
+      "descrizione": "Questa mostra mette a tema la risposta della cultura alla guerra. Il punto di partenza è la realtà di Scuole per l’Europa, iniziativa educativa nata durante il conflitto a Sarajevo degli anni ‘90 per promuovere la convivenza multietnica e la pace. A partire da questa esperienza concreta, la mostra intende approfondire e guardare come la cultura sia stata e possa essere, ancora oggi, custode dell’umano.",
+      "image": "assets/images/home/mostra_sarajevo.png"
     },
     {
       "titolo": "Stupore e mistero. L'esperienza umana nella ricerca scientifica",
-      "descrizione": "La mostra nasce da alcuni ragazzi che, nello studio delle materie scientifiche, sono rimasti colpiti da come l'esperienza di fare scienza mettesse in luce alcuni punti della loro umanità. Il lavoro di questi mesi è stato fatto partendo dall'esperienza di ognuno nello studio o nel rapporto con la scienza più in generale e dialogando tra di loro e con alcuni professori a partire dal libro \"Solo lo stupore conosce\" di Marco Bersanelli e Mario Gargantini. In particolare, la mostra si concentrerà sullo stupore che muove la ricerca scientifica e sul mistero che, approfondendo la ricerca, la realtà continua ad essere, seppur sempre più conosciuta."
+      "descrizione": "La mostra nasce da alcuni ragazzi che, nello studio delle materie scientifiche, sono rimasti colpiti da come l'esperienza di fare scienza mettesse in luce alcuni punti della loro umanità. Il lavoro di questi mesi è stato fatto partendo dall'esperienza di ognuno nello studio o nel rapporto con la scienza più in generale e dialogando tra di loro e con alcuni professori a partire dal libro \"Solo lo stupore conosce\" di Marco Bersanelli e Mario Gargantini. In particolare, la mostra si concentrerà sullo stupore che muove la ricerca scientifica e sul mistero che, approfondendo la ricerca, la realtà continua ad essere, seppur sempre più conosciuta.",
+      "image": "assets/images/home/mostra_scienza.png"
     }
 ]

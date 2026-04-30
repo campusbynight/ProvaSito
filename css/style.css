@@ -5109,7 +5109,7 @@ html {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
-    object-position: center top !important;
+    object-position: right top !important;
   }
 
   /* 1. Fix larghezza globale: Framer blocca #main a 390px */

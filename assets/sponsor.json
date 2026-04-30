@@ -68,5 +68,20 @@
       "nome": "TH",
       "image": "assets/images/sponsor/th@4x.png",
       "link": "https://www.th-resorts.com/it/"
+    },
+    {
+      "nome": "Confcommercio Bologna",
+      "image": "assets/images/sponsor/confcommercio@4x.png",
+      "link": "https://www.confcommercio.it/"
+    },
+    {
+      "nome": "Cementisti SPA",
+      "image": "assets/images/sponsor/cementisti@4x.png",
+      "link": "https://www.cementistispa.com/"
+    },
+    {
+      "nome": "Yomax",
+      "image": "assets/images/sponsor/yomax@4x.png",
+      "link": "https://www.yomax.it/"
     }
 ]

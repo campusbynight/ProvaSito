@@ -628,59 +628,67 @@
           // Crea i contenitori per gli eventi con data
           let isLeftColumn = true;
           Object.entries(eventsByDay).forEach(([giorno, dayEvents]) => {
-              // Crea il titolo fisso al posto della data
+              const parts = giorno.split('-');
+              const d = new Date(`${parts[2]}-${parts[1]}-${parts[0]}T12:00:00`);
+              const dataFormattata = d.toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" });
+
+              // Crea il titolo al posto della data
               const titleDiv = document.createElement('div');
               titleDiv.className = 'programma-colonne';
-              titleDiv.innerHTML = `<p class="framer-text" dir="auto"
-                style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgUmVndWxhcg==;--framer-font-family:"Ltt Recoleta Compressed Regular","Ltt Recoleta Compressed Regular Placeholder",sans-serif;--framer-font-size:120px;--framer-text-alignment:left;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(33, 39, 78))'
-                >oggi</p>`;
+              titleDiv.style.width = '100%';
+              titleDiv.style.display = 'flex';
+              titleDiv.style.justifyContent = 'center';
+              titleDiv.style.marginBottom = '40px';
+              titleDiv.innerHTML = `
+                <div style="display: inline-block; text-align: center; position: relative;">
+                  <p class="framer-text" dir="auto"
+                    style='font-family:"Articulat CF Heavy",sans-serif;font-size:clamp(60px, 10vw, 120px);line-height:0.9;text-align:center;color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26));margin:0;letter-spacing:-2px;'
+                    >il programma<br>di oggi</p>
+                  <p class="framer-text" dir="auto"
+                    style='font-family:"Ltt Recoleta Compressed Medium",sans-serif;font-size:clamp(16px, 3vw, 32px);color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26));margin:0;position:absolute;bottom:0;right:0;transform:translateX(105%);white-space:nowrap;'
+                    >${dataFormattata}</p>
+                </div>
+              `;
               programmaGriglia.appendChild(titleDiv);
               
               dayEvents.forEach((evento, index) => {
-                  if (isLeftColumn) {
-                      // Colonna sinistra
-                      const colSx = document.createElement('div');
-                      colSx.className = 'programma-col-sx';
-                      colSx.innerHTML = `
-                          <div class="programma-txt-a">
-                              <p class="framer-text" dir="auto"
-                                style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTGlnaHQ=;--framer-font-family:"Ltt Recoleta Compressed Light","Ltt Recoleta Compressed Light Placeholder",sans-serif;--framer-font-size:46px;--framer-font-weight:300;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(33, 39, 78))'>
-                                ore ${evento.ora}</p>
-                          </div>
-                          <div class="programma-txt-c programma-event-title-wrap">
-                              <p class="framer-text" dir="auto"
-                                style='--font-selector:Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTWVkaXVt;--framer-font-family:"Ltt Recoleta Compressed Medium","Ltt Recoleta Compressed Medium Placeholder",sans-serif;--framer-font-size:96px;--framer-font-weight:500;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(33, 39, 78))'>
-                                ${evento.titolo}</p>
-                          </div>
-                      `;
-                      programmaGriglia.appendChild(colSx);
-                  } else {
-                      // Colonna destra
-                      const colDx = document.createElement('div');
-                      colDx.className = 'programma-col-dx';
-                      colDx.innerHTML = `
-                          <div class="programma-txt-d">
-                              <p class="framer-text" dir="auto"
-                                style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTGlnaHQ=;--framer-font-family:"Ltt Recoleta Compressed Light","Ltt Recoleta Compressed Light Placeholder",sans-serif;--framer-font-size:46px;--framer-font-weight:300;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(33, 39, 78))'>
-                                ore ${evento.ora}</p>
-                          </div>
-                          <div class="programma-txt-f programma-event-title-wrap">
-                              <p class="framer-text" dir="auto"
-                                style='--font-selector:Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTWVkaXVt;--framer-font-family:"Ltt Recoleta Compressed Medium","Ltt Recoleta Compressed Medium Placeholder",sans-serif;--framer-font-size:96px;--framer-font-weight:500;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(33, 39, 78))'>
-                                ${evento.titolo}</p>
-                          </div>
-                      `;
-                      programmaGriglia.appendChild(colDx);
-                  }
-                  isLeftColumn = !isLeftColumn;
+                  // Contenitore per il singolo evento
+                  const eventContainer = document.createElement('div');
+                  eventContainer.style.display = 'flex';
+                  eventContainer.style.flexDirection = 'column';
+                  eventContainer.style.width = '100%';
+                  eventContainer.style.boxSizing = 'border-box';
+                  eventContainer.style.padding = '0 clamp(20px, 5vw, 60px)';
+                  eventContainer.style.marginBottom = '25px';
+
+                  // Header dell'evento: Orario a sx, Titolo a dx sulla stessa linea
+                  const headerDiv = document.createElement('div');
+                  headerDiv.style.display = 'flex';
+                  headerDiv.style.justifyContent = 'space-between';
+                  headerDiv.style.alignItems = 'baseline';
+                  headerDiv.style.width = '100%';
+                  headerDiv.style.marginBottom = '15px';
+                  headerDiv.innerHTML = `
+                      <p class="framer-text" dir="auto"
+                        style='font-family:"Articulat CF Normal Oblique", "Articulat CF Normal", sans-serif;font-style:italic;font-size:clamp(20px, 4vw, 36px);color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26));margin:0;'>
+                        ore ${evento.ora}</p>
+                      <p class="framer-text" dir="auto"
+                        style='font-family:"Ltt Recoleta Compressed Black","Ltt Recoleta Compressed Medium",sans-serif;font-size:clamp(40px, 8vw, 72px);color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26));margin:0;line-height:1;text-align:right;'>
+                        ${evento.titolo}</p>
+                  `;
                   
-                  // Aggiungi descrizione
-                  const sepDiv = document.createElement('div');
-                  sepDiv.className = isLeftColumn ? 'programma-sep-b' : 'programma-sep-a';
-                  sepDiv.innerHTML = `<p class="framer-text" dir="auto"
-                    style='--font-selector: Q1VTVE9NVjI7QXJ0aWN1bGF0IENGIE5vcm1hbA==;--framer-font-family:"Articulat CF Normal","Articulat CF Normal Placeholder",sans-serif;--framer-font-size:18px;--framer-text-alignment:right;--framer-text-color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(33, 39, 78))'>
-                    ${evento.descrizione}</p>`;
-                  programmaGriglia.appendChild(sepDiv);
+                  // Descrizione sotto
+                  const descDiv = document.createElement('div');
+                  descDiv.style.width = '100%';
+                  descDiv.innerHTML = `
+                      <p class="framer-text" dir="auto"
+                        style='font-family:"Articulat CF Normal",sans-serif;font-size:clamp(16px, 2.5vw, 24px);color:var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3,rgb(236,99,26));margin:0;line-height:1.4;text-align:left;'>
+                        ${evento.descrizione}</p>
+                  `;
+
+                  eventContainer.appendChild(headerDiv);
+                  eventContainer.appendChild(descDiv);
+                  programmaGriglia.appendChild(eventContainer);
               });
           });
 

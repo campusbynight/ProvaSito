@@ -4805,6 +4805,7 @@ html {
   width: max-content !important;
   height: 50px !important;
   border-radius: 50px !important;
+  border: 1px solid #fffae3 !important;
   background-color: rgb(33, 39, 78) !important; /* BACKGROUD ARANCIONE PURO */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
 }

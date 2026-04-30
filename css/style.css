@@ -1321,7 +1321,7 @@ body {
   width: 100%;
   max-width: 277px;
   gap: 10px;
-  display: none;
+  display: flex;
   align-items: center;
 }
 .pagina .naviga-eventi-btn {
@@ -1358,14 +1358,6 @@ body {
   border-radius: 40px !important;
   border: none !important;
   outline: none;
-}
-.pagina .naviga-card-eventi:hover .naviga-card-cta,
-.pagina .naviga-card-eventi:focus-within .naviga-card-cta {
-  display: none;
-}
-.pagina .naviga-card-eventi:hover .naviga-eventi-actions,
-.pagina .naviga-card-eventi:focus-within .naviga-eventi-actions {
-  display: flex;
 }
 .pagina .sezione-menu {
   /* Wrapper sezione menu (desktop):

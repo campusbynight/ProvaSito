@@ -5453,3 +5453,16 @@ html {
 .pagina .sezione-sponsor[hidden] {
   display: none !important;
 }
+
+/* Rimuove colore blu e sottolineatura per il link Maps in "programma" */
+.programma-countdown-meta-item a,
+.programma-countdown-meta-item a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* opzionale: mantiene assenza di sottolineatura anche al passaggio del mouse */
+.programma-countdown-meta-item a:hover,
+.programma-countdown-meta-item a:focus {
+  text-decoration: none;
+}

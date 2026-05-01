@@ -19,11 +19,21 @@
   <meta name="robots" content="max-image-preview:large">
   <link rel="stylesheet" href="css/style.css">
   <style>
+    :root{
+      --cream: #f7f2df;
+      --teal: #63c1c3;
+      --deep-teal: #55b9b2;
+      --navy: #0f2942;
+      --accent: #4ba9a2;
+    }
+
+    /* Page overall */
     .lotteria-page {
-      background: var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2, #fffae3);
-      color: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+      background: var(--cream);
+      color: var(--navy);
       min-height: 100vh;
       overflow-x: hidden;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
 
     .lotteria-container {
@@ -31,53 +41,66 @@
       margin-left: calc(-50vw + 50%);
       padding-left: 0;
       padding-right: 0;
+      box-sizing: border-box;
     }
 
+    /* Hero */
     .lotteria-hero {
-      min-height: 78vh;
-      padding-top: 92px;
+      min-height: 56vh;
+      padding-top: 56px;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: left;
+      text-align: center;
       width: 100%;
-    }
-
-    .lotteria-hero .lotteria-container {
-      width: 100%;
-      max-width: 100%;
-      margin: 0 auto;
     }
 
     .lotteria-title {
-      font-family: "Ltt Recoleta Compressed Light", "Ltt Recoleta Compressed Light Placeholder", sans-serif;
-      font-size: clamp(60px, 12vw, 99px);
-      line-height: 0.9;
-      font-weight: 300;
-      color: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+      font-family: "Ltt Recoleta Compressed Regular", serif;
+      font-size: clamp(48px, 12vw, 96px);
+      line-height: 0.95;
+      font-weight: 700;
+      color: var(--teal);
       margin: 0;
       text-align: center;
+      letter-spacing: -0.02em;
     }
 
-    .lotteria-hero .lotteria-title + .lotteria-title {
-      margin-top: 8px;
+    /* Top page subtitle (placed inside hero) */
+    .lotteria-top-subtitle {
+      font-family: "Articulat CF Heavy", sans-serif;
+      font-size: clamp(14px, 2.2vw, 22px);
+      color: var(--teal);
+      text-align: center;
+      margin: 0 0 8px; /* sit close to the main title */
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      display: block;
+    }
+
+    .lotteria-title + .lotteria-title {
+      margin-top: 6px;
+      font-weight: 400;
+      font-size: clamp(20px, 4vw, 28px);
+      color: rgba(15,41,66,0.6);
     }
 
     .lotteria-countdown {
       text-align: center;
-      margin-top: 22px;
-      font-family: "Inter", "Inter Placeholder", sans-serif;
-      font-size: clamp(40px, 7.6vw, 125px);
-      font-weight: 600;
+      margin-top: 18px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto;
+      font-size: clamp(32px, 8vw, 64px);
+      font-weight: 700;
       line-height: 1;
-      letter-spacing: 0.01em;
+      letter-spacing: 0.02em;
       font-variant-numeric: tabular-nums;
-      color: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+      color: var(--teal);
       white-space: nowrap;
     }
-
+    
     .lotteria-countdown-sep {
-      color: rgba(118, 20, 24, 0.5);
+      color: rgba(99, 193, 195, 0.5);
     }
 
     .lotteria-countdown-digit {
@@ -87,25 +110,24 @@
     }
 
     .lotteria-prizes {
-      background: var(--token-d453de31-a28f-4b58-b5d3-fb3a6b7682a5, #21274e);
-      padding: 6px 0 10px;
+      background: var(--teal);
+      padding: 48px 0 80px;
       width: 100vw;
-      min-height: 100vh;
+      min-height: 60vh;
       margin-left: calc(-50vw + 50%);
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       box-sizing: border-box;
     }
 
     .lotteria-prizes-title {
-      margin: 0;
-      margin-left: 24px;
-      font-family: "Ltt Recoleta Compressed Regular", "Ltt Recoleta Compressed Regular Placeholder", sans-serif;
-      font-size: clamp(48px, 8vw, 90px);
-      font-weight: 500;
+      margin: 0 0 8px 24px;
+      font-family: "Ltt Recoleta Compressed Regular", serif;
+      font-size: clamp(36px, 6.6vw, 64px);
+      font-weight: 700;
       line-height: 1;
-      color: var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3, #ec631a);
+      color: var(--navy);
     }
 
     .lotteria-prizes-list {
@@ -113,19 +135,19 @@
       margin: 28px 0 0;
       padding: 0;
       display: grid;
-      gap: 12px;
+      gap: 10px;
     }
 
     .lotteria-prizes-item {
-      font-family: "Ltt Recoleta Compressed Regular", "Ltt Recoleta Compressed Regular Placeholder", sans-serif;
-      font-size: clamp(32px, 8vw, 65px);
-      line-height: 0.9;
-      color: var(--token-c66738e4-2fe2-4e60-92e6-b3f08529dea3, #ec631a);
-      margin: 15px 80px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto;
+      font-size: clamp(18px, 3.4vw, 20px);
+      line-height: 1.2;
+      color: var(--navy);
+      margin: 8px 40px;
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      gap: 15px;
+      gap: 18px;
     }
 
     .lotteria-prizes-item:nth-child(even) {
@@ -160,28 +182,29 @@
     }
 
     .lotteria-prizes-list .lotteria-prize-rank {
-      font-size: clamp(32px, 8vw, 85px);
-      min-width: 2.4ch;
-      flex: 0 0 2.4ch;
-      text-align: center;
+      font-size: clamp(48px, 8vw, 80px);
+      min-width: 3ch;
+      flex: 0 0 3ch;
+      text-align: right;
+      color: var(--navy);
+      font-weight: 800;
     }
 
     .lotteria-prize-label {
       display: inline-block;
-    }
-
-    .lotteria-prizes-list .lotteria-prize-label {
-      font-size: clamp(44px, 5.8vw, 60px);
+      font-weight: 500;
+      color: rgba(15,41,66,0.85);
+      font-size: clamp(34px, 6vw, 45px);
     }
 
     .lotteria-prizes-list .lotteria-prize-image {
-      width: clamp(30px, 5.4vw, 56px);
-      height: clamp(30px, 5.4vw, 56px);
-      object-fit: contain;
-      border-radius: 0;
+      width: clamp(44px, 6vw, 64px);
+      height: clamp(44px, 6vw, 64px);
+      object-fit: cover;
+      border-radius: 8px;
       background: transparent;
       flex-shrink: 0;
-      filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.18));
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.08));
     }
 
     .lotteria-prizes-list .lotteria-prizes-item:nth-child(even) .lotteria-prize-image {
@@ -191,6 +214,21 @@
     .lotteria-prizes-list .lotteria-prizes-item:nth-child(even) .lotteria-prize-content {
       order: 1;
     }
+
+    /* Override: force left alignment for all prize items (no alternating layout) */
+    .lotteria-prizes-item:nth-child(even),
+    .lotteria-prizes-list .lotteria-prizes-item:nth-child(even) {
+      text-align: left !important;
+      justify-content: flex-start !important;
+    }
+
+    .lotteria-prizes-item .lotteria-prize-label,
+    .lotteria-prizes-item .lotteria-prize-rank,
+    .lotteria-prizes-item .lotteria-prize-image,
+    .lotteria-prizes-item .lotteria-prize-content {
+      order: unset !important;
+    }
+
 
     .lotteria-prize-image {
       width: clamp(50px, 7.5vw, 90px);
@@ -203,34 +241,36 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 34px;
-      padding: 64px 20px 88px;
+      gap: 24px;
+      padding: 48px 20px 88px;
       text-align: center;
     }
 
     .lotteria-button {
-      font-family: "Ltt Recoleta Compressed Regular", "Ltt Recoleta Compressed Regular Placeholder", sans-serif;
-      font-size: clamp(24px, 3vw, 31px);
-      font-weight: 600;
-      color: var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2, #fffae3);
-      background: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+      font-family: "Ltt Recoleta Compressed Regular", serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--cream);
+      background: var(--navy);
       border: 0;
       border-radius: 999px;
-      height: 56px;
-      min-width: 240px;
+      height: 42px;
+      min-width: 180px;
+      padding: 0 22px;
       cursor: pointer;
+      box-shadow: 0 6px 18px rgba(15,41,66,0.08);
     }
 
     .lotteria-extra-title {
       margin: 0;
-      font-family: "Ltt Recoleta Compressed Light", "Ltt Recoleta Compressed Light Placeholder", sans-serif;
-      font-size: clamp(60px, 12vw, 99px);
-      line-height: 0.9;
-      font-weight: 300;
-      color: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+      font-family: "Ltt Recoleta Compressed Regular", serif;
+      font-size: clamp(28px, 6.6vw, 42px);
+      line-height: 1;
+      font-weight: 700;
+      color: var(--navy);
       width: 100vw;
       text-align: left;
-      padding-left: 140px;
+      padding-left: 24px;
     }
 
     .lotteria-more-prizes-wrapper {
@@ -247,8 +287,8 @@
     }
 
     .lotteria-info-box {
-      background: #761418;
-      color: #fffae3;
+      background: var(--teal);
+      color: var(--navy);
       padding: 0 20px;
       margin: 0;
       max-height: 0;
@@ -289,7 +329,7 @@
     }
 
     .lotteria-more-prizes-list .lotteria-prizes-item {
-      color: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+      color: var(--navy);
       font-size: clamp(34px, 6vw, 45px);
       margin: 10px 0;
       text-align: left;
@@ -301,6 +341,7 @@
     .lotteria-more-prizes-list .lotteria-prizes-item .lotteria-prize-content {
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
       order: 2 !important;
     }
     
@@ -308,16 +349,30 @@
     .lotteria-more-prizes-list .lotteria-prizes-item .lotteria-prize-code-text {
       font-family: "Inter", "Inter Placeholder", sans-serif;
       font-size: clamp(16px, 2vw, 24px);
-      color: rgba(118, 20, 24, 0.7);
+      color: var(--navy);
       margin-top: 4px;
     }
     
     .lotteria-more-prizes-list .lotteria-prizes-item .lotteria-prize-label {
       order: unset !important;
+      margin-top: calc(var(--lotteria-rank-size, 48px) / 2 - 0.5em);
+
     }
     
     .lotteria-more-prizes-list .lotteria-prizes-item .lotteria-prize-rank {
       order: 1 !important;
+    }
+
+    /* Make rank numbers in the full prizes list larger (middle ground) */
+    .lotteria-more-prizes-list .lotteria-prize-rank {
+      --lotteria-rank-size: clamp(36px, 5.5vw, 60px);
+      font-size: var(--lotteria-rank-size);
+      line-height: 1;
+      min-width: 2.6ch;
+      flex: 0 0 2.6ch;
+      text-align: right;
+      color: var(--navy);
+      font-weight: 800;
     }
     
     .lotteria-more-prizes-list .lotteria-prizes-item .lotteria-prize-image {
@@ -331,35 +386,35 @@
 
     .lotteria-search-container {
       width: clamp(200px, 25vw, 350px);
-      margin-top: 40px;
-      margin-left: 40px;
+      margin-top: 24px;
+      margin-left: 24px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 8px;
     }
 
     .lotteria-search-input {
       width: 100%;
-      height: 56px;
+      height: 44px;
       border-radius: 999px;
-      border: 2px solid var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
-      background: transparent;
-      padding: 0 24px;
-      font-family: "Ltt Recoleta Compressed Regular", "Ltt Recoleta Compressed Regular Placeholder", sans-serif;
-      font-size: 24px;
-      color: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
+      border: 2px solid rgba(15,41,66,0.12);
+      background: white;
+      padding: 0 18px;
+      font-family: Inter, system-ui;
+      font-size: 16px;
+      color: var(--navy);
       outline: none;
       box-sizing: border-box;
-      transition: all 0.2s ease;
+      transition: all 0.12s ease;
     }
 
     .lotteria-search-input::placeholder {
-      color: rgba(118, 20, 24, 0.5);
+      color: rgba(15,41,66,0.4);
     }
 
     .lotteria-search-input:focus {
-      background: var(--token-819f6190-c503-4369-af27-3643c2ed1690, #761418);
-      color: var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2, #fffae3);
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(15,41,66,0.12);
     }
 
     .lotteria-search-input:focus::placeholder {
@@ -382,71 +437,33 @@
 
     @media (max-width: 780px) {
       .lotteria-hero {
-        min-height: 62vh;
+        min-height: 44vh;
         width: 100vw;
         margin-left: calc(-50vw + 50%);
         padding-left: 0;
         padding-right: 0;
+        padding-top: 36px;
       }
 
-      .lotteria-hero .lotteria-container {
-        width: 100vw;
-        max-width: 100vw;
-      }
+      .lotteria-title { font-size: clamp(42px, 18vw, 72px); }
 
-      .lotteria-title {
-        font-size: clamp(72px, 18vw, 128px);
-      }
+      .lotteria-countdown { font-size: clamp(24px, 9vw, 44px); margin-top: 12px; }
 
-      .lotteria-countdown {
-        font-size: clamp(52px, 13.5vw, 112px);
-        margin-top: 28px;
-        letter-spacing: 0;
-        padding: 0 20px;
-        box-sizing: border-box;
-      }
+      .lotteria-prizes { padding: 28px 0 48px; }
 
-      .lotteria-countdown-digit {
-        min-width: 1.9ch;
-      }
+      .lotteria-prizes-list { gap: 18px; margin-top: 14px; }
 
-      .lotteria-prizes {
-        padding: 2px 0 6px;
-      }
+      .lotteria-prizes-item { margin: 8px 20px; }
 
-      .lotteria-prizes-list {
-        gap: 30px;
-        margin-top: 14px;
-      }
+      .lotteria-button { min-width: 160px; height: 40px; }
 
-      .lotteria-prizes-item {
-        margin: 10px 40px;
-      }
+      .lotteria-extra-title { padding-left: 20px; font-size: clamp(20px, 8vw, 26px); }
 
-      .lotteria-button {
-        min-width: 220px;
-      }
-      
-      .lotteria-extra-title {
-        padding-left: 40px;
-      }
-      
-      .lotteria-more-prizes-wrapper {
-        flex-direction: column;
-        padding: 0 40px;
-      }
+      .lotteria-more-prizes-wrapper { flex-direction: column; padding: 0 20px; }
 
-      .lotteria-search-container {
-        width: 100%;
-        margin-left: 0;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        order: -1;
-      }
-      
-      .lotteria-more-prizes-list .lotteria-prizes-item {
-        margin: 10px 0;
-      }
+      .lotteria-search-container { width: 100%; margin-left: 0; margin-top: 12px; order: -1; }
+
+      .lotteria-more-prizes-list .lotteria-prizes-item { margin: 8px 0; }
     }
   </style>
 </head>
@@ -456,6 +473,7 @@
 
     <header class="lotteria-hero">
       <div class="lotteria-container">
+        <p class="lotteria-top-subtitle">CAMPUS BY NIGHT - 7,8,9 MAGGIO 2026 - PIAZZA SCARAVILLI, BOLOGNA (BO)</p>
         <h1 class="lotteria-title">lotteria</h1>
         <p class="lotteria-title">estraiamo tra</p>
         <p class="lotteria-countdown" id="lotteria-countdown" data-target="2026-05-09T20:00:00">

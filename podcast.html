@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" type="image/png" href="assets/images/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="assets/images/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="assets/images/favicon/site.webmanifest" />
+  <title>campusbynight - SBN podcast</title>
+  <meta name="description" content="Sport By Night – Il podcast sportivo del Campus by Night">
+  <meta property="og:title" content="campusbynight - SBN podcast">
+  <meta property="og:description" content="Sport By Night – Il podcast sportivo del Campus by Night">
+  <meta name="robots" content="max-image-preview:large">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── TOKENS ── */
+    :root {
+      --crema:    #fffae3;
+      --rosso:    #761418;
+      --blu:      #21274e;
+      --arancio:  #ec631a;
+      --crema-dim: rgba(255,250,227,0.55);
+    }
+
+    .podcast-page {
+      background: var(--crema);
+      color: var(--rosso);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ══════════════════════════════════════
+       HERO — split layout
+    ══════════════════════════════════════ */
+    .pod-hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+
+    /* sinistra: crema */
+    .pod-hero-left {
+      background: var(--crema);
+      display: flex;
+      flex-direction: column;
+      padding: 150px 56px 64px;
+      position: relative;
+    }
+
+    .pod-hero-kicker {
+      font-family: "Inter", sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--arancio);
+      margin-bottom: 20px;
+    }
+
+    .pod-hero-title {
+      font-family: "Ltt Recoleta Compressed Light", sans-serif;
+      font-size: clamp(72px, 10vw, 136px);
+      line-height: 0.84;
+      font-weight: 300;
+      color: var(--rosso);
+    }
+
+    .pod-hero-title em {
+      font-family: "Ltt Recoleta Compressed Regular", sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      color: var(--arancio);
+    }
+
+    .pod-hero-desc {
+      font-family: "Inter", sans-serif;
+      font-size: clamp(14px, 1.6vw, 17px);
+      line-height: 1.65;
+      color: rgba(118,20,24,0.62);
+      max-width: 380px;
+      margin-top: 28px;
+    }
+
+    .pod-hero-scroll {
+      margin-top: 48px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "Inter", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(118,20,24,0.4);
+    }
+
+    .pod-hero-scroll-line {
+      width: 40px;
+      height: 1px;
+      background: rgba(118,20,24,0.25);
+    }
+
+    /* destra: crema, logo centrato */
+    .pod-hero-right {
+      background: var(--crema);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 150px 56px 64px;
+      position: relative;
+      overflow: hidden;
+      gap: 52px;
+    }
+
+
+
+
+
+    /* ── LOGO: per ingrandire modifica i 3 valori clamp ──
+       min(px) = mobile, valore centrale = scala su schermo, max(px) = desktop
+       es. per un logo più grande: clamp(200px, 26vw, 360px) */
+    .pod-hero-logo {
+      width: clamp(180px, 22vw, 320px);
+      height: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pod-hero-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pod-hero-btn {
+      font-family: "Ltt Recoleta Compressed Regular", sans-serif;
+      font-size: clamp(17px, 2vw, 22px);
+      font-weight: 600;
+      padding: 0 28px;
+      height: 50px;
+      border-radius: 999px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s;
+    }
+
+    .pod-hero-btn:hover { opacity: 0.82; }
+    .pod-hero-btn-yt { background: #cc0000; color: #fff; }
+    .pod-hero-btn-sp { background: var(--blu); color: #fff; }
+
+    /* ══════════════════════════════════════
+       CAROSELLO — sfondo rosso scuro
+    ══════════════════════════════════════ */
+    .pod-carousel-section {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      background: var(--rosso);
+      padding: 36px 0 0;
+    }
+
+    .pod-carousel-header {
+      padding: 0 80px 28px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .pod-carousel-headline {
+      font-family: "Ltt Recoleta Compressed Light", sans-serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 300;
+      line-height: 0.9;
+      color: var(--crema);
+    }
+
+    .pod-carousel-headline em {
+      font-family: "Ltt Recoleta Compressed Regular", sans-serif;
+      font-style: normal;
+      color: var(--arancio);
+    }
+
+    .pod-ep-counter {
+      font-family: "Inter", sans-serif;
+      font-size: clamp(12px, 1.4vw, 15px);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,250,227,0.3);
+      white-space: nowrap;
+    }
+
+    /* track */
+    .pod-carousel-wrap {
+      position: relative;
+    }
+
+    .pod-carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .pod-carousel::-webkit-scrollbar { display: none; }
+
+    /* card */
+    .pod-card {
+      flex: 0 0 420px;
+      scroll-snap-align: start;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.22s;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+
+    .pod-card.active {
+      background: var(--crema);
+    }
+
+    /* indicatore attivo */
+    .pod-card.active::after {
+      content: "";
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 5px;
+      background: var(--arancio);
+    }
+
+    .pod-card-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #0a0a0a;
+      position: relative;
+    }
+
+    .pod-card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .pod-card:hover .pod-card-thumb img { transform: scale(1.04); }
+
+    .pod-card-thumb-fallback {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .pod-card-thumb-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.4) 100%);
+    }
+
+    .pod-card-body {
+      padding: 18px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .pod-card-num {
+      font-family: "Ltt Recoleta Compressed Regular", sans-serif;
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 500;
+      line-height: 1;
+      color: rgba(255,250,227,0.18);
+      transition: color 0.22s;
+    }
+
+    .pod-card.active .pod-card-num {
+      color: var(--arancio);
+    }
+
+    .pod-card-title {
+      font-family: "Ltt Recoleta Compressed Regular", sans-serif;
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 500;
+      line-height: 1.1;
+      color: rgba(255,250,227,0.7);
+      transition: color 0.22s;
+    }
+
+    .pod-card.active .pod-card-title {
+      color: var(--rosso);
+    }
+
+    .pod-card-guest {
+      display: none;
+    }
+
+    /* frecce */
+    .pod-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,250,227,0.15);
+      background: var(--rosso);
+      color: var(--crema);
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, opacity 0.2s;
+    }
+
+    .pod-arrow:hover { background: rgba(255,250,227,0.1); }
+    .pod-arrow:disabled { opacity: 0.15; cursor: default; }
+    .pod-arrow-prev { left: 16px; }
+    .pod-arrow-next { right: 16px; }
+
+    /* ══════════════════════════════════════
+       DETTAGLIO — sfondo crema, ampio
+    ══════════════════════════════════════ */
+    .pod-detail {
+      width: 100%;
+      background: var(--crema);
+      padding: 72px 80px 80px;
+    }
+
+    .pod-detail-grid {
+      display: grid;
+      grid-template-columns: 5fr 4fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* sinistra */
+    .pod-detail-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .pod-detail-ep {
+      font-family: "Inter", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--arancio);
+      margin-bottom: 14px;
+    }
+
+    .pod-detail-title {
+      font-family: "Ltt Recoleta Compressed Regular", sans-serif;
+      font-size: clamp(42px, 6vw, 72px);
+      font-weight: 500;
+      line-height: 0.92;
+      color: var(--rosso);
+      margin-bottom: 28px;
+    }
+
+    .pod-yt-wrap {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #0a0a0a;
+      margin-bottom: 20px;
+    }
+
+    .pod-yt-wrap iframe {
+      width: 100%; height: 100%;
+      border: none; display: block;
+    }
+
+    .pod-detail-btns {
+      display: flex;
+      gap: 10px;
+    }
+
+    .pod-detail-btn {
+      font-family: "Ltt Recoleta Compressed Regular", sans-serif;
+      font-size: clamp(17px, 2vw, 22px);
+      font-weight: 600;
+      padding: 0 28px;
+      height: 52px;
+      border-radius: 999px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .pod-detail-btn:hover { opacity: 0.82; }
+    .pod-detail-btn-yt { background: #cc0000; color: #fff; }
+    .pod-detail-btn-sp { background: var(--blu); color: #fff; }
+
+    /* destra */
+    .pod-detail-right {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      padding-top: 8px;
+    }
+
+    .pod-detail-preview {
+      font-family: "Ltt Recoleta Compressed Regular", sans-serif;
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 500;
+      line-height: 1.15;
+      color: var(--rosso);
+      font-style: italic;
+    }
+
+    .pod-detail-divider {
+      width: 40px;
+      height: 2px;
+      background: var(--arancio);
+    }
+
+    .pod-detail-riassunto {
+      font-family: "Inter", sans-serif;
+      font-size: clamp(13px, 1.5vw, 15px);
+      line-height: 1.8;
+      color: rgba(118,20,24,0.62);
+    }
+
+    /* guest card */
+    #guests-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pod-guest {
+      background: var(--blu);
+      border-radius: 18px;
+      padding: 24px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pod-guest-label {
+      font-family: "Inter", sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,250,227,0.35);
+    }
+
+    .pod-guest-name {
+      font-family: "Ltt Recoleta Compressed Regular", sans-serif;
+      font-size: clamp(26px, 3.2vw, 38px);
+      font-weight: 500;
+      line-height: 1;
+      color: var(--crema);
+    }
+
+    .pod-guest-bio {
+      font-family: "Inter", sans-serif;
+      font-size: clamp(12px, 1.4vw, 14px);
+      line-height: 1.7;
+      color: rgba(255,250,227,0.5);
+    }
+
+    /* ══════════════════════════════════════
+       FOOTER CTA
+    ══════════════════════════════════════ */
+    .pod-cta {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      background: var(--blu);
+      padding: 88px 40px 100px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .pod-cta-title {
+      font-family: "Ltt Recoleta Compressed Light", sans-serif;
+      font-size: clamp(56px, 11vw, 108px);
+      font-weight: 300;
+      line-height: 0.88;
+      color: var(--crema);
+    }
+
+    .pod-cta-title em {
+      font-family: "Ltt Recoleta Compressed Regular", sans-serif;
+      font-style: normal;
+      color: var(--arancio);
+    }
+
+    .pod-cta-sub {
+      font-family: "Inter", sans-serif;
+      font-size: clamp(14px, 1.8vw, 18px);
+      color: rgba(255,250,227,0.45);
+      max-width: 440px;
+      line-height: 1.6;
+    }
+
+    .pod-cta-btns {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .pod-cta-btn {
+      font-family: "Ltt Recoleta Compressed Regular", sans-serif;
+      font-size: clamp(19px, 2.2vw, 26px);
+      font-weight: 600;
+      padding: 0 36px;
+      height: 56px;
+      border-radius: 999px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s;
+    }
+
+    .pod-cta-btn:hover { opacity: 0.82; }
+    .pod-cta-btn-yt { background: #cc0000; color: #fff; }
+    .pod-cta-btn-sp { background: var(--crema); color: #101279; }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .pod-hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .pod-hero-left { padding: 110px 28px 48px; min-height: 70vh; justify-content: flex-end; }
+      .pod-hero-right { padding: 48px 48px 56px; }
+      .pod-hero-deco-num { font-size: 220px; }
+      .pod-carousel-header { padding: 0 24px 36px; flex-direction: column; gap: 8px; }
+      .pod-card { flex: 0 0 300px; }
+      .pod-detail { padding: 48px 24px 60px; }
+      .pod-detail-grid { grid-template-columns: 1fr; gap: 36px; }
+      .pod-cta { padding: 64px 24px 80px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="main" class="pagina podcast-page">
+    <div class="navbar-wrapper hidden-1wu7hlw" data-navbar-placeholder="true"></div>
+
+    <!-- ══ HERO ══ -->
+    <header class="pod-hero">
+      
+      <div class="pod-hero-right">
+        <img class="pod-hero-logo" src="assets/images/sport/logo_SBN.jpeg" alt="Sport By Night Podcast logo">
+        <div class="pod-hero-links">
+          <a class="pod-hero-btn pod-hero-btn-yt" href="https://www.youtube.com" target="_blank" rel="noopener">▶ YouTube</a>
+          <a class="pod-hero-btn pod-hero-btn-sp" href="https://open.spotify.com" target="_blank" rel="noopener">♫ Spotify</a>
+        </div>
+      </div>
+
+      <div class="pod-hero-left">
+        <p class="pod-hero-kicker">campus by night &mdash; sport by night</p>
+        <h1 class="pod-hero-title">
+          <em>SBN</em><br>
+          podcast
+        </h1>
+        <p class="pod-hero-desc">
+          Sport, università, storie vere.<br>
+          Il podcast sportivo del Campus by Night,<br>
+          fatto da studenti per studenti.
+        </p>
+        <div class="pod-hero-scroll">
+          <span class="pod-hero-scroll-line"></span>
+          scorri per ascoltare
+        </div>
+      </div>
+    </header>
+
+    <!-- ══ CAROSELLO ══ -->
+    <section class="pod-carousel-section" aria-labelledby="carousel-heading">
+      <div class="pod-carousel-header">
+        <h2 class="pod-carousel-headline" id="carousel-heading">
+          ascolta<br><em>tutto</em>
+        </h2>
+        <span class="pod-ep-counter" id="ep-counter"></span>
+      </div>
+
+      <div class="pod-carousel-wrap">
+        <button class="pod-arrow pod-arrow-prev" id="btn-prev" aria-label="Precedente">&#8592;</button>
+        <div class="pod-carousel" id="carousel" role="list"></div>
+        <button class="pod-arrow pod-arrow-next" id="btn-next" aria-label="Successivo">&#8594;</button>
+      </div>
+
+      <!-- ══ DETTAGLIO ══ -->
+      <div class="pod-detail" id="pod-detail">
+        <div class="pod-detail-grid">
+          <div class="pod-detail-left">
+            <p class="pod-detail-ep" id="detail-ep"></p>
+            <h3 class="pod-detail-title" id="detail-title"></h3>
+            <div class="pod-yt-wrap" id="yt-embed"></div>
+            <div class="pod-detail-btns">
+              <a class="pod-detail-btn pod-detail-btn-yt" id="link-yt" href="#" target="_blank" rel="noopener">▶ YouTube</a>
+              <a class="pod-detail-btn pod-detail-btn-sp" id="link-sp" href="#" target="_blank" rel="noopener">♫ Spotify</a>
+            </div>
+          </div>
+          <div class="pod-detail-right">
+            <p class="pod-detail-preview" id="detail-preview"></p>
+            <div class="pod-detail-divider"></div>
+            <p class="pod-detail-riassunto" id="detail-riassunto"></p>
+            <div id="guests-container"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CTA ══ -->
+    <section class="pod-cta">
+      <h2 class="pod-cta-title">non perderti<br><em>nessuna</em><br>puntata</h2>
+      <p class="pod-cta-sub">Seguici su YouTube e Spotify per nuove storie ogni settimana.</p>
+      <div class="pod-cta-btns">
+        <a class="pod-cta-btn pod-cta-btn-yt" href="https://www.youtube.com" target="_blank" rel="noopener">▶ YouTube</a>
+        <a class="pod-cta-btn pod-cta-btn-sp" href="https://open.spotify.com" target="_blank" rel="noopener">♫ Spotify</a>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="assets/navbar-loader.js"></script>
+  <script>
+    function getYouTubeId(url) {
+      const m = url.match(/(?:v=|youtu\.be\/|embed\/)([A-Za-z0-9_-]{11})/);
+      return m ? m[1] : null;
+    }
+
+    let episodes = [];
+
+    function renderDetail(ep) {
+  document.getElementById('detail-ep').textContent = 'Episodio ' + ep.ep;
+  document.getElementById('detail-title').textContent = ep.titolo;
+  document.getElementById('detail-preview').textContent = ep.preview;
+  document.getElementById('detail-riassunto').textContent = ep.riassunto;
+  document.getElementById('link-yt').href = ep.youtube;
+  document.getElementById('link-sp').href = ep.spotify;
+
+  // ospiti: supporta stringa singola o array [{nome, bio}]
+  const container = document.getElementById('guests-container');
+  container.innerHTML = '';
+
+  let ospiti = [];
+
+  if (Array.isArray(ep.ospiti)) {
+    ospiti = ep.ospiti;
+  } else {
+    ospiti = [
+      {
+        nome: ep.ospite || '',
+        bio: ep.bio_ospite || ''
+      }
+    ];
+  }
+
+  ospiti.forEach(o => {
+    const box = document.createElement('div');
+    box.className = 'pod-guest';
+
+    box.innerHTML = `
+      <span class="pod-guest-label">Ospite</span>
+      <p class="pod-guest-name">${o.nome || ''}</p>
+      <p class="pod-guest-bio">${o.bio || ''}</p>
+    `;
+
+    container.appendChild(box);
+  });
+
+  const ytId = getYouTubeId(ep.youtube || '');
+  const ytBox = document.getElementById('yt-embed');
+
+  ytBox.innerHTML = ytId
+    ? `<iframe src="https://www.youtube.com/embed/${ytId}" allowfullscreen></iframe>`
+    : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.2);font-family:Inter,sans-serif;font-size:13px;">Nessun video</div>`;
+}
+
+    function selectCard(index) {
+      document.querySelectorAll('.pod-card').forEach((c, i) =>
+        c.classList.toggle('active', i === index)
+      );
+      renderDetail(episodes[index]);
+    }
+
+    async function init() {
+      try {
+        const res = await fetch('podcast.json');
+        episodes  = await res.json();
+      } catch(e) {
+        console.warn('podcast.json non trovato.');
+        return;
+      }
+
+      // aggiorna contatori hero
+      document.getElementById('ep-counter').textContent = episodes.length + ' episodi';
+
+      // costruisci carosello
+      const carousel = document.getElementById('carousel');
+      episodes.forEach((ep, i) => {
+        const card = document.createElement('div');
+        card.className = 'pod-card';
+        card.setAttribute('role', 'listitem');
+        card.setAttribute('tabindex', '0');
+        const ytId = getYouTubeId(ep.youtube);
+        const thumbUrl = ytId
+          ? `https://img.youtube.com/vi/${ytId}/mqdefault.jpg`
+          : null;
+
+        card.innerHTML = `
+          <div class="pod-card-thumb">
+            ${thumbUrl
+              ? `<img src="${thumbUrl}" alt="Ep. ${ep.ep}" loading="lazy"><div class="pod-card-thumb-overlay"></div>`
+              : `<div class="pod-card-thumb-fallback" style="background:var(--rosso)">
+                   <span style="font-family:'Ltt Recoleta Compressed Regular',sans-serif;font-size:64px;font-weight:500;color:rgba(255,250,227,0.15)">${String(ep.ep).padStart(2,'0')}</span>
+                 </div>`}
+          </div>
+          <div class="pod-card-body">
+            <span class="pod-card-num">${String(ep.ep).padStart(2,'0')}</span>
+            <span class="pod-card-title">${ep.titolo}</span>
+            <span class="pod-card-guest">${ep.ospite}</span>
+          </div>
+        `;
+        card.addEventListener('click', () => selectCard(i));
+        card.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') selectCard(i); });
+        carousel.appendChild(card);
+      });
+
+      // frecce
+      const btnPrev = document.getElementById('btn-prev');
+      const btnNext = document.getElementById('btn-next');
+
+      function updateArrows() {
+        btnPrev.disabled = carousel.scrollLeft <= 4;
+        btnNext.disabled = carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 4;
+      }
+
+      btnPrev.addEventListener('click', () => carousel.scrollBy({ left: -600, behavior: 'smooth' }));
+      btnNext.addEventListener('click', () => carousel.scrollBy({ left: 600, behavior: 'smooth' }));
+      carousel.addEventListener('scroll', updateArrows);
+      updateArrows();
+
+      // primo episodio di default
+      selectCard(0);
+    }
+
+    init();
+  </script>
+</body>
+</html>

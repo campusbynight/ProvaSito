@@ -1,0 +1,90 @@
+[
+  {
+    "ep": 1,
+    "titolo": "Il calcio universitario in Italia",
+    "preview": "Si parla di come il calcio universitario stia crescendo in Italia e di cosa manca ancora rispetto ai campionati americani.",
+    "riassunto": "In questa prima puntata esploriamo il panorama del calcio universitario italiano: dalla storia dei CUS alle nuove iniziative studentesche. Confrontiamo il modello italiano con quello americano e discutiamo cosa serve per far crescere questo settore. Una conversazione aperta, diretta e appassionata.",
+    "ospite": "Marco Ferretti",
+    "bio_ospite": "Marco Ferretti è allenatore del CUS Bologna e ha lavorato per 10 anni nel settore giovanile del Bologna FC. Laureatosi in Scienze Motorie, oggi coniuga la carriera tecnica con l'insegnamento universitario.",
+    "youtube": "https://youtu.be/z6JrHvt6O5o?si=x9GZMILynXGyOkog",
+    "spotify": "https://open.spotify.com/episode/example1",
+    "colore": "#ec631a"
+  },
+  {
+    "ep": 2,
+    "titolo": "Mental coaching nello sport",
+    "preview": "Come la psicologia sportiva sta cambiando l'approccio degli atleti universitari alla performance e alla gestione della pressione.",
+    "riassunto": "Il mental coaching non è più un lusso riservato ai professionisti. In questa puntata parliamo di tecniche di visualizzazione, gestione dell'ansia pre-gara e routine mentali. La nostra ospite racconta come lavora con atleti universitari di diverse discipline e quali risultati concreti si ottengono.",
+    "ospite": "Sara Conti",
+    "bio_ospite": "Sara Conti è psicologa dello sport e mental coach. Collabora con il CONI Emilia-Romagna e segue atleti universitari di atletica, nuoto e calcio. Ha pubblicato ricerche sull'ansia competitiva nei giovani sportivi.",
+    "youtube": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "spotify": "https://open.spotify.com/episode/example2",
+    "colore": "#21274e"
+  },
+  {
+    "ep": 3,
+    "titolo": "Nutrizione e performance: sfatare i miti",
+    "preview": "Carboidrati sì o no? Digiuno intermittente per gli sportivi? Un nutrizionista risponde alle domande più frequenti degli studenti-atleti.",
+    "riassunto": "Tante leggende circolano in palestra e negli spogliatoi. In questa puntata facciamo chiarezza su alimentazione e performance sportiva: quando mangiare, cosa evitare prima di una gara, come gestire il recupero. Un dialogo pratico, adatto a chi si allena e studia allo stesso tempo.",
+    "ospite": "Luca Barbieri",
+    "bio_ospite": "Luca Barbieri è nutrizionista sportivo e ricercatore all'Università di Bologna. Segue atleti amatoriali e professionisti e tiene corsi di nutrizione applicata allo sport per studenti universitari.",
+    "youtube": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "spotify": "https://open.spotify.com/episode/example3",
+    "colore": "#761418"
+  },
+  {
+    "ep": 4,
+    "titolo": "Donne e sport: rompere gli stereotipi",
+    "preview": "Una calciatrice professionista racconta il suo percorso tra pregiudizi, sacrifici e la crescita del calcio femminile in Italia.",
+    "riassunto": "Il calcio femminile italiano sta vivendo una trasformazione profonda. Ne parliamo con una protagonista diretta: dai campi polverosi della Serie C alla Serie A, passando per un percorso universitario portato avanti in parallelo. Un episodio che parla di determinazione, identità e futuro.",
+    "ospite": "Giulia Morandi",
+    "bio_ospite": "Giulia Morandi gioca come centrocampista nel Cesena FC Femminile. Studentessa di Giurisprudenza a Bologna, è anche ambassador di un progetto nazionale per lo sport femminile nelle scuole.",
+    "youtube": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "spotify": "https://open.spotify.com/episode/example4",
+    "colore": "#ec631a"
+  },
+  {
+    "ep": 5,
+    "titolo": "Lo sport come strumento di inclusione",
+    "preview": "Progetti sportivi nei quartieri difficili: come il basket e il calcio possono diventare strumenti di coesione sociale.",
+    "riassunto": "In questa puntata parliamo di sport e inclusione sociale attraverso l'esperienza di un'associazione bolognese che usa il basket per raggiungere ragazzi in situazioni di fragilità. Un episodio che allarga lo sguardo oltre la performance, verso il valore umano e comunitario dello sport.",
+    "ospite": "Andrea Mele",
+    "bio_ospite": "Andrea Mele è fondatore dell'associazione Palla al Centro, attiva a Bologna dal 2018. Ex giocatore di basket, ha trasformato la sua passione in un progetto sociale che oggi coinvolge oltre 200 ragazzi ogni anno.",
+    "youtube": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "spotify": "https://open.spotify.com/episode/example5",
+    "colore": "#21274e"
+  },
+  {
+    "ep": 6,
+    "titolo": "Il giornalismo sportivo nell'era dei social",
+    "preview": "TikTok, Instagram, YouTube: come cambia il racconto dello sport quando ogni atleta è anche un media.",
+    "riassunto": "Il giornalismo sportivo tradizionale è in crisi? O si sta semplicemente trasformando? Ne parliamo con un giornalista che ha fatto il salto dal cartaceo ai digital media. Analizziamo tendenze, linguaggi e opportunità per chi vuole raccontare lo sport oggi, partendo dall'università.",
+    "ospite": "Federica Russo",
+    "bio_ospite": "Federica Russo è giornalista sportiva freelance, collabora con Sky Sport e gestisce una newsletter di analisi calcistica con 8.000 iscritti. Ex studentessa di Comunicazione all'Università di Bologna.",
+    "youtube": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "spotify": "https://open.spotify.com/episode/example6",
+    "colore": "#761418"
+  },
+  {
+    "ep": 7,
+    "titolo": "Infortunio e ritorno: la resilienza degli atleti",
+    "preview": "Come si affronta un lungo stop da infortunio? Un ex calciatore racconta i mesi di riabilitazione e il ritorno in campo.",
+    "riassunto": "Un infortunio grave mette alla prova non solo il corpo ma anche la mente. In questo episodio ascoltiamo la storia in prima persona di un atleta che ha vissuto una rottura del legamento crociato durante il secondo anno di università. Riabilitazione, dubbi, motivazione e la gioia del ritorno.",
+    "ospite": "Tommaso Grandi",
+    "bio_ospite": "Tommaso Grandi è studente di Ingegneria a Bologna e giocatore del CUS Bologna. Ha vissuto un lungo stop per infortunio nel 2023 e oggi è tornato titolare. Collabora con l'area medica del CUS per supportare altri atleti infortunati.",
+    "youtube": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "spotify": "https://open.spotify.com/episode/example7",
+    "colore": "#ec631a"
+  },
+  {
+    "ep": 8,
+    "titolo": "Bologna città dello sport",
+    "preview": "Dal basket alla pallavolo, dal calcio all'atletica: Bologna è davvero una città sportiva? Un'analisi tra storia, impianti e futuro.",
+    "riassunto": "Bologna ha una tradizione sportiva ricchissima: la Virtus e la Fortitudo nel basket, il Bologna FC, Bianca Panova e lo sport universitario con il CUS. In questa puntata ripercorriamo la storia sportiva della città, parliamo degli impianti, delle politiche sportive e del legame speciale tra sport e vita universitaria bolognese.",
+    "ospite": "Prof. Claudio Ferretti",
+    "bio_ospite": "Il Prof. Claudio Ferretti insegna Storia dello Sport all'Università di Bologna ed è autore di tre libri sulla storia sportiva della città. Consulente del Comune di Bologna per le politiche sportive.",
+    "youtube": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "spotify": "https://open.spotify.com/episode/example8",
+    "colore": "#21274e"
+  }
+]

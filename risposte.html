@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="assets/images/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="assets/images/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="assets/images/favicon/site.webmanifest" />
+
+  <title>campusbynight - risposte</title>
+  <meta name="description" content="Campus by Night - Risposte (word cloud)">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="campusbynight - risposte">
+  <meta property="og:description" content="Campus by Night - Risposte (word cloud)">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="campusbynight - risposte">
+  <meta name="twitter:description" content="Campus by Night - Risposte (word cloud)">
+  <meta name="robots" content="max-image-preview:large">
+
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    html,
+    body {
+      margin: 0;
+      background: #21274e;
+      color: var(--token-d453de31-a28f-4b58-b5d3-fb3a6b7682a5, rgb(33, 39, 78));
+    }
+
+    #main,
+    .pagina {
+      background: #21274e;
+    }
+
+    .risposte-page {
+      min-height: 100vh;
+      padding-top: 92px;
+      padding-bottom: 64px;
+      background: #21274e;
+    }
+
+    .risposte-shell {
+      width: min(1100px, calc(100vw - 56px));
+      margin: 0 auto;
+      display: grid;
+      gap: 18px;
+    }
+
+    .risposte-box {
+      background: #fffae3;
+      border: 1px solid rgba(236, 99, 26, 0.24);
+      border-radius: 26px;
+      box-shadow: 0 28px 58px rgba(10, 14, 30, 0.4);
+      padding: 30px 32px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .risposte-kicker {
+      margin: 0 0 8px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-family: "Articulat CF Normal", "Articulat CF Normal Placeholder", sans-serif;
+      color: #ec631a;
+    }
+
+    .risposte-title {
+      margin: 10px 0 0;
+      font-family: "Ltt Recoleta Compressed Regular", "Ltt Recoleta Compressed Regular Placeholder", sans-serif;
+      font-size: clamp(44px, 7vw, 86px);
+      line-height: 0.95;
+      letter-spacing: 0.01em;
+      color: #ec631a;
+    }
+
+    .risposte-subtitle {
+      margin: 14px 0 0;
+      max-width: 70ch;
+      font-family: "Articulat CF Normal", "Articulat CF Normal Placeholder", sans-serif;
+      font-size: clamp(15px, 1.6vw, 18px);
+      line-height: 1.6;
+      font-style: italic;
+      color: #000000;
+      opacity: 0.85;
+    }
+
+    .risposte-status {
+      margin-top: 14px;
+      font-family: "Articulat CF Normal", "Articulat CF Normal Placeholder", sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: rgba(0, 0, 0, 0.68);
+    }
+
+    .risposte-section-title {
+      margin: 0;
+      font-family: "Articulat CF Heavy", "Articulat CF Normal Placeholder", sans-serif;
+      font-size: clamp(18px, 2.2vw, 22px);
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.86);
+    }
+
+    .risposte-cloud {
+      margin-top: 18px;
+      position: relative;
+      width: 100%;
+      height: 380px;
+      overflow: hidden;
+      padding-bottom: 6px;
+    }
+
+    .risposte-word {
+      display: inline-block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      line-height: 1;
+      font-family: "Ltt Recoleta Condensed Bold", "Ltt Recoleta Condensed Bold Placeholder", sans-serif;
+      color: #21274e;
+      letter-spacing: -0.01em;
+      user-select: none;
+      white-space: nowrap;
+      transform: translateZ(0);
+    }
+
+    .risposte-word[data-count] {
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+    }
+
+    .risposte-divider {
+      height: 1px;
+      width: 100%;
+      background: rgba(33, 39, 78, 0.12);
+      margin: 22px 0;
+    }
+
+    @media (max-width: 809.98px) {
+      .risposte-page {
+        padding-top: 86px;
+        padding-bottom: 48px;
+      }
+
+      .risposte-shell {
+        width: calc(100vw - 26px);
+        gap: 14px;
+      }
+
+      .risposte-box {
+        border-radius: 18px;
+        padding: 22px 18px 18px;
+      }
+
+      .risposte-cloud {
+        height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="main" class="pagina">
+    <div class="navbar-wrapper hidden-1wu7hlw" data-navbar-placeholder="true"></div>
+    <main class="risposte-page" aria-labelledby="risposte-title">
+      <div class="risposte-shell">
+        <section class="risposte-box" aria-label="Risposte">
+          <p class="risposte-kicker">Campus By Night</p>
+          <p id="status" class="risposte-status" aria-live="polite"></p>
+        </section>
+
+        <section id="cloudRoot" class="risposte-box" aria-label="Word cloud">
+          <div id="cloudContent"></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // =============================================================
+    // CONFIG
+    // =============================================================
+    // 1) Pubblica il Google Sheet: File -> Condividi -> Pubblica sul Web
+    // 2) Incolla qui l'ID del foglio (la parte tra /d/ e /edit)
+    // 3) Imposta il gid (di default spesso 0)
+    const SHEET_ID = "15rx39HDFRy3df7fG_3aLm89u8gz1ndVzRefeK__ly1s"; // <-- TODO
+    const SHEET_GID = "0";
+
+    // Quante colonne iniziali ignorare (in genere 1: timestamp / info cronologiche)
+    const IGNORE_FIRST_COLUMNS = 1;
+
+    // Se una cella contiene più parole separate da virgola/; /a capo, verranno splittate
+    const SPLIT_REGEX = /[\n,;]+/g;
+
+    // Dimensione font min/max per la word cloud
+    const FONT_MIN_PX = 16;
+    const FONT_MAX_PX = 72;
+
+    // Palette coerente con il sito
+    const WORD_COLORS = ['#21274e', '#295f89', '#3a88c4', '#1a43bf' , '#ec631a', '#e65100', '#ffb74d', '#ffcc80'];
+
+    // Word cloud: distribuzione ellittica (più orizzontale che verticale)
+    const CLOUD_X_SCALE = 1.35;
+    const CLOUD_Y_SCALE = 0.72;
+
+    // =============================================================
+
+    function setStatus(message) {
+      var node = document.getElementById('status');
+      if (node) node.textContent = message || '';
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    function normalizeToken(token) {
+      var clean = String(token)
+        .trim()
+        .replace(/\s+/g, ' ')
+        .replace(/^[\u200B\u200C\u200D\uFEFF]+|[\u200B\u200C\u200D\uFEFF]+$/g, '');
+
+      if (!clean) return { key: '', display: '' };
+
+      var key = clean.toLocaleLowerCase('it-IT');
+      return { key: key, display: clean };
+    }
+
+    // Minimal CSV parser (handles quoted fields with commas/newlines)
+    function parseCsv(text) {
+      var rows = [];
+      var row = [];
+      var field = '';
+      var i = 0;
+      var inQuotes = false;
+
+      while (i < text.length) {
+        var char = text[i];
+
+        if (inQuotes) {
+          if (char === '"') {
+            if (text[i + 1] === '"') {
+              field += '"';
+              i += 2;
+              continue;
+            }
+            inQuotes = false;
+            i += 1;
+            continue;
+          }
+
+          field += char;
+          i += 1;
+          continue;
+        }
+
+        if (char === '"') {
+          inQuotes = true;
+          i += 1;
+          continue;
+        }
+
+        if (char === ',') {
+          row.push(field);
+          field = '';
+          i += 1;
+          continue;
+        }
+
+        if (char === '\r') {
+          i += 1;
+          continue;
+        }
+
+        if (char === '\n') {
+          row.push(field);
+          rows.push(row);
+          row = [];
+          field = '';
+          i += 1;
+          continue;
+        }
+
+        field += char;
+        i += 1;
+      }
+
+      row.push(field);
+      rows.push(row);
+      return rows;
+    }
+
+    function buildCsvUrl(sheetId, gid) {
+      return 'https://docs.google.com/spreadsheets/d/' + encodeURIComponent(sheetId) +
+        '/gviz/tq?tqx=out:csv&gid=' + encodeURIComponent(gid);
+    }
+
+    function computeFontSize(count, maxCount) {
+      if (maxCount <= 1) return FONT_MIN_PX;
+      var min = FONT_MIN_PX;
+      var max = FONT_MAX_PX;
+
+      // Log scaling (closer to Mentimeter feel)
+      var normalized = Math.log(count) / Math.log(maxCount);
+      return Math.round(min + (max - min) * normalized);
+    }
+
+    function intersects(a, b, padding) {
+      var pad = padding || 1;
+      return !(
+        a.x2 + pad < b.x1 ||
+        a.x1 - pad > b.x2 ||
+        a.y2 + pad < b.y1 ||
+        a.y1 - pad > b.y2
+      );
+    }
+
+    function localBoxFor(el, cloudRect) {
+      var r = el.getBoundingClientRect();
+      return {
+        x1: r.left - cloudRect.left,
+        y1: r.top - cloudRect.top,
+        x2: r.right - cloudRect.left,
+        y2: r.bottom - cloudRect.top
+      };
+    }
+
+    function pickRotation(index) {
+      // parole più frequenti: dritte; le altre: un po' dinamiche
+      if (index < 3) return 0;
+      // Solo orizzontale/verticale (stile Mentimeter)
+      var rotations = [0, 0, 0, -90];
+      return rotations[index % rotations.length];
+    }
+
+    function pickColor(index) {
+      return WORD_COLORS[index % WORD_COLORS.length];
+    }
+
+    function layoutCloud(cloud) {
+      if (!cloud) return;
+
+      var words = Array.from(cloud.querySelectorAll('.risposte-word'));
+      if (words.length === 0) return;
+
+      // reset
+      words.forEach(function (el) {
+        el.style.left = '0px';
+        el.style.top = '0px';
+        el.style.transform = 'translate(-50%, -50%)';
+        el.style.visibility = 'hidden';
+      });
+
+      // proviamo ad auto-adattare l'altezza se le parole non entrano
+      var maxHeight = 860;
+      var baseHeight = Math.max(320, Math.min(520, 260 + words.length * 6));
+      var height = baseHeight;
+
+      function tryPlaceForHeight(targetHeight) {
+        cloud.style.height = targetHeight + 'px';
+
+        var cloudRect = cloud.getBoundingClientRect();
+        var width = cloudRect.width;
+        var h = cloudRect.height;
+        if (!width || !h) return 0;
+
+        var centerX = width / 2;
+        var centerY = h / 2;
+        var placed = [];
+        var placedCount = 0;
+
+        for (var i = 0; i < words.length; i += 1) {
+          var el = words[i];
+          var rot = pickRotation(i);
+          el.style.transform = 'translate(-50%, -50%) rotate(' + rot + 'deg)';
+          el.style.color = pickColor(i);
+
+          var ok = false;
+          var pad = 4;
+
+          // spirale: più tentativi per parole piccole
+          var maxAttempts = i < 8 ? 240 : 360;
+          var spiralStep = 3.6;
+
+          for (var attempt = 0; attempt < maxAttempts; attempt += 1) {
+            var angle = attempt * 0.33;
+            var radius = spiralStep * angle;
+
+            var jitterX = (Math.random() - 0.5) * 6;
+            var jitterY = (Math.random() - 0.5) * 4;
+
+            var x = centerX + (radius * Math.cos(angle) * CLOUD_X_SCALE) + jitterX;
+            var y = centerY + (radius * Math.sin(angle) * CLOUD_Y_SCALE) + jitterY;
+
+            el.style.left = x + 'px';
+            el.style.top = y + 'px';
+
+            // force layout
+            var box = localBoxFor(el, cloudRect);
+
+            // bounds
+            if (
+              box.x1 < pad ||
+              box.y1 < pad ||
+              box.x2 > width - pad ||
+              box.y2 > h - pad
+            ) {
+              continue;
+            }
+
+            var collision = false;
+            for (var p = 0; p < placed.length; p += 1) {
+              if (intersects(box, placed[p], 2)) {
+                collision = true;
+                break;
+              }
+            }
+
+            if (!collision) {
+              placed.push(box);
+              ok = true;
+              break;
+            }
+          }
+
+          if (!ok) {
+            // fallback: piazza comunque (in modo controllato) vicino al centro
+            el.style.left = (centerX + (Math.random() - 0.5) * width * 0.5) + 'px';
+            el.style.top = (centerY + (Math.random() - 0.5) * h * 0.5) + 'px';
+            placed.push(localBoxFor(el, cloudRect));
+          }
+
+          el.style.visibility = 'visible';
+          placedCount += 1;
+        }
+
+        return placedCount;
+      }
+
+      while (height <= maxHeight) {
+        var placedNow = tryPlaceForHeight(height);
+        if (placedNow >= words.length) break;
+        height += 120;
+      }
+    }
+
+    var resizeTimer = null;
+    function relayoutAllClouds() {
+      var clouds = document.querySelectorAll('.risposte-cloud');
+      clouds.forEach(function (cloud) {
+        layoutCloud(cloud);
+      });
+    }
+
+    window.addEventListener('resize', function () {
+      if (resizeTimer) window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(relayoutAllClouds, 160);
+    });
+
+    function renderColumnCloud(container, title, values) {
+      var counts = new Map();
+      var displayByKey = new Map();
+
+      values.forEach(function (value) {
+        if (value == null) return;
+        var raw = String(value).trim();
+        if (!raw) return;
+
+        var parts = raw.split(SPLIT_REGEX);
+        parts.forEach(function (part) {
+          var normalized = normalizeToken(part);
+          if (!normalized.key) return;
+
+          if (!displayByKey.has(normalized.key)) {
+            displayByKey.set(normalized.key, normalized.display);
+          }
+
+          counts.set(normalized.key, (counts.get(normalized.key) || 0) + 1);
+        });
+      });
+
+      var entries = Array.from(counts.entries())
+        .map(function (pair) {
+          return {
+            key: pair[0],
+            display: displayByKey.get(pair[0]) || pair[0],
+            count: pair[1]
+          };
+        })
+        .sort(function (a, b) {
+          if (b.count !== a.count) return b.count - a.count;
+          return a.display.localeCompare(b.display, 'it');
+        });
+
+      var maxCount = entries.reduce(function (acc, item) {
+        return Math.max(acc, item.count);
+      }, 0);
+
+      var section = document.createElement('section');
+      section.style.marginTop = '22px';
+
+      var h2 = document.createElement('h2');
+      h2.className = 'risposte-section-title';
+      h2.innerHTML = escapeHtml(title);
+      section.appendChild(h2);
+
+      var cloud = document.createElement('div');
+      cloud.className = 'risposte-cloud';
+
+      if (entries.length === 0) {
+        var empty = document.createElement('p');
+        empty.className = 'risposte-status';
+        empty.textContent = 'Nessuna risposta.';
+        empty.style.margin = '12px 0 0';
+        section.appendChild(empty);
+        container.appendChild(section);
+        return;
+      }
+
+      entries.forEach(function (item) {
+        var span = document.createElement('span');
+        span.className = 'risposte-word';
+        span.dataset.count = String(item.count);
+        span.style.fontSize = computeFontSize(item.count, maxCount) + 'px';
+        span.title = item.count + ' volte';
+        span.textContent = item.display;
+        cloud.appendChild(span);
+      });
+
+      section.appendChild(cloud);
+      container.appendChild(section);
+
+      // Layout tipo word cloud (brainstorm)
+      window.requestAnimationFrame(function () {
+        layoutCloud(cloud);
+      });
+
+      var divider = document.createElement('div');
+      divider.className = 'risposte-divider';
+      divider.setAttribute('aria-hidden', 'true');
+      divider.style.marginTop = '22px';
+      container.appendChild(divider);
+    }
+
+    async function loadAndRender() {
+      var root = document.getElementById('cloudContent');
+      if (!root) return;
+
+      if (!SHEET_ID) {
+        setStatus('Manca SHEET_ID: apri risposte.html e incolla l\'ID del Google Sheet.');
+        return;
+      }
+
+      setStatus('Caricamento risposte…');
+
+      var url = buildCsvUrl(SHEET_ID, SHEET_GID);
+
+      var response;
+      try {
+        response = await fetch(url, { cache: 'no-store' });
+      } catch (err) {
+        console.error(err);
+        setStatus('Errore di rete nel caricamento del Google Sheet.');
+        return;
+      }
+
+      if (!response.ok) {
+        setStatus('Impossibile caricare il Google Sheet (controlla publish-to-web e permessi).');
+        return;
+      }
+
+      var csv = await response.text();
+      var rows = parseCsv(csv).filter(function (r) {
+        // remove empty trailing row
+        return r.some(function (cell) { return String(cell || '').trim() !== ''; });
+      });
+
+      if (rows.length < 2) {
+        setStatus('Nessun dato trovato nel Google Sheet.');
+        return;
+      }
+
+      var header = rows[0] || [];
+      var dataRows = rows.slice(1);
+
+      // Normalize row length
+      var columnCount = header.length;
+      dataRows.forEach(function (r) {
+        while (r.length < columnCount) r.push('');
+      });
+
+      // Clear
+      root.innerHTML = '';
+
+      var rendered = 0;
+      for (var col = IGNORE_FIRST_COLUMNS; col < columnCount; col += 1) {
+        var title = String(header[col] || '').trim() || ('Domanda ' + (col + 1));
+
+        var values = dataRows
+          .map(function (r) { return r[col]; })
+          .filter(function (v) { return String(v || '').trim() !== ''; });
+
+        renderColumnCloud(root, title, values);
+        rendered += 1;
+      }
+
+      if (rendered === 0) {
+        setStatus('Non ci sono colonne-domanda da visualizzare.');
+        return;
+      }
+
+      setStatus('Aggiornato.');
+
+      // relayout (utile se le sezioni cambiano altezza dopo il rendering)
+      window.requestAnimationFrame(relayoutAllClouds);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      loadAndRender();
+    });
+  </script>
+
+  <script src="assets/navbar-loader.js"></script>
+</body>
+</html>

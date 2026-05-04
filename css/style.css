@@ -4901,12 +4901,6 @@ html {
   stroke-width: 1.5 !important;
 }
 
-/* iOS Safari: alcuni SVG con stroke-dasharray="" possono sparire del tutto.
-   L'icona sport usa molti path con quell'attributo: forziamo un valore valido. */
-.navbar-links .nav-icona-sport-container svg path {
-  stroke-dasharray: none !important;
-}
-
 /* Lotteria: piena arancione (non trasparente) */
 .navbar-links .nav-icona-lotteria-container svg path {
   fill: rgb(33, 39, 78) !important;

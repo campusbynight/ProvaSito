@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" style="display:block;color:#21274e">
+  <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 0 9 C 0 4.029 4.029 0 9 0 C 13.971 0 18 4.029 18 9 C 18 13.971 13.971 18 9 18 C 4.029 18 0 13.971 0 9 Z" transform="translate(3 3)" />
+    <path d="M 3.75 0 L 0 2.578 L 1.433 6.75 L 6.067 6.75 L 7.5 2.578 Z" transform="translate(8.25 8.25)" />
+    <path d="M 0 0 L 0 2.25" transform="translate(12 6)" />
+    <path d="M 0 0 L 2.14 0.695" transform="translate(6.11 10.133)" />
+    <path d="M 0 1.821 L 1.323 0" transform="translate(8.36 15)" />
+    <path d="M 1.323 1.821 L 0 0" transform="translate(14.317 15)" />
+    <path d="M 2.14 0 L 0 0.695" transform="translate(15.75 10.133)" />
+    <path d="M 6.797 0 L 3.398 2.336 L 0 0" transform="translate(8.602 3.664)" />
+    <path d="M 3.097 6.154 L 0 3.778 L 1.12 0" transform="translate(17.889 6.354)" />
+    <path d="M 1.976 0 L 3.096 3.778 L 0 6.154" transform="translate(3.014 6.354)" />
+    <path d="M 0 3.893 L 1.378 0 L 5.339 0" transform="translate(14.262 16.821)" />
+    <path d="M 0 0 L 3.961 0 L 5.339 3.893" transform="translate(4.399 16.821)" />
+  </g>
+</svg>

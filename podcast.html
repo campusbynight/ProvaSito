@@ -715,10 +715,10 @@
 
     async function init() {
       try {
-        const res = await fetch('podcast.json');
+        const res = await fetch('assets/podcast.json');
         episodes  = await res.json();
       } catch(e) {
-        console.warn('podcast.json non trovato.');
+        console.warn('assets/podcast.json non trovato.');
         return;
       }
 

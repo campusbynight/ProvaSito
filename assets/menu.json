@@ -12,7 +12,7 @@
                     },
                     {
                         "nome": "MortadElly",
-                        "descrizione": "Piadina con Mortadella, Stracchino, Rucola",
+                        "descrizione": "Piadina con Prosciutto Crudo, Stracchino, Rucola",
                         "prezzo": "4,00€"
                     },
                     {
@@ -42,7 +42,7 @@
                     },
                     {
                         "nome": "Box Aperitivo x2",
-                        "descrizione": "Taralli, Arachidi, Patatine, Prosciutto",
+                        "descrizione": "Taralli, Arachidi, Patatine, Mortadella",
                         "prezzo": "3,00€"
                     },
                     {
@@ -217,7 +217,7 @@
                     },
                     {
                         "nome": "Box Aperitivo x2",
-                        "descrizione": "Taralli, Arachidi, Patatine, Prosciutto",
+                        "descrizione": "Taralli, Arachidi, Patatine, Mortadella",
                         "prezzo": "3,00€"
                     },
                     {
@@ -392,7 +392,7 @@
                     },
                     {
                         "nome": "Box Aperitivo x2",
-                        "descrizione": "Taralli, Arachidi, Patatine, Prosciutto",
+                        "descrizione": "Taralli, Arachidi, Patatine, Mortadella",
                         "prezzo": "3,00€"
                     },
                     {

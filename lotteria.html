@@ -718,7 +718,7 @@
       function loadPrizes() {
         var errorNode = document.getElementById("lotteria-prizes-error");
 
-        fetch("./assets/premiLotteria.json", { cache: "no-store" })
+        fetch("./assets/PremiLotteria.json", { cache: "no-store" })
           .then(function (response) {
             if (!response.ok) {
               throw new Error("Premi JSON non disponibile");

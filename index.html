@@ -183,11 +183,15 @@
       }
 
           // Carica e popola le liste menu da assets/menu.json.
+          // Mostra la sezione solo se il file esiste e contiene un array non vuoto.
           async function loadMenu() {
             const menuSection = document.querySelector('#menu.sezione-menu');
             const menuContainer = document.querySelector('#menu-container');
 
+            // Stato di default: sezione nascosta finché non validiamo il JSON.
+            if (menuSection) menuSection.hidden = true;
             if (!menuContainer) return;
+            menuContainer.replaceChildren();
 
             try {
               const response = await fetch('assets/menu.json', { cache: 'no-store' });
@@ -200,15 +204,9 @@
                 throw new Error('menu.json deve essere un array');
               }
 
-              // Prendiamo il primo elemento o l'elemento del giorno corrente se necessario
-              // Per ora prendiamo il primo per semplicità
+              // Se la lista è vuota, la sezione resta nascosta.
               if (data.length === 0) {
-                if (menuSection) menuSection.hidden = true;
                 return;
-              }
-              
-              if (menuSection) {
-                menuSection.hidden = false;
               }
 
               // Trova il menu per il giorno corrente, altrimenti prendi il primo
@@ -217,8 +215,12 @@
               
               let todayMenu = data.find(m => m.giorno === formattedToday) || data[0];
 
-              if (!todayMenu || !Array.isArray(todayMenu.sezioni)) {
+              if (!todayMenu || !Array.isArray(todayMenu.sezioni) || todayMenu.sezioni.length === 0) {
                 return;
+              }
+
+              if (menuSection) {
+                menuSection.hidden = false;
               }
 
               const menuTitoloEl = document.querySelector(".menu-titolo");
@@ -332,8 +334,9 @@
               
               menuContainer.replaceChildren(dataContainer, ...nodes);
             } catch (error) {
-              // Fallback: in caso di errore resta visibile il contenuto statico HTML.
               console.error('Errore nel caricamento del menu:', error);
+              if (menuSection) menuSection.hidden = true;
+              menuContainer.replaceChildren();
             }
           }
 
@@ -738,11 +741,13 @@
       </div>
   </div>
   <!-- PROGRAMMA  -->
+   <!--
   <div class="sezione-programma" id="programma">
     <div class="programma-griglia">
-      <!-- Gli eventi verranno caricati dinamicamente dal file programma.json -->
+      
     </div>
   </div>
+  -->
   <!-- NAVIGA  -->
   <div class="sezione-naviga">
     <div class="naviga-carousel-shell hidden-n6m9oa hidden-1wu7hlw">
@@ -772,6 +777,7 @@
               style='--font-selector: Q1VTVE9NVjI7THR0IFJlY29sZXRhIENvbXByZXNzZWQgTGlnaHQ=;--framer-font-family:"Ltt Recoleta Compressed Light","Ltt Recoleta Compressed Light Placeholder",sans-serif;--framer-font-size:22px;--framer-font-weight:300;--framer-text-color:var(--token-de4a76c7-6e4b-4bcc-bedd-c14e940905e2,rgb(255,250,227))'>incontri</a>
           </div>
         </div>
+        <!--
         <a class="naviga-card link-pointer" href="https://www.ideaginger.it/progetti/campus-by-night-2026.html">
           <div class="naviga-card-preview" aria-hidden="true" data-img-base="fund-raising">
             <img src="./assets/images/home/fundRaising.jpeg" alt="" loading="lazy" decoding="async">
@@ -785,6 +791,7 @@
             >visita qui</p>
           </div>
         </a>
+        -->
         <a class="naviga-card link-pointer" href="chiSiamo.html">
           <div class="naviga-card-preview" aria-hidden="true" data-img-base="chi-siamo">
             <img src="./assets/images/home/chiSiamo.jpg" alt="" loading="lazy" decoding="async">
@@ -807,8 +814,7 @@
   <!-- MENU  -->
    <!-- inserire href="menu.html" quando disponibile -->
    <a class="sezione-menu link-pointer"
-    id="menu">
-
+    id="menu" hidden>
     <div class="menu-body" id="menu-phone">
       <div class="menu-intestazione pagina">
         <h1 class="menu-titolo framer-text" dir="auto">cosa mangiare</h1>

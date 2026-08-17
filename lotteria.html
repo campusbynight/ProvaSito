@@ -499,10 +499,10 @@
     <section class="lotteria-extra">
       <h2 class="lotteria-extra-title">ma non finisce qua...</h2>
       <button class="lotteria-button" id="lotteria-more-button" type="button">tutti i premi</button>
-      <div id="lotteria-info-box" class="lotteria-info-box">
+      <!-- <div id="lotteria-info-box" class="lotteria-info-box">
         Per confermare la propria vincita contattare tramite SMS o su WhatsApp Arianna al numero +39 3478886602  oppure Anthony al numero +39 3382833134.<br>
         I premi devono essere ritirati presso Via Valverde 14, Bologna (40136) tassativamente entro il 20 luglio 2026.
-      </div>
+      </div> -->
       <div id="lotteria-more-prizes-wrapper" class="lotteria-more-prizes-wrapper">
         <div class="lotteria-more-prizes-list-container">
           <ol class="lotteria-more-prizes-list" id="lotteria-more-prizes-list"></ol>
@@ -718,7 +718,7 @@
       function loadPrizes() {
         var errorNode = document.getElementById("lotteria-prizes-error");
 
-        fetch("./assets/PremiLotteria.json", { cache: "no-store" })
+        fetch("./assets/premiLotteria.json", { cache: "no-store" })
           .then(function (response) {
             if (!response.ok) {
               throw new Error("Premi JSON non disponibile");
